@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Craig LaForest | Healthcare Technology Leadership</title>
+  <meta name="description" content="Craig LaForest – Strategic technology leadership for healthcare organizations.">
+  <style>
+    :root {
+      --primary-blue: #2E86AB;
+      --accent-green: #A8DADC;
+      --background: #F1FAEE;
+      --text-dark: #222;
+      --text-light: #fff;
+      --section-padding: 60px 20px;
+      --border-radius: 12px;
+      --shadow: 0 2px 16px rgba(46,134,171,0.08);
+      --font-main: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-main);
+      background: var(--background);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--accent-green);
+    }
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(120deg, var(--primary-blue) 60%, var(--accent-green) 100%);
+      color: var(--text-light);
+      padding: 90px 20px 70px 20px;
+      text-align: center;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-size: 2.7rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      background: var(--accent-green);
+      color: var(--primary-blue);
+      padding: 16px 38px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(46,134,171,0.10);
+      transition: background 0.2s, color 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--text-light);
+      color: var(--primary-blue);
+    }
+    /* Benefits Section */
+    .section {
+      padding: var(--section-padding);
+      background: var(--background);
+    }
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary-blue);
+      margin-bottom: 18px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .benefits-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .benefit {
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 28px 22px;
+      flex: 1 1 220px;
+      max-width: 300px;
+      min-width: 220px;
+      text-align: center;
+      font-size: 1.08rem;
+      color: var(--primary-blue);
+      font-weight: 500;
+    }
+    /* Services Section */
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .service {
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 28px 22px;
+      flex: 1 1 220px;
+      max-width: 300px;
+      min-width: 220px;
+      text-align: center;
+      color: var(--primary-blue);
+      font-weight: 500;
+    }
+    /* Contact Section */
+    .contact-section {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 48px 20px;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .contact-section h2 {
+      color: var(--accent-green);
+      margin-bottom: 16px;
+      font-size: 1.7rem;
+    }
+    .contact-section p {
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .contact-form textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .contact-form button {
+      margin-top: 12px;
+      background: var(--accent-green);
+      color: var(--primary-blue);
+      border: none;
+      padding: 12px 32px;
+      border-radius: 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-form button:hover {
+      background: var(--text-light);
+      color: var(--primary-blue);
+    }
+    /* Footer */
+    footer {
+      background: #e0e8ef;
+      color: var(--primary-blue);
+      text-align: center;
+      padding: 22px 0;
+      font-size: 1rem;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      margin-top: 40px;
+    }
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .benefits-list, .services-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav .nav-links {
+        gap: 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .section-title { font-size: 1.3rem; }
+      .container { padding: 0 8px; }
+      header, .contact-section, footer { padding-left: 8px; padding-right: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Craig LaForest</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Craig LaForest</h1>
+    <p>
+      Empowering healthcare organizations with strategic technology leadership.<br>
+      I help healthcare teams achieve better outcomes, efficiency, and growth through expert technology guidance.
+    </p>
+    <a href="#contact"><button class="cta-btn">Schedule a Call</button></a>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Craig LaForest</h2>
+      <p style="text-align:center; max-width:700px; margin:0 auto;">
+        With years of experience guiding healthcare organizations, I specialize in aligning technology with your mission. My approach is collaborative, results-driven, and tailored to the unique needs of healthcare teams—ensuring you get the leadership and clarity needed to thrive in a rapidly changing environment.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="benefits">
+    <div class="container">
+      <h2 class="section-title">How I Help Healthcare Teams</h2>
+      <div class="benefits-list">
+        <div class="benefit">✔️ Maximize patient outcomes with efficient technology solutions</div>
+        <div class="benefit">✔️ Reduce operational costs and streamline workflows</div>
+        <div class="benefit">✔️ Ensure compliance and data security in all processes</div>
+        <div class="benefit">✔️ Empower your staff with clear, actionable technology strategies</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title">Services</h2>
+      <div class="services-list">
+        <div class="service">
+          <strong>Fractional CTO Leadership</strong><br>
+          Strategic technology direction for healthcare organizations, on-demand.
+        </div>
+        <div class="service">
+          <strong>Technology Assessment</strong><br>
+          In-depth review of your current systems and recommendations for improvement.
+        </div>
+        <div class="service">
+          <strong>Project Oversight</strong><br>
+          Guidance and management for critical healthcare IT projects.
+        </div>
+        <div class="service">
+          <strong>Compliance & Security Consulting</strong><br>
+          Ensure HIPAA and healthcare data security standards are met.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2>Contact Craig LaForest</h2>
+    <p>Ready to elevate your healthcare technology? Schedule a call or send a message below.</p>
+    <form class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required><br>
+      <input type="email" name="email" placeholder="Your Email" required><br>
+      <textarea name="message" placeholder="How can I help your healthcare team?" required></textarea><br>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Craig LaForest. All rights reserved.
+  </footer>
+</body>
+</html>
