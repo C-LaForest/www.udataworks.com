@@ -6,34 +6,10 @@
   <title>Fractional CTO for Healthcare | Craig LaForest</title>
   <meta name="description" content="Get the technology leadership you need. Craig LaForest helps healthcare organizations create and execute a winning technology strategy.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="index.css">
   <style>
-    body { font-family: 'Roboto', Arial, sans-serif; margin:0; background:#f8fafc; color:#222; }
-    header { background:#0a2540; color:#fff; padding:24px 0 12px 0; }
-    nav { display:flex; justify-content:center; gap:32px; }
-    nav a { color:#fff; text-decoration:none; font-weight:700; font-size:1.1em; padding:8px 12px; border-radius:4px; transition:background 0.2s; }
-    nav a:hover { background:#174ea6; }
-    .hero { text-align:center; padding:64px 16px 32px 16px; background:#e3f0fa; }
-    .hero h1 { font-size:2.5em; margin-bottom:0.3em; color:#0a2540; }
-    .hero p { font-size:1.3em; margin-bottom:1.5em; color:#174ea6; }
-    .cta-btn { background:#174ea6; color:#fff; padding:16px 36px; border:none; border-radius:6px; font-size:1.1em; font-weight:700; cursor:pointer; transition:background 0.2s; }
-    .cta-btn:hover { background:#0a2540; }
-    .benefits { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin:48px auto 32px auto; max-width:900px; }
-    .benefit { background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:28px 20px; text-align:center; }
-    .benefit h3 { color:#174ea6; margin-bottom:0.5em; }
-    .results { background:#fff; max-width:900px; margin:32px auto; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:32px 24px; }
-    .results h2 { color:#0a2540; margin-bottom:0.7em; }
-    .results-list { display:flex; flex-wrap:wrap; gap:32px; justify-content:center; }
-    .result-item { flex:1 1 220px; min-width:220px; text-align:center; }
-    .result-item strong { font-size:2em; color:#174ea6; }
-    .about-preview { max-width:900px; margin:48px auto 32px auto; background:#e3f0fa; border-radius:8px; padding:32px 24px; }
-    .about-preview h2 { color:#0a2540; }
-    .about-preview p { color:#174ea6; }
-    footer { background:#0a2540; color:#fff; text-align:center; padding:24px 0 12px 0; margin-top:48px; }
-    @media (max-width:600px) {
-      .benefits, .results-list { grid-template-columns:1fr; flex-direction:column; gap:16px; }
-      .hero { padding:32px 8px 24px 8px; }
-      .about-preview, .results { padding:20px 8px; }
-    }
+    
   </style>
 </head>
 <body>
@@ -42,6 +18,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
+	  <a href="aboutme.html">About Me</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -95,9 +72,14 @@
       <a href="index.html">Home</a> |
       <a href="about.html">About</a> |
       <a href="services.html">Services</a> |
+	  <a href="aboutme.html">About Me</a> |
       <a href="contact.html">Contact</a>
     </nav>
-    <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div>
+    <!-- <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div> -->
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Data Center Operations</p>
   </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

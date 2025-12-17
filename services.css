@@ -1,9 +1,5 @@
-/* Main site-wide styles for Unlimited Data Works */
-    body { font-family: 'Roboto', Arial, sans-serif; margin:0; background:#f8fafc; color:#222; }
-    header { background:#0a2540; color:#fff; padding:24px 0 12px 0; }
-    nav { display:flex; justify-content:center; gap:32px; }
-    nav a { color:#fff; text-decoration:none; font-weight:700; font-size:1.1em; padding:8px 12px; border-radius:4px; transition:background 0.2s; }
-    nav a:hover { background:#174ea6; }
+body { font-family: 'Roboto', Arial, sans-serif; margin:0; background:#f8fafc; color:#222; }
+ 
     .services-main { max-width:900px; margin:48px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:40px 32px; }
     .services-main h1 { color:#0a2540; margin-bottom:0.5em; }
     .service-tiers { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:32px; margin:32px 0; }
@@ -26,4 +22,3 @@
       .services-main { padding:20px 8px; }
       .service-tiers, .benefits-list { grid-template-columns:1fr; gap:16px; }
     }
-	

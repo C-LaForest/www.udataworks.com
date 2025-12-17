@@ -6,12 +6,9 @@
   <title>About Craig LaForest | Fractional CTO for Healthcare</title>
   <meta name="description" content="Learn about Craig LaForest, a visionary technology leader specializing in healthcare IT, clinical systems, and data center operations.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="about.css">
   <style>
-    body { font-family: 'Roboto', Arial, sans-serif; margin:0; background:#f8fafc; color:#222; }
-    header { background:#0a2540; color:#fff; padding:24px 0 12px 0; }
-    nav { display:flex; justify-content:center; gap:32px; }
-    nav a { color:#fff; text-decoration:none; font-weight:700; font-size:1.1em; padding:8px 12px; border-radius:4px; transition:background 0.2s; }
-    nav a:hover { background:#174ea6; }
     .about-main { max-width:900px; margin:48px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:40px 32px; }
     .about-header { display:flex; flex-wrap:wrap; align-items:center; gap:32px; }
     .about-photo { width:140px; height:140px; border-radius:50%; background:#e3f0fa; display:flex; align-items:center; justify-content:center; font-size:2.5em; color:#174ea6; font-weight:700; }
@@ -40,6 +37,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
+	  <a href="aboutme.html">About Me</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -90,9 +88,14 @@
       <a href="index.html">Home</a> |
       <a href="about.html">About</a> |
       <a href="services.html">Services</a> |
+	  <a href="aboutme.html">About Me</a> |
       <a href="contact.html">Contact</a>
     </nav>
-    <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div>
+    <!-- <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div> -->
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Data Center Operations</p>
   </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

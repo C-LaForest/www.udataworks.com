@@ -1,42 +1,46 @@
-<!-- BEGIN aboutme.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>About Me – Craig LaForest</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Main site-wide and About Me specific styles -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="aboutme.css">
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <a href="/" class="logo">Unlimited Data Works</a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/about.html">About</a></li>
-		<li><a href="/aboutme.html" class="active">About Me</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+	  <a href="aboutme.html">About Me</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
-  <main class="about-container">
-    <aside class="about-sidebar">
-      <img src="placeholder-profile.svg" alt="Craig LaForest Profile" class="profile-img">
+  <main class="aboutme-container">
+    <aside class="aboutme-sidebar">
+      <!--img src="profile-placeholder.svg" alt="Craig LaForest Profile" class="profile-img"-->
+	  <img src="1731310780472.jpg" alt="Craig LaForest Profile" class="profile-img">
       <h1>Craig LaForest</h1>
       <h2>Visionary Technology Leader</h2>
       <ul class="contact-list">
-        <li><strong>Location:</strong> Saline, MI</li>
-        <li><strong>Email:</strong> <a href="mailto:craigl@therealms.com">craigl@therealms.com</a></li>
-        <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/craiglaforest" target="_blank">linkedin.com/in/craiglaforest</a></li>
+        <li>
+          <strong>Email:</strong>
+          <a href="mailto:craigl@udataworks.com">craigl@udataworks.com</a>
+        </li>
+        <li>
+          <strong>LinkedIn:</strong>
+          <a href="https://linkedin.com/in/craiglaforest" target="_blank">linkedin.com/in/craiglaforest</a>
+        </li>
       </ul>
     </aside>
-    <section class="about-main">
+    <section class="aboutme-main">
       <section>
         <h2>Professional Summary</h2>
         <p>
-          I excel at building worlds—crafting robust, reliable, and scalable computing environments where end users can thrive, completely unobstructed by technology barriers. With 15+ years of experience in mission-critical and real-time systems, I am recognized for quickly synthesizing complex information and spotting patterns others might overlook. My approach is highly collaborative, bridging business and technical teams to deliver innovative, compliant, and high-availability solutions.
+          I excel at building worlds—crafting robust, reliable, and scalable computing environments where end users can thrive, unobstructed by technology barriers. With 15+ years of experience in mission-critical and real-time systems, I am recognized for quickly synthesizing complex information and spotting patterns others might overlook. My approach is highly collaborative, bridging business and technical teams to deliver innovative, compliant, and high-availability solutions.
         </p>
       </section>
       <section>
@@ -88,11 +92,18 @@
     </section>
   </main>
   <footer>
-    <div class="footer-content">
-      &copy; 2025 Unlimited Data Works. All rights reserved.
-    </div>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="services.html">Services</a> |
+	  <a href="aboutme.html">About Me</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+    <!-- <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div> -->
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Data Center Operations</p>
   </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-<!-- END about.html -->
-
