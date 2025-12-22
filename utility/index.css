@@ -1,3 +1,4 @@
+/*
 .hero { text-align:center; padding:64px 16px 32px 16px; background:#e3f0fa; }
     .hero h1 { font-size:2.5em; margin-bottom:0.3em; color:#0a2540; }
     .hero p { font-size:1.3em; margin-bottom:1.5em; color:#174ea6; }
@@ -20,3 +21,111 @@
       .hero { padding:32px 8px 24px 8px; }
       .about-preview, .results { padding:20px 8px; }
     }
+*/
+.hero {
+  text-align: center;
+  padding: 64px 16px 32px 16px;
+  background: #E8F1F5;
+}
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+  color: #1B365D;
+}
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 1.5em;
+  color: #174ea6;
+}
+.cta-btn {
+  background: #FF6B35;
+  color: #fff;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cta-btn:hover {
+  background: #1B365D;
+}
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin: 48px auto 32px auto;
+  max-width: 900px;
+}
+.benefit {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 28px 20px;
+  text-align: center;
+}
+.benefit h3 {
+  color: #1B365D;
+  margin-bottom: 0.5em;
+}
+.results {
+  background: #fff;
+  max-width: 900px;
+  margin: 32px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 32px 24px;
+}
+.results h2 {
+  color: #1B365D;
+  margin-bottom: 0.7em;
+}
+.results-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+.result-item {
+  flex: 1 1 220px;
+  min-width: 220px;
+  text-align: center;
+}
+.result-item strong {
+  font-size: 2em;
+  color: #FF6B35;
+}
+.about-preview {
+  max-width: 900px;
+  margin: 48px auto 32px auto;
+  background: #E8F1F5;
+  border-radius: 8px;
+  padding: 32px 24px;
+}
+.about-preview h2 {
+  color: #1B365D;
+}
+.about-preview p {
+  color: #1B365D;
+}
+footer {
+  background: #1B365D;
+  color: #fff;
+  text-align: center;
+  padding: 24px 0 12px 0;
+  margin-top: 48px;
+}
+@media (max-width: 600px) {
+  .benefits, .results-list {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero {
+    padding: 32px 8px 24px 8px;
+  }
+  .about-preview, .results {
+    padding: 20px 8px;
+  }
+}
