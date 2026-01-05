@@ -21,6 +21,7 @@ function setIndustryPreference(industry) {
     document.cookie = `industry=${industry}; path=/`;
   }
 }
+
 function getIndustryPreference() {
   if (storageAvailable('localStorage')) {
     return localStorage.getItem('industry');
@@ -30,6 +31,7 @@ function getIndustryPreference() {
     return match ? match[1] : null;
   }
 }
+
 function clearIndustryPreference() {
   if (storageAvailable('localStorage')) {
     localStorage.removeItem('industry');
@@ -45,15 +47,37 @@ function redirectToIndustry(industry) {
   }, 500); // brief delay for UX
 }
 
-// On page load: auto-redirect if preference exists
+// Special function to check if we should show the menu (when cookie is cleared)
+function shouldShowMenu() {
+  // Check if there's a URL parameter indicating the user wants to change industry
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('showMenu') === 'true';
+}
+
+// On page load: implement the new behavior according to requirements
 document.addEventListener('DOMContentLoaded', function() {
   const industry = getIndustryPreference();
+  
+  // Check if user explicitly wants to see the menu (cookie was cleared)
+  if (shouldShowMenu()) {
+    // Show the menu regardless of cookie state
+    attachEventListeners();
+    return;
+  }
+  
+  // If user has a preference (healthcare or utility), redirect to it
   if (industry === 'healthcare' || industry === 'utility') {
     redirectToIndustry(industry);
     return;
   }
+  
+  // If no cookie is set, default to healthcare
+  setIndustryPreference('healthcare');
+  redirectToIndustry('healthcare');
+});
 
-  // Attach event listeners for selection buttons
+// Function to attach event listeners (separated for reuse)
+function attachEventListeners() {
   document.getElementById('select-healthcare').addEventListener('click', function() {
     setIndustryPreference('healthcare');
     redirectToIndustry('healthcare');
@@ -62,8 +86,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setIndustryPreference('utility');
     redirectToIndustry('utility');
   });
-});
+}
 
-// Optional: Add a "Change Industry" link on /healthcare and /utility pages
-// Example HTML: <a href="/" onclick="clearIndustryPreference()">Change Industry</a>
+// Enhanced clearIndustryPreference for "Change Industry" functionality
+function clearIndustryPreferenceAndShowMenu() {
+  clearIndustryPreference();
+  // Redirect to index with a parameter to show the menu
+  window.location.href = '../index.html?showMenu=true';
+}
+
+// Make functions available globally for onclick handlers
 window.clearIndustryPreference = clearIndustryPreference;
+window.clearIndustryPreferenceAndShowMenu = clearIndustryPreferenceAndShowMenu;
