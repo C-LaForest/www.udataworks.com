@@ -17,21 +17,17 @@ function setIndustryPreference(industry) {
   if (storageAvailable('localStorage')) {
     localStorage.setItem('industry', industry);
   } else {
-    // Fallback: Use a session cookie (expires on browser close)
     document.cookie = `industry=${industry}; path=/`;
   }
 }
-
 function getIndustryPreference() {
   if (storageAvailable('localStorage')) {
     return localStorage.getItem('industry');
   } else {
-    // Fallback: Read from cookie
     const match = document.cookie.match(/(?:^|; )industry=([^;]*)/);
     return match ? match[1] : null;
   }
 }
-
 function clearIndustryPreference() {
   if (storageAvailable('localStorage')) {
     localStorage.removeItem('industry');
@@ -39,32 +35,56 @@ function clearIndustryPreference() {
   document.cookie = 'industry=; Max-Age=0; path=/';
 }
 
+// Helper: Get URL parameter
+function getURLParameter(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+// Show/hide menu helpers
+function showIndustryMenu() {
+  document.getElementById('industry-selection').classList.remove('hidden');
+  document.getElementById('loading').classList.add('hidden');
+  document.getElementById('error-message').classList.add('hidden');
+}
+function hideIndustryMenu() {
+  document.getElementById('industry-selection').classList.add('hidden');
+}
+
+// Show error and menu
+function showError(message) {
+  document.getElementById('error-message').textContent = message;
+  document.getElementById('error-message').classList.remove('hidden');
+  showIndustryMenu();
+}
+
 // Redirect logic
 function redirectToIndustry(industry) {
   document.getElementById('loading').classList.remove('hidden');
+  hideIndustryMenu();
   setTimeout(() => {
     window.location.assign(`./${industry}/index.html`);
-  }, 500); // brief delay for UX
+  }, 250); // faster redirect, no menu flash
 }
 
-// Special function to check if we should show the menu (when cookie is cleared)
-function shouldShowMenu() {
-  // Check if there's a URL parameter indicating the user wants to change industry
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('showMenu') === 'true';
-}
-
-// On page load: implement the new behavior according to requirements
+// Main logic
 document.addEventListener('DOMContentLoaded', function() {
+  const showMenu = getURLParameter('showMenu') === 'true';
   const industry = getIndustryPreference();
-  
-  // Check if user explicitly wants to see the menu (cookie was cleared)
-  if (shouldShowMenu()) {
-    // Show the menu regardless of cookie state
-    attachEventListeners();
+
+  if (showMenu) {
+    showIndustryMenu();
+    // Attach event listeners for selection buttons
+    document.getElementById('select-healthcare').addEventListener('click', function() {
+      setIndustryPreference('healthcare');
+      redirectToIndustry('healthcare');
+    });
+    document.getElementById('select-utility').addEventListener('click', function() {
+      setIndustryPreference('utility');
+      redirectToIndustry('utility');
+    });
     return;
   }
-  
+
   // If user has a preference (healthcare or utility), redirect to it
   if (industry === 'healthcare' || industry === 'utility') {
     redirectToIndustry(industry);
@@ -75,18 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setIndustryPreference('healthcare');
   redirectToIndustry('healthcare');
 });
-
-// Function to attach event listeners (separated for reuse)
-function attachEventListeners() {
-  document.getElementById('select-healthcare').addEventListener('click', function() {
-    setIndustryPreference('healthcare');
-    redirectToIndustry('healthcare');
-  });
-  document.getElementById('select-utility').addEventListener('click', function() {
-    setIndustryPreference('utility');
-    redirectToIndustry('utility');
-  });
-}
 
 // Enhanced clearIndustryPreference for "Change Industry" functionality
 function clearIndustryPreferenceAndShowMenu() {
