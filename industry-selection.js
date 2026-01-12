@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // If no cookie is set, default to healthcare
+  // If no cookie is set, default to medical-research
   setIndustryPreference('medical-research');
   redirectToIndustry('medical-research');
 });
