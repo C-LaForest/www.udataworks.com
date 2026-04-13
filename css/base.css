@@ -1,0 +1,30 @@
+/* base.css — Reset, fonts, CSS custom properties */
+
+:root {
+  /* Default colors (healthcare) — overridden by vertical.css */
+  --color-header: #0a2540;
+  --color-primary: #174ea6;
+  --color-accent-bg: #e3f0fa;
+  --color-bg: #f8fafc;
+  --color-text: #222;
+  --color-heading: var(--color-header);
+  --color-cta: var(--color-primary);
+  --color-cta-hover: var(--color-header);
+  --color-sidebar-accent: #2196f3;
+  --color-hr: var(--color-header);
+  --color-link: var(--color-header);
+  --color-footer: var(--color-header);
+  --color-card-bg: #f8fafc;
+  --color-card-border: var(--color-primary);
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+a { color: var(--color-primary); }
+
+h1, h2, h3 { line-height: 1.3; }

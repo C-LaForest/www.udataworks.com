@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fractional CTO Services | Craig LaForest</title>
   <meta name="description" content="Explore Fractional CTO services for healthcare organizations: advisory, consultative, and project-based solutions for clinical systems and data center operations.">
+  <meta property="og:title" content="Fractional CTO Services | Craig LaForest">
+  <meta property="og:description" content="Explore Fractional CTO services for healthcare organizations: advisory, consultative, and project-based solutions for clinical systems and data center operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-healthcare.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="services.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Home</a>
+      <a href="services.html" class="active">Services</a>
       <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-	  <a href="aboutme.html">About Me</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -55,6 +63,10 @@
         <p>
           <em>These solutions are tailored to your organization's needs, ensuring measurable improvements in patient care, efficiency, and compliance.</em>
         </p>
+        <h3>Sovereign AI &amp; Data Governance</h3>
+        <p>
+          Ensure your organization maintains full control over AI infrastructure and patient data. I design sovereign AI architectures that keep sensitive healthcare data within institutional boundaries, implement AI model governance with audit trails and bias monitoring, and reduce dependence on external cloud AI providers while maintaining HIPAA compliance.
+        </p>
       </div>
     </section>
 
@@ -78,24 +90,23 @@
     <section class="case-studies">
       <h2>Success Stories</h2>
       <div class="case">
-        <strong>99.99%+ uptime</strong> achieved for mission-critical clinical platforms, supporting $2.5B+ in annual transactions.
+        <strong>99.99%+ uptime</strong> achieved for mission-critical clinical platforms in highly regulated environments.
       </div>
       <div class="case">
         <strong>95% reduction in downtime</strong> through automation and proactive risk management.
       </div>
     </section>
-    <a href="contact.html"><button class="cta-btn">Book a Discovery Call</button></a>
+    <a href="contact.html" class="cta-btn">Book a Discovery Call</a>
   </main>
   <footer>
     <nav>
       <a href="index.html">Home</a> |
-      <a href="about.html">About</a> |
       <a href="services.html">Services</a> |
-	  <a href="aboutme.html">About Me</a> |
-      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
     </nav>
-    <!-- <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div> -->
-    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Data Center Operations</p>
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Technology Operations</p>
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

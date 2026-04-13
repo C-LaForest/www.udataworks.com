@@ -2,123 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <title>About Craig LaForest | Fractional CTO for Healthcare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Learn about Craig LaForest, a visionary technology leader specializing in healthcare IT, clinical systems, and data center operations.">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="about.css">
-  <style>
-    .about-main { max-width:900px; margin:48px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:40px 32px; }
-    .about-header { display:flex; flex-wrap:wrap; align-items:center; gap:32px; }
-    .about-photo { width:140px; height:140px; border-radius:50%; background:#e3f0fa; display:flex; align-items:center; justify-content:center; font-size:2.5em; color:#174ea6; font-weight:700; }
-    .about-info { flex:1; }
-    .about-info h1 { color:#0a2540; margin-bottom:0.2em; }
-    .about-info h2 { color:#174ea6; font-size:1.2em; margin-top:0; }
-    .about-section { margin-top:32px; }
-    .about-section h3 { color:#174ea6; margin-bottom:0.5em; }
-    .about-section ul { margin:0 0 0 18px; }
-    .about-section li { margin-bottom:0.5em; }
-    .mission { background:#e3f0fa; border-radius:6px; padding:18px 16px; margin:32px 0; color:#0a2540; font-weight:500; }
-    .achievements { display:flex; flex-wrap:wrap; gap:32px; margin-top:24px; }
-    .achievement { flex:1 1 220px; min-width:220px; background:#f8fafc; border-radius:6px; padding:18px 12px; text-align:center; }
-    .achievement strong { font-size:1.5em; color:#174ea6; }
-    footer { background:#0a2540; color:#fff; text-align:center; padding:24px 0 12px 0; margin-top:48px; }
-    @media (max-width:700px) {
-      .about-main { padding:20px 8px; }
-      .about-header { flex-direction:column; gap:16px; }
-      .achievements { flex-direction:column; gap:16px; }
-    }
-  </style>
+  <meta property="og:title" content="About Craig LaForest | Fractional CTO for Healthcare">
+  <meta property="og:description" content="Learn about Craig LaForest, a visionary technology leader specializing in healthcare IT, clinical systems, and data center operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-healthcare.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
       <a href="services.html">Services</a>
-	  <a href="aboutme.html">About Me</a>
+      <a href="about.html" class="active">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-  <main class="about-main">
-    <div class="about-header">
-      <div class="about-photo" aria-label="Craig LaForest headshot">CL</div>
-      <div class="about-info">
-        <h1>Craig LaForest</h1>
-        <h2>Fractional CTO | Healthcare Data Center Operations Expert</h2>
-        <p>Visionary technology leader with 15+ years of experience driving enterprise-wide transformation in mission-critical, highly regulated environments.</p>
-      </div>
-    </div>
-    <div class="mission">
-      <strong>Mission:</strong> Helping healthcare organizations achieve reliable, scalable, and compliant IT operations.
-    </div>
-    <!--section class="about-section"-->
-      <section class="leadership-philosophy">
-    <h2>Leadership Philosophy</h2>
-      <p>
-        My leadership philosophy is rooted in the conviction that technology must always advance the mission of healthcare: improving patient outcomes, ensuring safety, and supporting clinicians. I lead by example, building trust through hands-on experience, transparent communication, and a relentless focus on compliance and operational excellence.
-      </p>
-      <ul>
-        <li><strong>Patient-Centricity:</strong> Every technology decision is made with patient safety and care quality as the top priority.</li>
-        <li><strong>Regulatory Excellence:</strong> Compliance is a foundation for trust and operational success, not just a requirement.</li>
-        <li><strong>Team Empowerment:</strong> I foster high-performing, cross-functional teams through continuous learning, open communication, and shared ownership.</li>
-        <li><strong>Integrity and Transparency:</strong> I lead with integrity, ensuring all actions are ethical and transparent.</li>
-        <li><strong>Continuous Improvement:</strong> I champion innovation and adaptability to keep pace with healthcare’s evolving needs.</li>
+  <main class="aboutme-container">
+    <aside class="aboutme-sidebar">
+      <img src="../images/1731310780472.jpg" alt="Craig LaForest Profile" class="profile-img">
+      <h1>Craig LaForest</h1>
+      <h2>Visionary Technology Leader</h2>
+      <ul class="contact-list">
+        <li>&#x1F4E7; <a href="contact.html"><strong>Message me</strong></a><br></li>
+        <li>&#x1F4C5;
+          <!-- Calendly link widget begin -->
+          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+          <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/claforest?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=0747a1'});return false;"><strong>Schedule</strong> time with me</a><br>
+          <!-- Calendly link widget end -->
+        </li>
+        <li>
+          &nbsp;<img src="../images/LI-In-Bug.png" alt="LinkedIn Icon" style="width:16px; height:16px; vertical-align:middle; margin-right:4px;">
+          <a href="https://linkedin.com/in/craiglaforest" target="_blank" rel="noopener noreferrer"><strong>LinkedIn</strong></a>
+        </li>
       </ul>
-      <p>
-        With 15+ years in mission-critical, regulated environments, I have seen firsthand how technology can transform care delivery. My approach bridges the gap between IT and clinical teams, ensuring that every initiative supports the organization’s mission and delivers measurable impact for patients and providers alike.
-      </p>
-    </section>
-    <section class="about-section">
-      <h3>Key Achievements</h3>
-      <div class="achievements">
-        <div class="achievement">
-          <strong>99.99%+</strong><br>System Uptime
-        </div>
-        <div class="achievement">
-          <strong>95%</strong><br>Downtime Reduction
-        </div>
-        <div class="achievement">
-          <strong>$2.5B+</strong><br>Annual Transactions Supported
-        </div>
+      <hr class="solid">
+    </aside>
+    <section class="aboutme-main">
+      <!-- Mission Statement -->
+      <div class="mission">
+        <strong>Mission:</strong> Helping healthcare organizations achieve reliable, scalable, and compliant IT operations.
       </div>
-    </section>
-    <!-- AI/ML & Advanced Analytics Subsection -->
-<div class="technical-expertise-subsection">
-  <h3>AI/ML & Advanced Analytics in Healthcare</h3>
-  <p>
-    Leveraging artificial intelligence and machine learning to drive better patient outcomes, operational efficiency, and regulatory compliance:
-  </p>
-  <ul class="aiml-capabilities">
-    <li><strong>Clinical Decision Support Systems:</strong> AI-powered tools that assist clinicians with evidence-based recommendations, improving diagnostic accuracy and treatment planning.</li>
-    <li><strong>Patient Outcome Prediction:</strong> Machine learning models that analyze EHR and real-time data to forecast patient risks, enabling proactive interventions and reducing readmissions.</li>
-    <li><strong>Healthcare Data Analytics:</strong> Advanced analytics platforms that uncover trends in large datasets for population health management and personalized care strategies.</li>
-    <li><strong>Medical Imaging Analysis:</strong> AI algorithms that enhance the speed and accuracy of radiology and pathology image interpretation, supporting early detection and diagnosis.</li>
-    <li><strong>Healthcare Operations Optimization:</strong> Predictive models that streamline scheduling, resource allocation, and compliance monitoring, reducing costs and improving care delivery.</li>
-  </ul>
-  <p class="aiml-positioning">
-    <em>These AI/ML capabilities build on my foundation in healthcare automation and data-driven IT, providing intelligent solutions that enhance patient care, operational performance, and regulatory readiness.</em>
-  </p>
-</div>
 
-    <section class="about-section">
-      <h3>Background</h3>
-      <p>
-        Craig has led large-scale infrastructure and automation initiatives, revitalized critical platforms, and delivered measurable business impact for healthcare organizations. His unique ability to translate technical concepts into actionable business strategies ensures that IT operations are not only reliable and compliant, but also drive real business outcomes.
-      </p>
+      <!-- Professional Summary -->
+      <section>
+        <h2>Professional Summary</h2>
+        <p>
+          I help healthcare IT leaders eliminate downtime and compliance risks in their most critical systems, delivering 99.99%+ uptime and audit-ready infrastructure.
+          I excel at crafting robust, reliable, and scalable computing environments where end users can thrive, unobstructed by technology barriers. With 25+ years of experience in mission-critical and real-time systems, I am recognized for quickly synthesizing complex information and spotting patterns others might overlook. My approach is highly collaborative, bridging business and technical teams to deliver innovative, compliant, and high-availability solutions.
+        </p>
+        <p>
+          Healthcare IT leaders face relentless pressure to maintain 24/7 uptime, pass regulatory audits, and modernize aging infrastructure &mdash; all while managing limited resources and legacy systems. I provide the strategic technology leadership to solve these challenges without the overhead of a full-time executive hire.
+        </p>
+      </section>
+
+      <!-- Key Achievements Stats -->
+      <section>
+        <h2>Key Achievements</h2>
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <strong>99.99%+</strong><br>System Uptime
+          </div>
+          <div class="achievement-card">
+            <strong>95%</strong><br>Downtime Reduction
+          </div>
+          <div class="achievement-card">
+            <strong>100%</strong><br>Audit Pass Rate
+          </div>
+        </div>
+        <ul>
+          <li>25+ years driving enterprise-wide transformation in mission-critical, highly regulated environments</li>
+          <li>Achieved 99.99%+ system uptime through platform revitalization -- while maintaining system availability</li>
+          <li>95% downtime reduction in mission-critical, real-time systems</li>
+          <li>100% audit pass rate (HIPAA, HITECH) with zero findings</li>
+          <li>Led cloud operations and migration with near-zero downtime</li>
+          <li>100% audit pass rate (NERC/CIP, HIPAA) with No Findings</li>
+        </ul>
+      </section>
+
+      <!-- Leadership Philosophy -->
+      <section class="leadership-philosophy">
+        <h2>Leadership Philosophy</h2>
+        <p>
+          My leadership philosophy is rooted in the conviction that technology must always advance the mission of healthcare: improving patient outcomes, ensuring safety, and supporting clinicians. I lead by example, building trust through hands-on experience, transparent communication, and a relentless focus on compliance and operational excellence.
+        </p>
+        <ul>
+          <li><strong>Patient-Centricity:</strong> Every technology decision is made with patient safety and care quality as the top priority.</li>
+          <li><strong>Regulatory Excellence:</strong> Compliance is a foundation for trust and operational success, not just a requirement.</li>
+          <li><strong>Team Empowerment:</strong> I foster high-performing, cross-functional teams through continuous learning, open communication, and shared ownership.</li>
+          <li><strong>Integrity and Transparency:</strong> I lead with integrity, ensuring all actions are ethical and transparent.</li>
+          <li><strong>Continuous Improvement:</strong> I champion innovation and adaptability to keep pace with healthcare's evolving needs.</li>
+        </ul>
+        <p>
+          With 25+ years in mission-critical, regulated environments, I have seen firsthand how technology can transform care delivery. My approach bridges the gap between IT and clinical teams, ensuring that every initiative supports the organization's mission and delivers measurable impact for patients and providers alike.
+        </p>
+      </section>
+
+      <!-- Technical Expertise -->
+      <section>
+        <h2>Technical Expertise</h2>
+        <ul>
+          <li>SQL Administrator &amp; Developer</li>
+          <li>Network Engineer &amp; Administrator</li>
+          <li>Patching Compliance Manager (Windows and Linux)</li>
+          <li>Automation Engineer</li>
+          <li>Linux Engineer</li>
+          <li>Enterprise Architect</li>
+          <li>SAN Engineer</li>
+          <li>Cloud Engineer and Architect</li>
+        </ul>
+      </section>
+
+      <!-- AI/ML & Advanced Analytics -->
+      <section>
+        <h2>AI/ML &amp; Advanced Analytics in Healthcare</h2>
+        <p>
+          Leveraging artificial intelligence and machine learning to drive better patient outcomes, operational efficiency, and regulatory compliance:
+        </p>
+        <ul class="aiml-capabilities">
+          <li><strong>Clinical Decision Support Systems:</strong> AI-powered tools that assist clinicians with evidence-based recommendations, improving diagnostic accuracy and treatment planning.</li>
+          <li><strong>Patient Outcome Prediction:</strong> Machine learning models that analyze EHR and real-time data to forecast patient risks, enabling proactive interventions and reducing readmissions.</li>
+          <li><strong>Healthcare Data Analytics:</strong> Advanced analytics platforms that uncover trends in large datasets for population health management and personalized care strategies.</li>
+          <li><strong>Medical Imaging Analysis:</strong> AI algorithms that enhance the speed and accuracy of radiology and pathology image interpretation, supporting early detection and diagnosis.</li>
+          <li><strong>Healthcare Operations Optimization:</strong> Predictive models that streamline scheduling, resource allocation, and compliance monitoring, reducing costs and improving care delivery.</li>
+        </ul>
+        <p class="aiml-positioning">
+          These AI/ML capabilities build on my foundation in healthcare automation and data-driven IT, providing intelligent solutions that enhance patient care, operational performance, and regulatory readiness.
+        </p>
+        <h3>Sovereign AI for Healthcare</h3>
+        <p>
+          As healthcare organizations adopt AI, maintaining institutional control over patient data and AI infrastructure is critical. I help healthcare leaders design sovereign AI architectures that keep sensitive data within institutional boundaries, ensure AI models are auditable and HIPAA-compliant, and reduce dependence on external cloud AI providers &mdash; protecting both patients and organizational autonomy.
+        </p>
+      </section>
+
+      <!-- Background -->
+      <section>
+        <h2>Background</h2>
+        <p>
+          I have led large-scale infrastructure and automation initiatives, revitalized critical platforms, and delivered measurable business impact for healthcare organizations. My unique ability to translate technical concepts into actionable business strategies ensures that IT operations are not only reliable and compliant, but also drive real business outcomes.
+        </p>
+      </section>
+
+      <!-- Leadership Qualities -->
+      <section>
+        <h2>Leadership Qualities</h2>
+        <ul>
+          <li>Cross-functional team leadership (IT, Legal, Security, HR, Finance)</li>
+          <li>Bridging technical and business communication</li>
+          <li>Anticipating outcomes and connecting disparate ideas</li>
+          <li>Deep technical credibility across multiple disciplines</li>
+          <li>Fostering environments of trust and innovation</li>
+          <li>Responsible scaling of technology initiatives</li>
+        </ul>
+      </section>
+
+      <!-- Why Trust Me -->
+      <section>
+        <h2>Why Trust Me</h2>
+        <p>
+          With 25+ years of hands-on experience in IT, cloud, and automation, I have led cross-functional teams (IT, Legal, Security, HR, Finance) through complex transformations. I have worked every major IT role, so I understand your team's challenges firsthand. I am endorsed by peers and executives for delivering results under pressure.
+        </p>
+      </section>
+
+      <!-- Core Competencies -->
+      <section>
+        <h2>Core Competencies</h2>
+        <ul>
+          <li>Mission-critical system management</li>
+          <li>Enterprise-wide transformation</li>
+          <li>Infrastructure and automation initiatives</li>
+          <li>Complex information synthesis</li>
+          <li>Pattern recognition and analysis</li>
+          <li>Risk anticipation and mitigation</li>
+        </ul>
+      </section>
+
+      <!-- CTA -->
+      <section>
+        <p>
+          Facing downtime, compliance, or modernization challenges? Let's discuss how I can help your organization achieve seamless, reliable IT operations.
+          <a href="contact.html">Contact Me</a>
+        </p>
+      </section>
     </section>
   </main>
   <footer>
     <nav>
       <a href="index.html">Home</a> |
-      <a href="about.html">About</a> |
       <a href="services.html">Services</a> |
-	    <a href="aboutme.html">About Me</a> |
-      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
     </nav>
-    <!-- <div style="margin-top:12px;">&copy; 2025 Craig LaForest. All rights reserved.</div> -->
-    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Data Center Operations</p>
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Healthcare Technology Operations</p>
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

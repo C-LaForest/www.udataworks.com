@@ -1,0 +1,592 @@
+/* components.css — Header, footer, nav, buttons, cards, grids */
+
+/* ===== Header & Navigation ===== */
+header {
+  background: var(--color-header);
+  color: #fff;
+  padding: 24px 0 12px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+nav a:hover {
+  background: var(--color-primary);
+}
+
+nav a.active {
+  background: var(--color-primary);
+  border-bottom: 2px solid #fff;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--color-footer);
+  color: #fff;
+  text-align: center;
+  padding: 24px 0 12px 0;
+  margin-top: 48px;
+}
+
+footer nav a { font-weight: 400; font-size: 1em; }
+
+/* ===== CTA Button ===== */
+.cta-btn {
+  display: inline-block;
+  background: var(--color-cta);
+  color: #fff;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 24px;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: var(--color-cta-hover);
+  color: #fff;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  text-align: center;
+  padding: 64px 16px 32px 16px;
+  background: var(--color-accent-bg);
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+  color: var(--color-heading);
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 1.5em;
+  color: var(--color-primary);
+}
+
+/* ===== Benefits Grid (index page) ===== */
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin: 48px auto 32px auto;
+  max-width: 900px;
+}
+
+.benefit {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.benefit h3 {
+  color: var(--color-primary);
+  margin-bottom: 0.5em;
+}
+
+/* ===== Results Section ===== */
+.results {
+  background: #fff;
+  max-width: 900px;
+  margin: 32px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 32px 24px;
+}
+
+.results h2, .section-title {
+  color: var(--color-heading);
+  margin-bottom: 0.7em;
+}
+
+.results-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.result-item {
+  flex: 1 1 220px;
+  min-width: 220px;
+  text-align: center;
+}
+
+.result-item strong {
+  font-size: 2em;
+  color: var(--color-primary);
+}
+
+/* ===== About Preview (index page) ===== */
+.about-preview {
+  max-width: 900px;
+  margin: 48px auto 32px auto;
+  background: var(--color-accent-bg);
+  border-radius: 8px;
+  padding: 32px 24px;
+}
+
+.about-preview h2 { color: var(--color-heading); }
+.about-preview p { color: var(--color-primary); }
+
+/* ===== Service Tiers ===== */
+.service-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  margin: 32px 0;
+}
+
+.service-tier {
+  background: var(--color-accent-bg);
+  border-radius: 8px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.service-tier h3 {
+  color: var(--color-primary);
+  margin-bottom: 0.5em;
+}
+
+/* ===== Benefits List (services page) ===== */
+.benefits-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* ===== Case Studies ===== */
+.case-studies { margin: 32px 0; }
+.case-studies h2 { color: var(--color-heading); }
+
+.case {
+  background: var(--color-accent-bg);
+  border-radius: 6px;
+  padding: 18px 16px;
+  margin-bottom: 16px;
+}
+
+/* ===== Engagement Section ===== */
+.engagement { margin: 32px 0; }
+.engagement h2 { color: var(--color-heading); }
+.engagement ul { margin: 0 0 0 18px; }
+
+/* ===== Services Main Headings ===== */
+.services-main h1 { color: var(--color-heading); margin-bottom: 0.5em; }
+
+/* ===== About Page Components ===== */
+.about-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+}
+
+.about-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--color-accent-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.about-info { flex: 1; }
+.about-info h1 { color: var(--color-heading); margin-bottom: 0.2em; }
+.about-info h2 { color: var(--color-primary); font-size: 1.2em; margin-top: 0; }
+
+.about-section { margin-top: 32px; }
+.about-section h3 { color: var(--color-primary); margin-bottom: 0.5em; }
+.about-section ul { margin: 0 0 0 18px; }
+.about-section li { margin-bottom: 0.5em; }
+
+.mission {
+  background: var(--color-accent-bg);
+  border-radius: 6px;
+  padding: 18px 16px;
+  margin: 32px 0;
+  color: var(--color-heading);
+  font-weight: 500;
+}
+
+.achievements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.achievement {
+  flex: 1 1 220px;
+  min-width: 220px;
+  background: var(--color-card-bg);
+  border-radius: 6px;
+  padding: 18px 12px;
+  text-align: center;
+}
+
+.achievement strong {
+  font-size: 1.5em;
+  color: var(--color-primary);
+}
+
+/* ===== About-me Sidebar Components ===== */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.2rem;
+  border: 4px solid var(--color-sidebar-accent);
+  background: #e3f2fd;
+}
+
+.aboutme-sidebar h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.2rem 0;
+  color: var(--color-sidebar-accent);
+}
+
+.aboutme-sidebar h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-sidebar-accent);
+  margin: 0 0 1.2rem 0;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.contact-list li {
+  margin-bottom: 0.7rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.contact-list a {
+  color: var(--color-link);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.aboutme-main h2 {
+  font-size: 1.3rem;
+  color: var(--color-sidebar-accent);
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+}
+
+.aboutme-main ul { padding-left: 1.2rem; margin: 0.5rem 0 0 0; }
+.aboutme-main li { margin-bottom: 0.5rem; font-size: 1.05rem; }
+
+hr.solid {
+  border-top: 1px solid var(--color-hr);
+  width: 100%;
+}
+
+/* ===== Professional Summary ===== */
+.professional-summary { margin-bottom: 40px; }
+.professional-summary p:last-child { margin-bottom: 0; }
+
+/* ===== Achievements Grid (aboutme page) ===== */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.achievement-item {
+  background: var(--color-card-bg);
+  border-radius: 8px;
+  padding: 25px 20px;
+  border-left: 4px solid var(--color-card-border);
+}
+
+.achievement-item h3 {
+  color: var(--color-heading);
+  font-size: 1.2em;
+  margin: 0 0 15px 0;
+}
+
+.achievement-item ul { margin: 0; padding-left: 16px; }
+.achievement-item li { margin-bottom: 10px; line-height: 1.5; }
+
+/* ===== Technical Expertise Grid ===== */
+.expertise-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.expertise-column {
+  background: var(--color-card-bg);
+  border-radius: 8px;
+  padding: 25px 20px;
+}
+
+.expertise-column h3 {
+  color: var(--color-heading);
+  font-size: 1.1em;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.expertise-column ul { margin: 0; padding-left: 16px; }
+.expertise-column li { margin-bottom: 10px; line-height: 1.5; font-size: 0.95em; }
+
+/* ===== Leadership Competencies Grid ===== */
+.competencies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.competency {
+  background: var(--color-card-bg);
+  border-radius: 8px;
+  padding: 25px 20px;
+  border-top: 4px solid var(--color-card-border);
+}
+
+.competency h3 {
+  color: var(--color-heading);
+  font-size: 1.2em;
+  margin: 0 0 15px 0;
+}
+
+.competency ul { margin: 0; padding-left: 16px; }
+.competency li { margin-bottom: 10px; line-height: 1.5; }
+
+/* ===== Service Offering Blocks ===== */
+.service-offering {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-left: 4px solid #28a745;
+  border-radius: 6px;
+}
+
+.service-header h2 { color: var(--color-primary); margin-bottom: 0.5em; }
+.service-subtitle { color: #343a40; font-size: 1.1em; margin-bottom: 1em; }
+.service-content ul { margin: 1rem 0; padding-left: 1.5rem; }
+.service-content li { margin-bottom: 1rem; line-height: 1.6; }
+
+/* ===== AI/ML & Technical Expertise Subsections ===== */
+.technical-expertise-subsection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
+}
+
+.aiml-capabilities { margin: 1rem 0; padding-left: 1.5rem; }
+.aiml-capabilities li { margin-bottom: 1rem; line-height: 1.6; }
+.aiml-capabilities strong { color: #343a40; font-weight: 600; }
+
+.aiml-positioning {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #6c757d;
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+}
+
+/* ===== Contact Form ===== */
+main {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(30,64,175,0.08);
+  padding: 2rem;
+}
+
+main h1 {
+  color: var(--color-heading);
+  margin-bottom: 0.5rem;
+  font-size: 2.2em;
+  text-align: center;
+}
+
+main h2 { color: var(--color-primary); margin-top: 2rem; margin-bottom: 1rem; }
+
+.contact-intro {
+  background: var(--color-accent-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-left: 4px solid var(--color-primary);
+}
+
+.contact-intro h2 { margin-top: 0; color: var(--color-heading); }
+
+.cta-button {
+  display: inline-block;
+  background: #22c55e;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 1rem 0 2rem 0;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.cta-button:hover { background: #16a34a; }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: var(--color-heading);
+}
+
+input, textarea, select {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(23, 74, 166, 0.1);
+}
+
+select { cursor: pointer; }
+textarea { resize: vertical; min-height: 100px; }
+
+button[type="submit"] {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+  background: var(--color-heading);
+}
+
+.booking-questions {
+  margin-top: 2rem;
+  background: #f1f5f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #22c55e;
+}
+
+.booking-questions h2 {
+  color: var(--color-heading);
+  margin-top: 0;
+}
+
+.booking-questions ul { margin: 1rem 0; padding-left: 1.5rem; }
+.booking-questions li { margin-bottom: 0.5rem; line-height: 1.4; }
+.booking-questions small { color: #64748b; font-style: italic; }
+
+.contact-details {
+  margin-top: 2rem;
+  background: var(--color-accent-bg);
+  padding: 1.5rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.contact-details h2 { color: var(--color-heading); margin-top: 0; }
+.contact-details p { margin: 0; line-height: 1.6; }
+.contact-details a { color: var(--color-primary); text-decoration: none; }
+.contact-details a:hover { text-decoration: underline; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .contact-main {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  .cta-button {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  .contact-intro, .booking-questions, .contact-details {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .service-tiers, .benefits-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .benefits, .results-list {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero { padding: 32px 8px 24px 8px; }
+  .about-preview, .results { padding: 20px 8px; }
+  .about-header { flex-direction: column; gap: 16px; }
+  .achievements { flex-direction: column; gap: 16px; }
+  .achievements-grid,
+  .expertise-columns,
+  .competencies-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

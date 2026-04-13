@@ -1,0 +1,28 @@
+/* Medical Research — Color overrides */
+:root {
+  --color-header: #0a3d62;
+  --color-primary: #174ea6;
+  --color-accent-bg: #e3f0fa;
+  --color-heading: #0a3d62;
+  --color-cta: #174ea6;
+  --color-cta-hover: #0a3d62;
+  --color-sidebar-accent: #0a3d62;
+  --color-hr: #0a3d62;
+  --color-link: #0a3d62;
+  --color-footer: #0a3d62;
+  --color-card-border: #174ea6;
+}
+
+/* Hexagonal grid — evokes molecular/data structure */
+.hero {
+  background:
+    linear-gradient(30deg, rgba(10,61,98,0.04) 12%, transparent 12.5%, transparent 87%, rgba(10,61,98,0.04) 87.5%),
+    linear-gradient(150deg, rgba(10,61,98,0.04) 12%, transparent 12.5%, transparent 87%, rgba(10,61,98,0.04) 87.5%),
+    linear-gradient(30deg, rgba(10,61,98,0.04) 12%, transparent 12.5%, transparent 87%, rgba(10,61,98,0.04) 87.5%),
+    linear-gradient(150deg, rgba(10,61,98,0.04) 12%, transparent 12.5%, transparent 87%, rgba(10,61,98,0.04) 87.5%),
+    linear-gradient(60deg, rgba(23,78,166,0.03) 25%, transparent 25.5%, transparent 75%, rgba(23,78,166,0.03) 75%),
+    linear-gradient(60deg, rgba(23,78,166,0.03) 25%, transparent 25.5%, transparent 75%, rgba(23,78,166,0.03) 75%),
+    var(--color-accent-bg);
+  background-size: 40px 70px;
+  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+}

@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Medical Research Services | Craig LaForest</title>
-  <meta name="description" content="Strategic technology solutions for medical research: data integration, secure management, and advanced analytics for clinical and translational research.">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Medical Research Services &amp; Sovereign AI | Craig LaForest</title>
+  <meta name="description" content="Strategic technology solutions for medical research: sovereign AI infrastructure, data integration, secure management, and advanced analytics for clinical and translational research.">
+  <meta property="og:title" content="Medical Research Services &amp; Sovereign AI | Craig LaForest">
+  <meta property="og:description" content="Strategic technology solutions for medical research: sovereign AI infrastructure, data integration, secure management, and advanced analytics for clinical and translational research.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-medical-research.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="services.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
       <a href="services.html" class="active">Services</a>
-      <a href="aboutme.html">About Me</a>
+      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -51,9 +60,15 @@
         </p>
       </div>
       <div class="service-tier">
-        <h3>Enablement of Advanced Analytics &amp; AI/ML</h3>
+        <h3>Sovereign AI Strategy for Research Institutions</h3>
         <p>
-          Support the adoption of scalable, <strong>explainable</strong> AI/ML tools for multi-omics integration, imaging analysis, and biomarker discovery, addressing the challenges of small, heterogeneous datasets.
+          Help your institution maintain control over AI infrastructure and sensitive patient data. I design on-premises and sovereign cloud AI architectures that keep research data within institutional boundaries, ensure AI models are auditable, explainable, and HIPAA/IRB compliant, and reduce dependence on external cloud AI providers while aligning with emerging national AI strategies.
+        </p>
+      </div>
+      <div class="service-tier">
+        <h3>AI/ML Enablement with Data Sovereignty</h3>
+        <p>
+          Deploy scalable, <strong>explainable</strong> AI/ML tools for multi-omics integration, imaging analysis, and biomarker discovery while maintaining full data sovereignty. This includes on-premises model training for sensitive clinical data, AI model governance frameworks with versioning and audit trails, and federated learning approaches for multi-site collaboration without data leaving institutional boundaries.
         </p>
       </div>
       <div class="service-tier">
@@ -76,16 +91,16 @@
       </div>
     </section>
     <section class="engagement">
-      <h2>How We Work</h2>
+      <h2>How I Work</h2>
       <ul>
         <li><strong>Fractional CTO Engagements:</strong> Ongoing strategic leadership for research IT and data teams.</li>
         <li><strong>Consultative Projects:</strong> Targeted solutions for integration, compliance, or analytics challenges.</li>
         <li><strong>Workshops &amp; Training:</strong> Upskill your team in research data management, interoperability, and analytics.</li>
       </ul>
-      <button class="cta-btn" onclick="window.location.href='contact.html'">Request a Consultation</button>
+      <a href="contact.html" class="cta-btn">Request a Consultation</a>
     </section>
     <section class="benefits">
-      <h2>Why Choose Our Medical Research Services?</h2>
+      <h2>Why Choose My Medical Research Services?</h2>
       <div class="benefits-list">
         <div class="benefit">
           <strong>Research-First Approach</strong>
@@ -109,10 +124,10 @@
   <footer>
     <nav>
       <a href="index.html">Home</a> |
+      <a href="services.html">Services</a> |
       <a href="about.html">About</a> |
-      <a href="services.html" class="active">Services</a> |
-      <a href="aboutme.html">About Me</a> |
-      <a href="contact.html">Contact</a>
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
     </nav>
     <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Medical Research</p>
   </footer>

@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Fractional CTO for Medical Research | Craig LaForest</title>
   <meta name="description" content="Contact Craig LaForest for medical research technology leadership. Schedule a call to discuss your research IT infrastructure, data management, and compliance needs.">
+  <meta property="og:title" content="Contact | Fractional CTO for Medical Research | Craig LaForest">
+  <meta property="og:description" content="Contact Craig LaForest for medical research technology leadership. Schedule a call to discuss your research IT infrastructure, data management, and compliance needs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-medical-research.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,500,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="contact.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
 </head>
 <body>
   <header>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
       <a href="services.html">Services</a>
-      <a href="aboutme.html">About Me</a>
+      <a href="about.html">About</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
   </header>
@@ -53,6 +61,7 @@
         <option value="lipodystrophy">Lipodystrophy Research</option>
         <option value="clinical-trials">Clinical Trials</option>
         <option value="translational">Translational Research</option>
+        <option value="sovereign-ai">Sovereign AI / AI Governance</option>
         <option value="other">Other Medical Research</option>
       </select>
       
@@ -64,7 +73,7 @@
     
     <div class="booking-questions">
       <h2>Pre-Call Research Questions</h2>
-      <p>To make our conversation as productive as possible, please consider these questions:</p>
+      <p>To make the conversation as productive as possible, please consider these questions:</p>
       <ul>
         <li>What is the primary focus of your current research projects?</li>
         <li>What is your annual research technology budget or grant allocation?</li>
@@ -73,16 +82,13 @@
         <li>Are you experiencing any data fragmentation or analysis pipeline issues?</li>
         <li>Do you collaborate with other institutions or manage multi-site studies?</li>
       </ul>
-      <p><small>These questions help me understand your unique research environment and tailor our discussion to your specific needs and challenges.</small></p>
+      <p><small>These questions help me understand your unique research environment and tailor the discussion to your specific needs and challenges.</small></p>
     </div>
 
     <div class="contact-details">
       <h2>Direct Contact Information</h2>
       <p><strong>Craig LaForest</strong><br>
       Fractional CTO for Medical Research<br>
-      <!--📧 <a href="mailto:email@company.com">email@company.com</a><br>
-      📞 <a href="tel:+18885551212">(888) 555-1212</a><br>
-      🔗 <br-->
       &nbsp;<img src="../images/LI-In-Bug.png" alt="LinkedIn Icon" style="width:16px; height:16px; vertical-align:middle; margin-right:4px;">
         <a href="https://linkedin.com/in/craiglaforest" target="_blank" rel="noopener noreferrer">Reach out on LinkedIn</a><br>
       📅 <!-- Calendly link widget begin -->
@@ -98,10 +104,10 @@
   <footer>
     <nav>
       <a href="index.html">Home</a> |
-      <a href="about.html">About</a> |
       <a href="services.html">Services</a> |
-      <a href="aboutme.html">About Me</a> |
-      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
     </nav>
     <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Medical Research</p>
   </footer>

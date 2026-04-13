@@ -1,9 +1,0 @@
-.benefits { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin:48px auto 32px auto; max-width:900px; }
-.benefit { background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.04); padding:28px 20px; text-align:center; }
-.benefit h3 { color:#174ea6; margin-bottom:0.5em; }
-
-
-@media (max-width:700px) {
-  .services-main { padding:20px 8px; }
-  .service-tiers, .benefits-list { grid-template-columns:1fr; gap:16px; }
-}

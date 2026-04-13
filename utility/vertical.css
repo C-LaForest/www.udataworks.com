@@ -1,0 +1,80 @@
+/* Gas Utility — Color overrides */
+:root {
+  --color-header: #1B365D;
+  --color-primary: #FF6B35;
+  --color-accent-bg: #E8F1F5;
+  --color-heading: #1B365D;
+  --color-cta: #FF6B35;
+  --color-cta-hover: #1B365D;
+  --color-sidebar-accent: #2196f3;
+  --color-hr: #1B365D;
+  --color-link: #1B365D;
+  --color-footer: #1B365D;
+  --color-card-border: #FF6B35;
+  --color-card-bg: #F5F5F5;
+}
+
+/* Utility-specific service tier styling */
+.service-tier {
+  background: #F5F5F5;
+  border-left: 6px solid #FF6B35;
+}
+
+.service-tier h3 { color: #2196f3; }
+.service-tier ul { list-style: none; padding: 0; margin: 0; }
+.service-tier li { margin-bottom: 0.6em; color: #2C3E50; font-size: 1.05em; }
+
+/* Utility-specific benefit styling */
+.benefit {
+  background: #E8F1F5;
+  border-left: 4px solid #2D5A27;
+  color: #2C3E50;
+}
+
+/* Utility-specific case study styling */
+.case {
+  background: #F5F5F5;
+  border-left: 4px solid #FF6B35;
+  color: #2C3E50;
+}
+
+/* Utility-specific about page */
+.trust-badges {
+  background: #F5F5F5;
+  border-left: 4px solid #D2691E;
+  padding: 16px;
+}
+
+.sustainability-note {
+  color: #2D5A27;
+  font-weight: 600;
+}
+
+/* Diagonal hatch pattern — evokes infrastructure, engineering, pipeline grids */
+.hero {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(27,54,93,0.10) 18px,
+      rgba(27,54,93,0.10) 19.5px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgba(27,54,93,0.10) 18px,
+      rgba(27,54,93,0.10) 19.5px
+    ),
+    var(--color-accent-bg);
+}
+
+/* Utility contact CTA override */
+.cta-button {
+  background: #ff9800;
+}
+
+.cta-button:hover {
+  background: #fb923c;
+}
