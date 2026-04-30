@@ -78,24 +78,27 @@ document.addEventListener('DOMContentLoaded', function() {
       setIndustryPreference('medical-research');
       redirectToIndustry('medical-research');
     });
-    document.getElementById('select-healthcare').addEventListener('click', function() {
-      setIndustryPreference('healthcare');
-      redirectToIndustry('healthcare');
-    });
-    document.getElementById('select-utility').addEventListener('click', function() {
-      setIndustryPreference('utility');
-      redirectToIndustry('utility');
+    document.getElementById('select-regulated').addEventListener('click', function() {
+      setIndustryPreference('regulated-industries');
+      redirectToIndustry('regulated-industries');
     });
     return;
   }
 
-  // If user has a preference (healthcare or utility), redirect to it
-  if (industry === 'medical-research' || industry === 'healthcare' || industry === 'utility') {
+  // Migration: legacy preferences (healthcare, utility) remap to regulated-industries
+  if (industry === 'healthcare' || industry === 'utility') {
+    setIndustryPreference('regulated-industries');
+    redirectToIndustry('regulated-industries');
+    return;
+  }
+
+  // If user has a current preference, redirect to it
+  if (industry === 'medical-research' || industry === 'regulated-industries') {
     redirectToIndustry(industry);
     return;
   }
-  
-  // If no cookie is set, default to medical-research
+
+  // If no preference is set, default to medical-research (primary niche)
   setIndustryPreference('medical-research');
   redirectToIndustry('medical-research');
 });

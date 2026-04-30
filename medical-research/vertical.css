@@ -13,6 +13,61 @@
   --color-card-border: #174ea6;
 }
 
+/* Sovereign AI featured section */
+.sovereign-feature {
+  background: linear-gradient(135deg, #e3f0fa 0%, #f0f7fc 100%);
+  border-top: 4px solid #174ea6;
+  border-bottom: 4px solid #174ea6;
+  padding: 40px 0;
+  margin: 40px 0;
+}
+.sovereign-feature .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  color: #174ea6;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.sovereign-feature h2 { color: #0a3d62; font-size: 2rem; margin: 0 0 20px 0; }
+.sovereign-definition {
+  background: #fff;
+  border-left: 6px solid #174ea6;
+  padding: 18px 22px;
+  margin: 20px 0 28px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(23,78,166,0.08);
+}
+.sovereign-definition strong { color: #174ea6; }
+.sovereign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.sovereign-grid .card {
+  background: #fff;
+  border-top: 3px solid #174ea6;
+  padding: 18px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(10,61,98,0.08);
+}
+.sovereign-grid .card h3 { color: #0a3d62; margin: 0 0 12px 0; font-size: 1.1rem; }
+.sovereign-grid .card ul { padding-left: 1.2rem; margin: 0; }
+.sovereign-grid .card li { margin-bottom: 0.5rem; font-size: 0.95rem; color: #0a3d62; }
+.sovereign-grid .card p { font-size: 0.95rem; color: #0a3d62; margin: 0; }
+.callout {
+  background: #0a3d62; color: #fff;
+  padding: 22px 26px; border-radius: 6px;
+  margin: 28px 0; font-size: 1.08rem;
+  border-left: 6px solid #174ea6;
+}
+.callout strong { color: #93c5fd; }
+
+@media (max-width: 700px) {
+  .sovereign-feature h2 { font-size: 1.5rem; }
+}
+
 /* Hexagonal grid — evokes molecular/data structure */
 .hero {
   background:

@@ -20,12 +20,14 @@ main {
 }
 .industry-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
   margin: 2rem 0;
+  flex-wrap: wrap;
 }
 button {
   flex: 1 1 45%;
-  margin: 0 0.5rem;
+  min-width: 160px;
   padding: 1rem;
   font-size: 1.2rem;
   border: none;

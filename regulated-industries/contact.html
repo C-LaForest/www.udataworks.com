@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Fractional CTO for Regulated Industries | Sovereign AI | Craig LaForest</title>
+  <meta name="description" content="Contact Craig LaForest, Fractional CTO for Regulated Industries. Schedule a call to discuss sovereign AI, compliance, infrastructure modernization, or technology leadership.">
+  <meta property="og:title" content="Contact | Fractional CTO for Regulated Industries | Craig LaForest">
+  <meta property="og:description" content="Schedule a sovereign AI, compliance, or infrastructure leadership conversation.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-regulated-industries.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto:400,500,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sovereign-ai.html">Sovereign AI</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Contact Craig LaForest</h1>
+    <p>Ready to discuss sovereign AI strategy, compliance posture, infrastructure modernization, or fractional CTO leadership? Schedule a call or send a message below.</p>
+    <a href="https://calendly.com/claforest/meeting" class="cta-button" target="_blank" rel="noopener noreferrer">Schedule a Consultation</a>
+    <form action="https://formspree.io/f/xwpgjlaa" method="post" autocomplete="off">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required>
+
+      <label for="organization">Organization</label>
+      <input type="text" id="organization" name="organization">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="industry">Industry</label>
+      <select id="industry" name="industry">
+        <option value="">Select your industry</option>
+        <option value="energy-utility">Energy / Utilities</option>
+        <option value="financial-services">Financial Services</option>
+        <option value="government">Government</option>
+        <option value="healthcare-ops">Healthcare Operations</option>
+        <option value="manufacturing">Manufacturing</option>
+        <option value="telecom">Telecom</option>
+        <option value="other-regulated">Other Regulated Industry</option>
+      </select>
+
+      <label for="inquiry">Primary Inquiry</label>
+      <select id="inquiry" name="inquiry">
+        <option value="sovereign-ai">Sovereign AI Strategy</option>
+        <option value="sovereign-ai-implementation">Sovereign AI Implementation</option>
+        <option value="compliance">Compliance &amp; Audit Readiness</option>
+        <option value="infrastructure">Infrastructure Modernization</option>
+        <option value="ot-it">OT/IT Convergence</option>
+        <option value="cybersecurity">Cybersecurity Program</option>
+        <option value="fractional-cto">Fractional CTO Retainer</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="booking-questions">
+      <h2>Pre-Call Questions</h2>
+      <ul>
+        <li>What regulatory frameworks does your organization operate under?</li>
+        <li>What is your annual technology budget or team size?</li>
+        <li>What is your top infrastructure, compliance, or sovereign AI challenge?</li>
+        <li>Are there upcoming audits, migrations, or AI initiatives on the horizon?</li>
+        <li>Do you have dedicated IT leadership in place, or is that the gap you are filling?</li>
+      </ul>
+      <p><small>These questions help tailor the conversation to your organization's needs.</small></p>
+    </div>
+  </main>
+  <footer>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="sovereign-ai.html">Sovereign AI</a> |
+      <a href="services.html">Services</a> |
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
+    </nav>
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Regulated Industries</p>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

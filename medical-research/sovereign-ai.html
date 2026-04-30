@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Sovereign AI for Medical Research — Strategy, Architecture, and Implementation | Craig LaForest</title>
+  <meta name="description" content="Sovereign AI for medical research: definition, regulatory landscape (HIPAA, IRB, FDA Part 11, NIH data policies), reference architecture, maturity model, and engagement options for research programs.">
+  <meta property="og:title" content="Sovereign AI for Medical Research | Craig LaForest">
+  <meta property="og:description" content="Adopt AI in your research program without losing control of patient data, model lineage, or regulatory standing. Strategy, architecture, and implementation for research programs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-medical-research.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
+  <style>
+    /* Sovereign AI page-specific styling using medical-research palette */
+    .sovereign-feature {
+      background: linear-gradient(135deg, #e3f0fa 0%, #f0f7fc 100%);
+      border-top: 4px solid #174ea6;
+      border-bottom: 4px solid #174ea6;
+      padding: 40px 0;
+      margin: 40px 0;
+    }
+    .sovereign-feature .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.85rem;
+      color: #174ea6;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .sovereign-definition {
+      background: #fff;
+      border-left: 6px solid #174ea6;
+      padding: 18px 22px;
+      margin: 20px 0 28px 0;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(23,78,166,0.08);
+    }
+    .sovereign-definition strong { color: #174ea6; }
+    .sovereign-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+    .sovereign-grid .card {
+      background: #fff;
+      border-top: 3px solid #174ea6;
+      padding: 18px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(10,61,98,0.08);
+    }
+    .sovereign-grid .card h3 {
+      color: #0a3d62;
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+    }
+    .sovereign-grid .card ul { padding-left: 1.2rem; margin: 0; }
+    .sovereign-grid .card li { margin-bottom: 0.5rem; font-size: 0.95rem; color: #0a3d62; }
+    .maturity-stages { counter-reset: stage; margin: 24px 0; }
+    .maturity-stage {
+      background: #fff;
+      border-left: 4px solid #174ea6;
+      padding: 14px 18px 14px 60px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      position: relative;
+    }
+    .maturity-stage::before {
+      counter-increment: stage;
+      content: counter(stage);
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: #174ea6; color: #fff;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.1rem;
+    }
+    .maturity-stage h4 { margin: 0 0 6px 0; color: #0a3d62; }
+    .maturity-stage p { margin: 0; color: #0a3d62; font-size: 0.95rem; }
+    .callout {
+      background: #0a3d62;
+      color: #fff;
+      padding: 22px 26px;
+      border-radius: 6px;
+      margin: 28px 0;
+      font-size: 1.08rem;
+      border-left: 6px solid #174ea6;
+    }
+    .callout strong { color: #93c5fd; }
+    .architecture-layer {
+      background: #fff;
+      border: 1px solid #174ea6;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+    .architecture-layer h4 { margin: 0 0 6px 0; color: #174ea6; }
+    .architecture-layer p { margin: 0; font-size: 0.95rem; color: #0a3d62; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sovereign-ai.html" class="active">Sovereign AI</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <div class="container">
+    <section class="hero">
+      <h1>Sovereign AI for Medical Research</h1>
+      <p>Adopt AI in your research program without losing control of patient data, model lineage, or regulatory standing.</p>
+      <a href="contact.html" class="cta-btn">Schedule a Sovereign AI Conversation</a>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">What is Sovereign AI?</h2>
+        <p>Sovereign AI is the deliberate practice of deploying artificial intelligence so that your research program retains control over three things: patient and study <strong>data</strong>, the <strong>models</strong> themselves (including weights, fine-tuning, and lifecycle), and the <strong>audit trail</strong> of every decision. Sovereign AI keeps these inside your institutional regulatory perimeter rather than handing them to a third-party SaaS provider.</p>
+        <p>For medical research, sovereign AI is not optional. It is the only AI adoption pattern that aligns with how IRBs, HIPAA, FDA, NIH, and your own institutional data governance actually work. Every other path forces a choice between AI capability and regulatory standing &mdash; and that choice can end a research program.</p>
+        <p>Sovereign AI is also the discipline that makes AI-assisted research <em>publishable</em>. Reproducibility, model lineage, and audit trails are increasingly required by journals, funders, and regulators. Closed-weight commercial models with vendor-controlled versioning fail those tests.</p>
+
+        <h3>What Sovereign AI is NOT</h3>
+        <ul>
+          <li><strong>Not "anti-AI."</strong> It is responsible AI adoption. Sovereign AI is how research programs get to use AI capability at all without violating their IRB protocols, grant terms, or institutional data governance.</li>
+          <li><strong>Not "no cloud."</strong> Sovereign-cloud research enclaves (AWS GovCloud, Azure for Research, GCP Sovereign Controls), institutional HPC, and hybrid architectures are all valid sovereign AI patterns. The question is who controls the data, models, and audit trail.</li>
+          <li><strong>Not "build everything from scratch."</strong> Open-weight foundation models (Llama, Mistral) and biomedical-specific open models on sovereign infrastructure is the dominant pattern. You do not have to train from zero to be sovereign.</li>
+          <li><strong>Not just "private deployment."</strong> True sovereignty requires governance, audit, and lifecycle control too. A privately deployed black-box model you cannot inspect, version, or reproduce in published findings is not sovereign.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">Why Now &mdash; The Research Regulatory Landscape</h2>
+        <p>Regulators, funders, IRBs, and journals are not waiting for research programs to figure AI out. The rules are being written now, and consumer or SaaS AI usage in research is already a compliance problem under one or more of these:</p>
+
+        <ul>
+          <li><strong>HIPAA Privacy Rule + Security Rule</strong> &mdash; PHI exposure when patient data touches third-party AI is a BAA issue at minimum, often a notifiable incident. OCR enforcement guidance is evolving.</li>
+          <li><strong>FDA 21 CFR Part 11</strong> &mdash; Electronic records, signatures, and audit trails. AI used in any process supporting regulated submissions must meet Part 11 expectations.</li>
+          <li><strong>FDA AI/ML guidance</strong> &mdash; Software as a Medical Device (SaMD), Good Machine Learning Practice (GMLP), predetermined change control plans for AI/ML-based devices.</li>
+          <li><strong>IRB requirements</strong> &mdash; Most existing informed consent forms do not cover third-party AI processing of patient data. Using consumer AI on study data may already exceed your protocol.</li>
+          <li><strong>Common Rule (45 CFR 46)</strong> &mdash; Research subject protections including data handling and re-identification risk.</li>
+          <li><strong>NIH Data Management &amp; Sharing Policy</strong> &mdash; Required for all NIH-funded research. Many DMS plans are silent on or incompatible with consumer AI usage.</li>
+          <li><strong>Federal grant terms</strong> &mdash; NIH, NSF, DARPA, DOE increasingly require explicit data governance plans. Consumer AI usage often violates these.</li>
+          <li><strong>NIST AI RMF + Generative AI Profile (AI 600-1)</strong> &mdash; Federal baseline for AI governance, increasingly referenced by funders.</li>
+          <li><strong>GDPR Article 22</strong> &mdash; For any study with EU participants. Automated decision-making protections.</li>
+          <li><strong>Journal AI policies</strong> &mdash; Major journals (Nature, NEJM, JAMA) now require disclosure of AI usage. Some require model and data provenance for replication.</li>
+        </ul>
+
+        <p><strong>Implication:</strong> A research program using ChatGPT on de-identified data may already be in violation of its IRB protocol, its grant terms, its data use agreements with collaborating institutions, and the publication standards of its target journals &mdash; simultaneously. Discovering this during an audit, after a publication, or after a data breach is the worst time to find out.</p>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">The Four Risks of Non-Sovereign AI in Research</h2>
+        <div class="sovereign-grid">
+          <div class="card">
+            <h3>1. IRB &amp; Consent Risk</h3>
+            <p>Most existing informed consent forms do not cover third-party AI processing of patient data. Using consumer or SaaS AI on study data can place your program out of compliance with its own approved protocol &mdash; an IRB violation regardless of whether the data was de-identified.</p>
+          </div>
+          <div class="card">
+            <h3>2. Data Exfiltration Risk</h3>
+            <p>Re-identification attacks on "de-identified" data fed to commercial AI are well-documented. PHI leakage through prompts is a notifiable incident under HIPAA. Once data is in a third-party model, it cannot be retracted &mdash; the disclosure has already happened.</p>
+          </div>
+          <div class="card">
+            <h3>3. Reproducibility &amp; Publication Risk</h3>
+            <p>Closed-weight models with versions you do not control mean your published results cannot be reproduced. Journals are starting to reject AI-assisted analyses without provenance and audit trails. Vendor model deprecations destroy reproducibility for any work depending on them.</p>
+          </div>
+          <div class="card">
+            <h3>4. Grant Compliance &amp; Funding Risk</h3>
+            <p>NIH, NSF, DARPA, DOE data governance terms are increasingly incompatible with consumer AI. Institutional review of research AI usage is intensifying. A grant violation can mean funding clawback, future award ineligibility, and institutional reputation damage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">A Sovereign AI Reference Architecture for Research</h2>
+        <p>Sovereign AI for research is not a single product. It is a layered architecture that integrates with your institutional identity, security, IRB administration, and grants management systems. Federated learning gets first-class treatment because multi-site research collaboration is the norm.</p>
+
+        <div class="architecture-layers">
+          <div class="architecture-layer">
+            <h4>Compute Layer</h4>
+            <p>Institutional HPC, sovereign-cloud research enclaves (AWS GovCloud, Azure for Research, GCP Sovereign Controls), or on-prem GPU clusters. Compatible with existing IRB-approved data handling environments.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Model Layer</h4>
+            <p>Open-weight foundation models (Llama 3, Mistral) plus biomedical-specific open models (BioMedLM, Llama-Med variants, ClinicalBERT). Fine-tuning infrastructure for domain-specific performance.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Federated Learning Layer</h4>
+            <p>Federated training and inference for multi-site cohorts and rare disease consortia. Share model improvements across collaborating institutions without sharing raw data &mdash; preserves DUAs, IRB boundaries, and patient consent scope.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Inference &amp; Orchestration Layer</h4>
+            <p>vLLM, TGI, Triton for inference. LangChain, LlamaIndex, custom orchestration. Retrieval-augmented generation (RAG) over your sovereign research data sources, including REDCap, LIMS, EHR, imaging archives.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Governance Layer</h4>
+            <p>IRB-aware audit trails, FDA Part 11 compliance, model registry with version lineage tied to published results. Bias, drift, and equity monitoring. Reproducibility infrastructure that survives vendor changes.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Identity &amp; Access Layer</h4>
+            <p>Institutional SSO, study-team RBAC, data-use-agreement enforcement. Access boundaries match the IRB protocol &mdash; not a parallel access regime.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Observability Layer</h4>
+            <p>Prompt and response logs, model version tracking, performance monitoring, drift detection, audit log pipeline. Feeds your institutional compliance reporting and grant-required data governance documentation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">The Sovereign AI Maturity Model</h2>
+        <p>Most research programs are at stage 1 or 2 today. The transition from stage 2 to stage 3 is the highest-risk window: institutional AI policies exist, but architecture does not enforce them, and PIs are using consumer AI to keep grants on schedule.</p>
+
+        <div class="maturity-stages">
+          <div class="maturity-stage">
+            <h4>Unmanaged</h4>
+            <p>Shadow AI everywhere. PIs and research staff using consumer AI on study data without inventory, policy, or oversight. Sensitive data is leaking through chatbots and unsanctioned enterprise tools.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Policy</h4>
+            <p>Institutional AI usage policy. Approved tools list. Basic training. PIs know the rules but circumvent them when grant deadlines compete with compliance friction. Policy without architecture is hope.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Controlled</h4>
+            <p>DLP integrated. Sanctioned AI tools deployed with prompt logging. Unsanctioned tools blocked or monitored. Research AI inventory exists. Risk is reduced but not eliminated.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Sovereign</h4>
+            <p>On-premises or sovereign-cloud AI deployed for research workloads. Open-weight models with biomedical fine-tuning. IRB-aware governance framework operational. Audit trails integrated with institutional compliance program.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Optimized</h4>
+            <p>Federated learning across institutional consortia for rare disease cohorts and multi-site studies. Mature MLOps with continuous evaluation. Audit trail integrated with grants compliance reporting. AI becomes a defensible institutional research capability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">Engagement Models &mdash; How I Help Research Programs</h2>
+        <div class="sovereign-grid">
+          <div class="card">
+            <h3>Sovereign AI Strategy Assessment</h3>
+            <p><strong>2&ndash;4 weeks.</strong> Current-state inventory of AI usage in your program. IRB exposure, grant compliance review. Build-vs-buy-vs-host recommendation. Briefing for IRB, grants office, and institutional leadership.</p>
+          </div>
+          <div class="card">
+            <h3>Reference Architecture Design</h3>
+            <p><strong>4&ndash;8 weeks.</strong> Detailed architecture tailored to your program's IRB protocols, data use agreements, institutional infrastructure, and compliance program. Vendor-neutral.</p>
+          </div>
+          <div class="card">
+            <h3>Sovereign AI Pilot Implementation</h3>
+            <p><strong>8&ndash;16 weeks.</strong> Stand up working sovereign AI capability for one priority study or workload. Includes governance program, biomedical fine-tuning, and IRB-aware audit trail integration.</p>
+          </div>
+          <div class="card">
+            <h3>Ongoing Sovereign AI Advisory</h3>
+            <p><strong>Fractional CTO retainer.</strong> Continuous strategy, architecture, and operational leadership as your sovereign AI program matures across studies, consortia, and grant cycles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="results">
+      <div class="container">
+        <h2 class="section-title">Research-Specific Sovereign AI FAQ</h2>
+
+        <h5>Can I use AI on de-identified data without IRB review?</h5>
+        <p>Often no, even for de-identified data. Re-identification risk, third-party AI processing not covered in informed consent, and data use agreement restrictions can all require IRB notification or amendment. The safe default is to confirm with your IRB before any AI processing of study data &mdash; including de-identified data &mdash; touches a third-party service.</p>
+
+        <h5>How does sovereign AI affect my data use agreements with collaborating institutions?</h5>
+        <p>Sovereign AI is generally easier to fit into existing DUAs than commercial AI. Federated learning architectures specifically allow you to honor "data does not leave institution X" clauses while still collaborating on AI model development. Many DUAs that prohibit commercial AI processing explicitly permit sovereign AI patterns.</p>
+
+        <h5>What happens to my published AI-assisted findings if the vendor deprecates the model?</h5>
+        <p>If you used a closed-weight commercial model: your published findings are no longer reproducible by definition. Journals increasingly view this as a fatal flaw. Sovereign AI with version-locked open-weight models lets you preserve the exact model used for any published analysis &mdash; reproducibility for the lifetime of the work.</p>
+
+        <h5>Are open-weight biomedical models good enough for serious research?</h5>
+        <p>For most enterprise research workloads, yes. Open-weight models are competitive with closed-frontier models on classification, extraction, summarization, structured generation, and RAG-based question answering. Biomedical-tuned variants and domain fine-tuning on your data often outperform generic frontier models for specialized tasks. For frontier reasoning tasks, hybrid patterns (sovereign for sensitive workloads, commercial for low-sensitivity) are reasonable.</p>
+
+        <h5>How does federated learning help multi-site rare disease studies?</h5>
+        <p>Rare disease cohorts are by definition small at any single site. Federated learning lets multiple institutions contribute to model training without sharing patient data &mdash; honoring HIPAA, IRB, DUA, and consent boundaries while still capturing the statistical power of a multi-site cohort. It is the natural pattern for rare disease consortia.</p>
+
+        <h5>What does this cost for a typical NIH-funded lab?</h5>
+        <p>Highly variable. A sovereign-cloud research enclave for a focused workload can start in the low six figures all-in (compute, integration, governance). Institutional shared infrastructure spreads the cost across labs. Federated participation in an existing consortium can be much lower. Total cost is often comparable to or lower than per-seat enterprise AI subscriptions at scale, with the added benefit of being grant-allowable as data infrastructure.</p>
+      </div>
+    </section>
+
+    <section id="cta" class="results">
+      <div class="container">
+        <h2 class="section-title">Ready to talk about sovereign AI for your research program?</h2>
+        <p>If your IRB is asking "where will the data go?" and your PI is asking "when can we start using AI?" &mdash; those questions need the same answer. A 30-minute call helps identify your top exposure points, current maturity stage, and the highest-leverage next step.</p>
+        <a href="contact.html" class="cta-btn">Schedule a Sovereign AI Conversation</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="sovereign-ai.html">Sovereign AI</a> |
+      <a href="services.html">Services</a> |
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
+    </nav>
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Medical Research</p>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

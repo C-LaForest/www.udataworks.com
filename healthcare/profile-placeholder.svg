@@ -1,6 +1,0 @@
-<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="150" r="150" fill="#e3f2fd"/>
-  <circle cx="150" cy="120" r="70" fill="#90caf9"/>
-  <ellipse cx="150" cy="220" rx="100" ry="50" fill="#90caf9"/>
-  <text x="150" y="170" text-anchor="middle" font-size="90" fill="#2196f3" font-family="Arial, sans-serif" font-weight="bold">CL</text>
-</svg>
