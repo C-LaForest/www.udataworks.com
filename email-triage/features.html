@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Email Triage Features — Classification, Drafting, Scheduling, API | Craig LaForest</title>
+  <meta name="description" content="Full feature catalog: intelligent classification, automated routing, smart reply drafting, calendar-aware meeting scheduling, multi-provider support, multi-user, agent API.">
+  <meta property="og:title" content="Email Triage Features">
+  <meta property="og:description" content="Classification, drafting, scheduling, multi-tenant, API. Full feature catalog for the self-hosted email automation system.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html" class="active">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Features</h1>
+      <p class="lead">Everything Email Triage does — from LLM classification to calendar-aware meeting scheduling to the agent API.</p>
+    </div>
+  </section>
+
+  <!-- Classification -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Section 1</p>
+      <h2 class="section-title">Intelligent Classification</h2>
+      <p>Each incoming message is classified by a local LLM into one of your categories. The classifier sees the sender, subject, and body; you write the category descriptions and the system uses them as the classifier's instruction.</p>
+
+      <h3 style="margin-top:32px;">Default Categories</h3>
+      <p>12 system categories ship out of the box:</p>
+      <table class="feature-table">
+        <thead><tr><th>Category</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>to-respond</code></td><td>Emails that need a reply from you</td></tr>
+          <tr><td><code>action-required</code></td><td>Tasks, requests, deadlines</td></tr>
+          <tr><td><code>fyi</code></td><td>Informational. No action needed.</td></tr>
+          <tr><td><code>newsletters</code></td><td>Subscriptions and recurring content</td></tr>
+          <tr><td><code>meetings</code></td><td>Meeting invites, agenda, scheduling</td></tr>
+          <tr><td><code>meeting-request</code></td><td>Prose-only requests to schedule a meeting (no .ics)</td></tr>
+          <tr><td><code>grant-related</code></td><td>Grant applications, reviews, funding communications</td></tr>
+          <tr><td><code>self-event</code></td><td>Note-to-self about a personal event. Auto-creates calendar entry.</td></tr>
+          <tr><td colspan="2" style="text-align:center; font-style:italic; color:#64748B;">… plus invoices, comments, notifications, sponsor</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:32px;">Custom Categories</h3>
+      <p>Add as many as you want. Each category is defined by a short slug and a description; the description is what the LLM uses to decide whether a message belongs. Write it well, the classifier follows.</p>
+
+      <div class="mockup-frame">
+        <img src="images/categories.png" alt="Categories admin page">
+      </div>
+      <p class="mockup-caption">/categories — system defaults + user-added categories with operator-editable descriptions</p>
+
+      <h3 style="margin-top:32px;">Classification Hints</h3>
+      <p>Two types of fast-path rules bypass the LLM entirely:</p>
+      <ul>
+        <li><strong>Mailing-list rules.</strong> Map a <code>List-Id</code> header to a category. Sub-millisecond routing.</li>
+        <li><strong>Pattern rules.</strong> Match on sender domain, subject substring, or arbitrary regex.</li>
+      </ul>
+
+      <div class="mockup-frame">
+        <img src="images/rules.png" alt="Rules editor">
+      </div>
+      <p class="mockup-caption">/rules — mailing-list, sender, and regex rules with 30-day hit counts</p>
+
+      <h3 style="margin-top:32px;">Caching</h3>
+      <p>Two-level Redis cache keyed by <code>(sender, normalized_subject, body_hash)</code>. Repeat emails skip the LLM call. <strong>Cache is disabled by default for HIPAA-flagged accounts</strong> — re-classification cost buys audit posture.</p>
+    </div>
+  </section>
+
+  <!-- Routing -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 2</p>
+      <h2 class="section-title">Automated Routing &amp; Actions</h2>
+      <p>After classification, messages route through configurable action chains. Actions are independent — any number can fire on a single message.</p>
+
+      <h3 style="margin-top:32px;">Available Actions</h3>
+      <table class="feature-table">
+        <thead><tr><th>Action</th><th>What It Does</th></tr></thead>
+        <tbody>
+          <tr><td><code>move</code></td><td>Move to a different folder. Per-category folder mapping.</td></tr>
+          <tr><td><code>label</code></td><td>Apply the category as a label / Gmail label.</td></tr>
+          <tr><td><code>notify</code></td><td>Slack, SMS-via-gateway, custom webhook.</td></tr>
+          <tr><td><code>draft_reply</code></td><td>Generate a contextual draft reply, save to Drafts folder.</td></tr>
+          <tr><td><code>suggest_meeting_times</code></td><td>Calendar-aware draft listing free slots. Auto-fires on <code>meeting-request</code>.</td></tr>
+          <tr><td><code>accept_invite</code> / <code>decline</code> / <code>tentative</code></td><td>Calendar invite handling with iMIP-threaded replies.</td></tr>
+          <tr><td><code>escalate</code></td><td>Forward to a configurable recipient. SMS-gateway pattern for phone delivery.</td></tr>
+          <tr><td><code>mute</code></td><td>Suppress all classification + action firing.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="mockup-frame">
+        <img src="images/routes.png" alt="Routes editor">
+      </div>
+      <p class="mockup-caption">/accounts/&lt;id&gt;/routes — per-category action table. Different accounts can route the same category differently.</p>
+
+      <h3 style="margin-top:32px;">Watch Rules</h3>
+      <p>Independent of category. Match a sender, subject, body pattern → fire <code>escalate</code> / <code>webhook</code> / <code>mute</code>. Useful for "alert me immediately when X arrives" patterns that don't fit a category.</p>
+    </div>
+  </section>
+
+  <!-- Drafting -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Section 3</p>
+      <h2 class="section-title">Smart Reply Drafting</h2>
+      <p>The <code>draft_reply</code> action generates a contextual response using your local language model. The draft lands in your Drafts folder. <strong>Nothing is ever sent automatically.</strong></p>
+
+      <h3 style="margin-top:32px;">Three Signals Per Draft</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h3>The Incoming Message</h3>
+          <p>Sender, subject, body — the obvious context.</p>
+        </div>
+        <div class="card">
+          <h3>Your Writing Style</h3>
+          <p>Distilled from your sent mail. Tone, greeting style, signoff conventions, common phrases, average reply length. Default window: last 50 messages, operator-adjustable up to 250+.</p>
+        </div>
+        <div class="card">
+          <h3>Recent Similar Replies</h3>
+          <p>Per-account vector index of past sent mail. Few-shot examples shown to the LLM. Edits you make to drafts are weighted <strong>1.3×</strong> over ordinary sent mail — the system learns your corrections.</p>
+        </div>
+      </div>
+
+      <div class="mockup-frame">
+        <img src="images/Draft.png" alt="Drafted reply">
+      </div>
+      <p class="mockup-caption">A drafted reply in the email client's Drafts folder — threaded into the original conversation, ready for review</p>
+
+      <h3 style="margin-top:32px;">Distilled Writing-Style Profile</h3>
+      <p>The system extracts measurable signals from your sent mail and shows you what it learned. Greeting patterns, signoff conventions, average length, common phrases — all visible and verifiable, not magic.</p>
+
+      <div class="mockup-frame">
+        <img src="images/style-data.png" alt="Writing-style profile">
+      </div>
+      <p class="mockup-caption">/profile/style-data — the distilled writing-style profile. Edits you make to drafts feed back into this index.</p>
+
+      <h3 style="margin-top:32px;">Multi-Alias Awareness</h3>
+      <p>If your account sends from multiple addresses (work, personal, project-specific), the system maintains a separate writing-style profile per address. A draft to a message addressed to <code>alias-a@</code> reflects how you write <em>as alias-a</em>.</p>
+
+      <h3 style="margin-top:32px;">Captured Feedback Loop</h3>
+      <p>When you edit a draft before sending, the final version is captured as a "high-signal example." Future drafts learn the way you actually want it to write — not the way it guessed.</p>
+
+      <div class="callout">
+        <p><strong>Privacy posture.</strong> All drafting runs on the local LLM. The incoming message, the style examples, and the generated draft never leave your network. HIPAA-flagged accounts apply the same scrubbing rules to drafted body as to classification reasoning.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 4</p>
+      <h2 class="section-title">Calendar-Aware Meeting Scheduling</h2>
+      <p>The highest-leverage feature for anyone whose calendar is the bottleneck. When mail is classified as <code>meeting-request</code>, the system reads your calendar, picks slots, and drafts a calendar-aware reply.</p>
+
+      <div class="mockup-frame">
+        <img src="images/meeting.png" alt="Meeting preferences page">
+      </div>
+      <p class="mockup-caption">/profile?tab=meeting — slot configuration, working-hours grid, OOO override</p>
+
+      <h3 style="margin-top:32px;">The Intercept</h3>
+      <ol>
+        <li>Reads your calendar over the next 14 days</li>
+        <li>Filters to your configured working hours (per-weekday, with lunch-break carve-outs)</li>
+        <li>Skips events marked "free" (birthdays, reminders don't blank your day)</li>
+        <li>Picks N suggestions spread across M distinct days</li>
+        <li>Drafts a reply listing slots in your local time zone with DST-correct labels</li>
+        <li>Saves to Drafts for one-click edit-and-send</li>
+      </ol>
+
+      <div class="mockup-frame">
+        <img src="images/Draft.png" alt="Meeting suggestion draft">
+      </div>
+      <p class="mockup-caption">A generated meeting-suggestion draft — N slots across M days with proper EST/EDT labels</p>
+
+      <h3 style="margin-top:32px;">Invite Acceptance</h3>
+      <p>When a <code>.ics</code>-attached invite arrives, the <code>accept_invite</code> / <code>decline_invite</code> / <code>tentative_invite</code> actions respond on your calendar and draft an iMIP-formatted reply, properly threaded back to the organizer.</p>
+
+      <h3 style="margin-top:32px;">Calendar Surrogates (IMAP)</h3>
+      <p>Pure-IMAP servers don't expose a calendar API. The system supports routing calendar operations for an IMAP account through a sibling Gmail / O365 account. Operator sets the surrogate via dropdown.</p>
+    </div>
+  </section>
+
+  <!-- Provider support -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Section 5</p>
+      <h2 class="section-title">Email Provider Support</h2>
+      <table class="feature-table">
+        <thead><tr><th>Provider</th><th>Push</th><th>Labels/Folders</th><th>Calendar API</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gmail</strong></td><td>Cloud Pub/Sub (seconds)</td><td>Native labels</td><td>Google Calendar API</td></tr>
+          <tr><td><strong>Office 365</strong></td><td>Graph subscription (seconds)</td><td>Native folders</td><td>Microsoft Graph</td></tr>
+          <tr><td><strong>IMAP</strong></td><td>IDLE (&lt;2 sec, multi-folder)</td><td>SPECIAL-USE detected</td><td>via surrogate Gmail/O365</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:18px;">Supports Dovecot, Cyrus, Exchange-via-IMAP, Fastmail, Proton Bridge. TLS by default (port 993). Multi-folder watch per account with per-folder route overrides.</p>
+
+      <div class="mockup-frame">
+        <img src="images/accounts.png" alt="Multi-account list">
+      </div>
+      <p class="mockup-caption">/accounts — multi-account view with real-time push status and per-account health indicators</p>
+
+      <h3 style="margin-top:32px;">Per-Account Configuration</h3>
+      <p>Each account has its own tabbed configuration page covering provider credentials, push/poll cadence, watched folders, calendar role assignment, delegates, and integration endpoints. Every knob is in the UI &mdash; no config-file editing required.</p>
+
+      <div class="mockup-frame">
+        <img src="images/edit.png" alt="Account edit page">
+      </div>
+      <p class="mockup-caption">/accounts/&lt;id&gt;/edit &mdash; provider credentials, aliases, time zone, push/poll, watch folders</p>
+    </div>
+  </section>
+
+  <!-- Multi-user -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 6</p>
+      <h2 class="section-title">Multi-User &amp; Multi-Account</h2>
+      <p>One install supports any number of users, each with their own accounts, categories, style profile, and meeting preferences. Three role tiers: <strong>Admin</strong> (install-wide config), <strong>User</strong> (owns own accounts), <strong>Delegate</strong> (granted view/triage/draft on another user's account).</p>
+      <p>Per-user isolation is enforced at the data layer. Delegate actions are audited with both actor and account-owner stamped. The HIPAA §164.312(b) audit gate distinguishes owner self-access from delegate access — the former is a §164.502(a) self-disclosure carve-out and isn't audited as PHI access; the latter writes an audit row every time.</p>
+
+      <div class="mockup-frame">
+        <img src="images/users.png" alt="Users and delegate admin">
+      </div>
+      <p class="mockup-caption">/users &mdash; user management, role assignment, and delegate grants visible on the same surface</p>
+    </div>
+  </section>
+
+  <!-- Operations -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Section 7</p>
+      <h2 class="section-title">Operations &amp; Configuration</h2>
+      <p>Every operational signal is exposed through the admin UI &mdash; classifier latency, cache hit ratio, embedding metrics, supervised-task state, push watcher health, ingestion rollups. JSON for machine consumption (Nagios, Datadog, Prometheus); HTML for the admin stats page.</p>
+
+      <div class="mockup-frame">
+        <img src="images/admin_stats.png" alt="Admin operational stats">
+      </div>
+      <p class="mockup-caption">/admin/stats &mdash; operational signals dashboard showing the system is healthy at a glance</p>
+
+      <h3 style="margin-top:32px;">Install-Wide Configuration</h3>
+      <p>Tabbed configuration page covers ingestion, classifier model, integrations (Redis cache, webhooks), AI backends, TLS / security, and BAA acknowledgments. Operator-controlled, audit-logged, no config-file editing.</p>
+
+      <div class="mockup-frame">
+        <img src="images/config.png" alt="Install-wide config">
+      </div>
+      <p class="mockup-caption">/config &mdash; install-wide configuration tabs</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2>Want this in your stack?</h2>
+      <p>A 30-minute call to scope deployment, integration, and tier fit.</p>
+      <a href="contact.html" class="cta-btn">Schedule a Demo</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

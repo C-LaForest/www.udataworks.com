@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Privacy, Sovereign AI &amp; HIPAA — Email Triage Compliance Posture | Craig LaForest</title>
+  <meta name="description" content="How Email Triage implements sovereign AI: local-by-default LLM, BAA-gated cloud, hard-locked embedding allowlist. HIPAA mode with PHI-scrubbed logs and tamper-evident audit chain.">
+  <meta property="og:title" content="Email Triage — Privacy &amp; Sovereign AI">
+  <meta property="og:description" content="Local LLM by default. Code-enforced BAA gating. SHA-256 audit chain. HIPAA-ready by design.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html" class="active">Privacy &amp; Sovereign AI</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Privacy, Sovereign AI &amp; HIPAA</h1>
+      <p class="lead">Email content never leaves your network. By default. Always. By design.</p>
+    </div>
+  </section>
+
+  <!-- Sovereign AI -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Sovereign AI in Email Triage</p>
+      <h2 class="section-title">Three concentric privacy guarantees.</h2>
+      <p class="section-subtitle">Sovereign AI is implemented at three levels of the stack — each strictly stronger than the last.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>1. Local-First Classifier</h3>
+          <p>Default Ollama backend on your own GPU host. Qwen / Llama / Mistral families supported. Email content never traverses a third-party API. No SOC 2 boundary to argue about. No data-processing addendum to negotiate. The classifier is yours.</p>
+        </div>
+        <div class="card">
+          <h3>2. BAA-Gated Cloud Backend</h3>
+          <p>Operators with BAA coverage (OpenAI, Gemini, OpenAI-compatible) can configure cloud classification. <strong>The BAA gate is enforced in code, not policy.</strong> HIPAA-flagged messages skip cloud routing until the operator records BAA acknowledgment in the audit log. The compliance officer's question — "what stops PHI from going to OpenAI?" — has a code-level answer.</p>
+        </div>
+        <div class="card">
+          <h3>3. Hard-Locked Embedding Allowlist</h3>
+          <p>The RAG path (sent-mail context for drafted replies) is hard-coded to local-only — <code>ollama</code>, in-process <code>sentence-transformers</code>, and a fallback composite. <strong>A static privacy-invariant test fails the build if anyone tries to add a non-local backend here.</strong> Drafted-reply context is higher-volume PHI exposure than per-message classification; the allowlist forecloses cloud embedding entirely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIPAA mode -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">HIPAA Mode</p>
+      <h2 class="section-title">A single toggle. Cascading enforcement across the codebase.</h2>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>PHI-Scrubbed Logs</h3>
+          <p>Sender, subject, body, and classification reasoning are redacted from system logs. The <code>[redacted]</code> token replaces these fields in every log line.</p>
+        </div>
+        <div class="card">
+          <h3>Static Privacy Scan</h3>
+          <p>A test suite runs on every build that greps the production source for forbidden field references in log calls. Any new code that would log a sensitive field <strong>fails the test before merge</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>Redacted Notifications</h3>
+          <p>SMS / push notifications include category and timestamp only. Never the sender, subject, or body content.</p>
+        </div>
+        <div class="card">
+          <h3>Recipient Verification</h3>
+          <p>The daily-digest feature refuses to send if the configured to-address doesn't match the account owner. Protects against accidentally cc'ing PHI to the wrong stakeholder.</p>
+        </div>
+        <div class="card">
+          <h3>PHI-Aware Caching</h3>
+          <p>The classification cache is disabled by default for HIPAA-flagged accounts. The cost (re-classifying repeats) buys the audit posture (no PHI in a side-cache).</p>
+        </div>
+        <div class="card">
+          <h3>Tamper-Evident Audit Log</h3>
+          <p>Every login, account view, and credential use is recorded in an append-only access log with a SHA-256 hash chain. Any alteration of a past row breaks the chain — detectable in seconds via the <code>email-triage audit verify</code> CLI command.</p>
+        </div>
+      </div>
+
+      <div class="mockup-frame">
+        <img src="images/compliance.png" alt="Compliance dashboard">
+      </div>
+      <p class="mockup-caption">/compliance — HIPAA mode, audit-chain status, BAA acknowledgments, TLS certificate lifecycle</p>
+    </div>
+  </section>
+
+  <!-- Encryption -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Encryption at Rest</p>
+      <h2 class="section-title">Fernet-encrypted secrets. Master key options operator-chosen.</h2>
+      <p>Provider passwords, OAuth refresh tokens, and other secrets are encrypted with Fernet (AES-128-CBC + HMAC-SHA256) using a master key held outside the SQLite database. Storage options for the master key:</p>
+      <ul>
+        <li><strong>Container secret</strong> (Podman / Docker secret store) — recommended for production</li>
+        <li><strong>Keyfile</strong> on the host filesystem (mode 0400, owned by the service user)</li>
+        <li><strong>OS keyring</strong> (GNOME Keyring, Windows Credential Manager)</li>
+        <li><strong>Environment variable</strong> (development only)</li>
+      </ul>
+      <p><strong>Backing up the database without also backing up the master key leaves the secrets unrecoverable</strong> — a safety property for off-site backup storage.</p>
+    </div>
+  </section>
+
+  <!-- TLS + Auth -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <div class="card-grid">
+        <div class="card">
+          <h3>Transmission Integrity (TLS)</h3>
+          <ul>
+            <li>ACME / Let's Encrypt automatic renewal</li>
+            <li>Self-signed for internal-only deployments</li>
+            <li>Operator-supplied certificates</li>
+            <li>Tailscale-issued certificates for funnel deployments</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Authentication</h3>
+          <ul>
+            <li>Email OTP (default)</li>
+            <li>WebAuthn / Passkey (YubiKey, Touch ID, Windows Hello)</li>
+            <li>CSRF protection with session-bound tokens</li>
+            <li>Per-session audit row (auth method, IP, user agent)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-tenancy -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Multi-Tenancy &amp; Delegation</p>
+      <h2 class="section-title">Three-role audit model.</h2>
+      <p>The user model supports three roles with distinct audit semantics:</p>
+      <ul>
+        <li><strong>Admin</strong> — install-wide configuration, all-account access, audit access.</li>
+        <li><strong>User</strong> — owns their own accounts; configures own routes / rules / digests.</li>
+        <li><strong>Delegate</strong> — granted view / triage / draft permission on another user's account.</li>
+      </ul>
+      <p>Delegate actions are stamped with both the actor and the account-owner in the audit log. The HIPAA §164.312(b) audit gate distinguishes owner self-access from delegate access — the former is a §164.502(a) self-disclosure carve-out and isn't audited as PHI access; the latter is and writes an audit row every time.</p>
+    </div>
+  </section>
+
+  <!-- Standards -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Standards Honored</p>
+      <h2 class="section-title">RFCs and regulations the system aligns to.</h2>
+      <table class="feature-table">
+        <thead><tr><th>Standard</th><th>Application</th></tr></thead>
+        <tbody>
+          <tr><td><strong>RFC 5322</strong></td><td>Internet Message Format. Parsing inbound mail, writing outbound headers with proper <code>In-Reply-To</code> threading.</td></tr>
+          <tr><td><strong>RFC 6154</strong></td><td>IMAP SPECIAL-USE flag. Drafts / Sent folder auto-discovery via <code>\Drafts</code> / <code>\Sent</code> markers.</td></tr>
+          <tr><td><strong>RFC 5545</strong></td><td>iCalendar. Parsing <code>.ics</code> payloads on incoming meeting invites.</td></tr>
+          <tr><td><strong>RFC 5546</strong></td><td>iMIP. Invite-acceptance / decline / tentative drafted as <code>METHOD=REPLY</code> with proper threading.</td></tr>
+          <tr><td><strong>HIPAA §164.312(b)</strong></td><td>Technical Safeguards — Audit Controls. Hash-chained audit log; CLI verifier.</td></tr>
+          <tr><td><strong>HIPAA §164.312(e)(1)</strong></td><td>Transmission Security. TLS posture, certificate lifecycle.</td></tr>
+          <tr><td><strong>HIPAA §164.502(a)</strong></td><td>Self-Disclosure carve-out. Audit gate avoids spurious "PHI access" rows on owner self-access.</td></tr>
+          <tr><td><strong>NERC CIP-007-R4</strong></td><td>Logging and Monitoring. Audit-log shape informed by CIP-007.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Bridge to consulting -->
+  <section class="sovereign-strip">
+    <div class="container" style="text-align:center;">
+      <p class="eyebrow">Beyond Email</p>
+      <h2><span class="accent">Need sovereign AI</span> for your organization, not just for email?</h2>
+      <p class="lead-light">Email Triage is one application of sovereign AI patterns. The same approach — local-by-default LLM, code-enforced compliance gates, audit-ready architecture — applies to any AI initiative in a regulated environment. I help organizations design and implement sovereign AI strategy across their stack.</p>
+      <div class="cta-row">
+        <a href="../medical-research/sovereign-ai.html" class="cta-btn on-dark">Sovereign AI for Medical Research →</a>
+        &nbsp;
+        <a href="../regulated-industries/sovereign-ai.html" class="cta-btn on-dark">Sovereign AI for Regulated Industries →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

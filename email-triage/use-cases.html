@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Email Triage Use Cases — Researchers, Clinics, Fractional CTOs, Homelab | Craig LaForest</title>
+  <meta name="description" content="Use cases: medical researchers, solo clinics, fractional CTOs, researcher cohorts, privacy-first homelabs. Each with target outcomes and tier fit.">
+  <meta property="og:title" content="Email Triage Use Cases">
+  <meta property="og:description" content="Five concrete scenarios: medical research, clinical practice, consulting, multi-user labs, homelab operators.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html" class="active">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Use Cases</h1>
+      <p class="lead">Five concrete scenarios where Email Triage delivers measurable outcomes. Each maps to a specific tier and links to the matching Fractional CTO engagement.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <!-- Medical Researcher -->
+      <div class="card" style="margin-bottom:32px;">
+        <span class="tag">Standard or Embedded tier</span>
+        <h3>Medical Researcher / Principal Investigator</h3>
+        <p><strong>Context:</strong> High inbox volume — sponsor mail, IRB notices, trainee updates, manuscript reviews, newsletters. HIPAA-aware by virtue of institutional environment. Time-pressed; daily inbox triage is a real tax.</p>
+        <p><strong>Outcome:</strong> Daily digest collapses 50+ newsletter messages into one. Sponsor mail labeled and surfaced for response. IRB notices auto-filed and notified via separate channel. Manuscript-review threads tracked with custom category. Meeting-request intercept handles collaborator scheduling.</p>
+        <p><a href="../medical-research/">See the Medical Research Fractional CTO engagement →</a></p>
+      </div>
+
+      <!-- Solo Practitioner -->
+      <div class="card" style="margin-bottom:32px;">
+        <span class="tag">Standard tier · HIPAA-mode</span>
+        <h3>Solo Practitioner Clinic (1–5 person practice)</h3>
+        <p><strong>Context:</strong> M365 or Google Workspace-based. HIPAA-regulated by default. Need to demonstrate compliance posture to insurers + auditors.</p>
+        <p><strong>Outcome:</strong> HIPAA-mode accounts with PHI-scrubbed logs. Audit chain on every staff access. Drafted patient-correspondence replies for clinician review (never auto-sent). Delegate access for front-desk staff to triage but not draft. Quarterly compliance review packet produced from the audit log.</p>
+        <p><a href="../regulated-industries/sovereign-ai.html">See sovereign AI for compliance-driven organizations →</a></p>
+      </div>
+
+      <!-- Fractional CTO -->
+      <div class="card" style="margin-bottom:32px;">
+        <span class="tag">Embedded tier · self-use</span>
+        <h3>Fractional CTO / Consulting Firm</h3>
+        <p><strong>Context:</strong> Multiple client mailboxes (separately authenticated). Need to keep client communications isolated for confidentiality. Calendar coordination across 8–12 active clients per week.</p>
+        <p><strong>Outcome:</strong> Per-client account with isolated rules and routes. Per-client writing-style profile so responses sound right for each engagement (the assistant's "voice" matches the engagement). Meeting-request intercept on every account with the right working-hours config per client. Watch rules escalate "fire-drill" client emails to SMS instantly.</p>
+        <p style="font-style:italic; color:#64748B;">This is how I run my own consulting practice.</p>
+      </div>
+
+      <!-- Researcher Cohort -->
+      <div class="card" style="margin-bottom:32px;">
+        <span class="tag">Standard tier · multi-user</span>
+        <h3>Researcher Cohort Tooling</h3>
+        <p><strong>Context:</strong> A lab with N researchers all using shared mail infrastructure. Each researcher has their own writing style and their own preferences. Privacy: one researcher shouldn't see another's mail or drafts.</p>
+        <p><strong>Outcome:</strong> Multi-user install with role-based access. Each researcher gets their own dashboard, their own categories, their own digest. Lab PI has delegate access to specific researcher mailboxes (with audit-row stamping). One Ollama host serves the whole lab; one container, one TLS cert, one backup.</p>
+        <p><a href="../medical-research/">See the Medical Research Fractional CTO engagement →</a></p>
+      </div>
+
+      <!-- Homelab -->
+      <div class="card" style="margin-bottom:32px;">
+        <span class="tag">Self-hosted · no service tier needed</span>
+        <h3>Privacy-First Homelab Operator</h3>
+        <p><strong>Context:</strong> Self-hosting enthusiast running on Podman. Wants Email Triage as part of a Tailscale-funneled internal-services stack. LLM already running locally (Ollama, GPU).</p>
+        <p><strong>Outcome:</strong> Install + configure independently from the public repository. Service offering not needed but documentation and ongoing version updates are valued. Tailscale-issued TLS certificate. Audit chain and HIPAA-mode features work the same as in enterprise deployments — privacy posture isn't tier-gated.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container" style="text-align:center;">
+      <h2>Which one matches your situation?</h2>
+      <p>Or if it's something else entirely — that's worth a conversation too.</p>
+      <a href="contact.html" class="cta-btn">Schedule a Conversation</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

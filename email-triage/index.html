@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Email Triage — Privacy-First Email Automation with Sovereign AI | Craig LaForest</title>
+  <meta name="description" content="Self-hosted email automation that classifies, routes, drafts replies, and schedules meetings. Sovereign AI by default. HIPAA-ready. Gmail / Office 365 / IMAP. Built by Craig LaForest.">
+  <meta property="og:title" content="Email Triage — Privacy-First Email Automation with Sovereign AI">
+  <meta property="og:description" content="Self-hosted, HIPAA-aware, multi-provider email automation. Email content never leaves your network.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <nav>
+        <a href="index.html" class="active">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Stop triaging your inbox by hand.</h1>
+      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, and schedules meetings — running on infrastructure you control. <strong>Sovereign AI by default.</strong> HIPAA-ready. Provider-agnostic.</p>
+      <div class="cta-group">
+        <a href="contact.html" class="cta-btn">Schedule a Demo</a>
+        <a href="features.html" class="cta-btn secondary">See the Features</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="mockup-frame">
+        <img src="images/dashboard.png" alt="Email Triage dashboard">
+      </div>
+      <p class="mockup-caption">/dashboard — at-a-glance activity, classification stats, recent triage runs</p>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">The problem</p>
+      <h2 class="section-title">Email is a structural drain.</h2>
+      <p class="section-subtitle">Knowledge-worker email has four failures the inbox alone cannot solve.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Signal-to-Noise</h3>
+          <p>A typical professional inbox is 70–80% mail that requires no action. The 20% that needs attention is buried.</p>
+        </div>
+        <div class="card">
+          <h3>Time-to-Action Latency</h3>
+          <p>Important mail sits unread for hours. Time-sensitive items — sponsor deadlines, IRB notices, security alerts — get missed.</p>
+        </div>
+        <div class="card">
+          <h3>Reply-Writing Tax</h3>
+          <p>Every response needs a courteous opening, substantive middle, and closing — even when the middle is "yes, 10am works."</p>
+        </div>
+        <div class="card">
+          <h3>Scheduling Friction</h3>
+          <p>Check calendar, pick 2–3 slots, write proposal, handle back-and-forth. The mechanical part is automatable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED: Sovereign AI strip -->
+  <section class="sovereign-strip">
+    <div class="container">
+      <p class="eyebrow">Headline Capability</p>
+      <h2><span class="accent">Sovereign AI</span> by default.</h2>
+      <p class="lead-light">Your email stays inside your network. Always. By design. The classifier and drafter run on your own infrastructure — Ollama on a GPU you control. Cloud LLM backends are supported, but only for non-HIPAA accounts or after explicit BAA acknowledgment recorded in code, not policy.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Local-First Classifier</h3>
+          <p>Default Ollama backend with Qwen / Llama / Mistral families. Email content never traverses a third-party API. No SOC 2 boundary to argue about.</p>
+        </div>
+        <div class="card">
+          <h3>BAA-Gated Cloud Option</h3>
+          <p>OpenAI / Gemini / OpenAI-compatible cloud backends supported. HIPAA-flagged messages skip cloud routing until BAA acknowledgment is recorded in the audit log. Code-enforced, not policy-enforced.</p>
+        </div>
+        <div class="card">
+          <h3>Hard-Locked Embedding Allowlist</h3>
+          <p>The RAG path (sent-mail context for drafted replies) is hard-coded to local-only. Adding a cloud embedding backend literally fails the build via static privacy-invariant tests.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a href="privacy.html" class="cta-btn on-dark">See the Privacy Architecture →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">A four-stage pipeline. Every step observable.</h2>
+      <p class="section-subtitle">New mail arrives. The classifier sorts it. The router applies your rules. Actions fire. Every classification produces an audit row showing which model, what category, how confident, what reasoning, what action.</p>
+
+      <div class="mockup-frame" style="max-width:900px;">
+        <img src="mockups/architecture.svg" alt="Pipeline architecture diagram">
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Key differentiators</p>
+      <h2 class="section-title">What makes Email Triage different.</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Operator-Chosen LLM</h3>
+          <p>Local Ollama by default. Cloud backends supported with BAA gating. Hybrid patterns possible. You pick.</p>
+        </div>
+        <div class="card">
+          <h3>HIPAA-Ready by Design</h3>
+          <p>Single toggle enables PHI-scrubbed logs, recipient verification, redacted notifications, and cryptographic audit chain.</p>
+        </div>
+        <div class="card">
+          <h3>Provider-Agnostic</h3>
+          <p>First-class Gmail (Pub/Sub push), Office 365 (Graph), and IMAP (IDLE). Multi-account, multi-provider.</p>
+        </div>
+        <div class="card">
+          <h3>Operator-Controlled Rules</h3>
+          <p>Categories, routes, and actions are user-defined and visible in a web UI. No black-box behavior.</p>
+        </div>
+        <div class="card">
+          <h3>Calendar-Aware</h3>
+          <p>Reads your calendar, suggests free slots, drafts meeting-acceptance replies with proper iCal threading.</p>
+        </div>
+        <div class="card">
+          <h3>Agent-Friendly API</h3>
+          <p>27+ JSON endpoints with bearer auth, per-token rate limiting, HIPAA hard-off. Built for AI-agent tool-calling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">See it in action</p>
+      <h2 class="section-title">Three views from the running system.</h2>
+
+      <div class="mockup-frame">
+        <img src="images/rules.png" alt="Rules editor">
+      </div>
+      <p class="mockup-caption">/rules — operator-controlled mailing-list, sender, and regex rules that bypass the classifier</p>
+
+      <div class="mockup-frame">
+        <img src="images/Draft.png" alt="Drafted reply with meeting time suggestions">
+      </div>
+      <p class="mockup-caption">A drafted reply in the email client's Drafts folder — ready for one-click edit-and-send</p>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Service Offering</p>
+      <h2 class="section-title">Three ways to engage.</h2>
+      <p class="section-subtitle">The product is open-source self-hostable. The service offering wraps it in implementation, customization, and ongoing operation.</p>
+
+      <div class="tier-grid">
+        <div class="tier-card">
+          <h3>Pilot</h3>
+          <div class="tier-target">Solo practitioners, individual researchers</div>
+          <ul>
+            <li>Deployment to a single user / single account</li>
+            <li>Baseline category setup</li>
+            <li>30-day check-in</li>
+            <li>Outcome: validate fit before scale</li>
+          </ul>
+          <a href="contact.html?tier=pilot" class="cta-btn">Start a Pilot</a>
+        </div>
+        <div class="tier-card">
+          <h3>Standard</h3>
+          <div class="tier-target">Small clinics, research labs, professional-services firms</div>
+          <ul>
+            <li>Multi-user deployment</li>
+            <li>Custom category taxonomy + integrations</li>
+            <li>HIPAA review packet</li>
+            <li>Quarterly tuning</li>
+          </ul>
+          <a href="contact.html?tier=standard" class="cta-btn">Plan a Standard Engagement</a>
+        </div>
+        <div class="tier-card featured">
+          <h3>Embedded</h3>
+          <div class="tier-target">Mid-size organizations adopting AI-assisted communication operations</div>
+          <ul>
+            <li>Full Fractional CTO retainer</li>
+            <li>Ongoing operation, monthly review</li>
+            <li>Custom feature development</li>
+            <li>Enterprise integrations</li>
+          </ul>
+          <a href="contact.html?tier=embedded" class="cta-btn">Talk About Embedded</a>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top:32px;"><a href="service.html">See the full service offering →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">Use cases</p>
+      <h2 class="section-title">Built for inboxes that matter.</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Medical Researcher / PI</h3>
+          <p>High-volume sponsor/IRB/manuscript inbox. HIPAA-aware. Daily digest collapses noise, surfaces what needs response.</p>
+        </div>
+        <div class="card">
+          <h3>Solo Practitioner Clinic</h3>
+          <p>HIPAA-regulated by default. Audit chain on every staff access. Drafted patient correspondence for clinician review.</p>
+        </div>
+        <div class="card">
+          <h3>Fractional CTO / Consulting Firm</h3>
+          <p>Multiple client mailboxes with isolation. Per-client style profiles. Meeting-request intercept across engagements.</p>
+        </div>
+        <div class="card">
+          <h3>Privacy-First Homelab</h3>
+          <p>Podman + Tailscale + Ollama on a GPU you own. Self-service deployment with the same compliance posture as enterprise.</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:24px;"><a href="use-cases.html">All use cases →</a></p>
+    </div>
+  </section>
+
+  <section class="sovereign-strip">
+    <div class="container" style="text-align:center;">
+      <h2><span class="accent">Ready</span> to take your inbox back?</h2>
+      <p class="lead-light">A 30-minute call helps identify whether Email Triage fits your stack, your compliance posture, and your team's workflow.</p>
+      <div class="cta-row">
+        <a href="contact.html" class="cta-btn on-dark">Schedule a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Email Triage",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Linux (containerized)",
+    "description": "Self-hosted, HIPAA-aware email automation system with sovereign AI classification, smart reply drafting, and calendar-aware meeting scheduling.",
+    "url": "https://www.udataworks.com/email-triage/",
+    "image": "https://www.udataworks.com/images/og-email-triage.png",
+    "offers": {
+      "@type": "AggregateOffer",
+      "offerCount": 3,
+      "offers": [
+        {"@type": "Offer", "name": "Pilot", "description": "Single-user deployment, baseline category setup, 30-day check-in"},
+        {"@type": "Offer", "name": "Standard", "description": "Multi-user, custom taxonomy, HIPAA review, quarterly tuning"},
+        {"@type": "Offer", "name": "Embedded (Fractional CTO)", "description": "Full retainer engagement with ongoing operation and custom development"}
+      ]
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Craig LaForest",
+      "url": "https://www.udataworks.com/",
+      "sameAs": ["https://linkedin.com/in/craiglaforest"]
+    },
+    "keywords": "sovereign AI, email automation, HIPAA, self-hosted, Ollama, fractional CTO"
+  }
+  </script>
+</body>
+</html>

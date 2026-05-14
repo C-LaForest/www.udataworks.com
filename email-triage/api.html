@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Email Triage API — Agent Integration, Automation, BI | Craig LaForest</title>
+  <meta name="description" content="JSON API for AI agents, scripted automation, and BI integration. Bearer-token auth, per-token rate limiting, HIPAA hard-off. 27+ endpoints for mail, triage, calendar.">
+  <meta property="og:title" content="Email Triage API — Agent Integration">
+  <meta property="og:description" content="27+ JSON endpoints. Built for tool-calling agents, CRM integration, BI pipelines.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="api.html" class="active">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Agent &amp; Automation API</h1>
+      <p class="lead">A serious email automation system can't be a destination. It has to be a participant in your broader workflow. 27+ JSON endpoints. Bearer auth. HIPAA hard-off.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">Why it exists</p>
+      <h2 class="section-title">Four integration paths the API serves.</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Agentic Assistants</h3>
+          <p>Claude, custom GPT-family agents, internally-hosted LLMs running tool-calling loops. The API gives the agent <code>list_messages</code> / <code>search_mail</code> / <code>triage</code> / <code>draft_reply</code> without rendering HTML or clicking buttons.</p>
+        </div>
+        <div class="card">
+          <h3>CRM / Ticketing</h3>
+          <p>Pull "what mail did we get from Customer X this week" or "list of action-required messages from the last 24 hours" on demand. Surface mail context inline in the CRM record.</p>
+        </div>
+        <div class="card">
+          <h3>BI / Analytics</h3>
+          <p>Triage activity as a data source — counts per category, response-time analytics, per-account volume trends. Standard data-pipeline tooling ingests the JSON.</p>
+        </div>
+        <div class="card">
+          <h3>Custom Automation</h3>
+          <p>Python, shell, n8n / Zapier-style flows. A stable HTTP contract instead of scraping the admin UI. Cron jobs, scheduled triage sweeps, summary digests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">API Surface</p>
+      <h2 class="section-title">27+ endpoints under <code>/api/openclaw/*</code></h2>
+      <p>Organized into five families. All return JSON. All bearer-token authenticated.</p>
+
+      <table class="feature-table">
+        <thead><tr><th>Family</th><th>Endpoint</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><strong>Account + Health</strong></td><td><code>GET /api/openclaw/health</code></td><td>Liveness + token-scope verification</td></tr>
+          <tr><td><code>GET /api/openclaw/accounts</code></td><td>List accounts the token is scoped to</td></tr>
+
+          <tr><td rowspan="6"><strong>Mail Read + Search</strong></td><td><code>GET /accounts/&lt;id&gt;/messages</code></td><td>Paginated mail list with filter</td></tr>
+          <tr><td><code>GET /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;</code></td><td>Single message detail</td></tr>
+          <tr><td><code>GET /accounts/&lt;id&gt;/mail/search</code></td><td>Full-text + structured search</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/mail/bulk</code></td><td>Bulk-fetch multiple messages</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/bulk/mail/fetch</code></td><td>Bulk-fetch with custom query DSL</td></tr>
+          <tr><td><code>GET /accounts/&lt;id&gt;/bulk/mail/full</code></td><td>Full-body bulk read</td></tr>
+
+          <tr><td rowspan="5"><strong>Mail Write</strong></td><td><code>POST /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;/label</code></td><td>Apply a label</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;/move</code></td><td>Move to folder</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;/archive</code></td><td>Archive</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;/draft</code></td><td>Create a draft (with <code>in_reply_to</code> threading)</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/bulk/mail/write</code></td><td>Batch label/move/archive</td></tr>
+
+          <tr><td rowspan="2"><strong>Triage</strong></td><td><code>POST /accounts/&lt;id&gt;/triage</code></td><td>Trigger triage with a custom query + limit</td></tr>
+          <tr><td><code>GET /api/openclaw/runs</code></td><td>Historical triage runs</td></tr>
+
+          <tr><td rowspan="6"><strong>Calendar</strong></td><td><code>GET /accounts/&lt;id&gt;/calendar/events</code></td><td>List events in a date range</td></tr>
+          <tr><td><code>GET /accounts/&lt;id&gt;/calendar/events/&lt;id&gt;</code></td><td>Single event detail</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/calendar/events</code></td><td>Create event</td></tr>
+          <tr><td><code>POST /.../events/&lt;id&gt;/respond</code></td><td>Accept / decline / tentative</td></tr>
+          <tr><td><code>GET /accounts/&lt;id&gt;/calendar/free-slots</code></td><td>Find free slots within a horizon</td></tr>
+          <tr><td><code>POST /accounts/&lt;id&gt;/calendar/bulk-respond</code></td><td>Batch-respond to multiple events</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">Auth + Authorization</p>
+      <h2 class="section-title">Bearer tokens. Owner-or-delegate scope. HIPAA hard-off.</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Bearer Tokens</h3>
+          <p>Each token is bound to a single user. The user's accounts are visible via the API. Tokens are created via the admin UI; revocation is immediate (token-table check on every request).</p>
+        </div>
+        <div class="card">
+          <h3>Per-Token Rate Limiting</h3>
+          <p>Token-bucket algorithm with operator-configurable defaults. Different tokens get independent buckets so a runaway agent on one token doesn't starve others.</p>
+        </div>
+        <div class="card">
+          <h3>Owner OR Delegate, NOT Admin</h3>
+          <p>A token can access only accounts the user owns or has been granted delegate access to. <strong>Admin role does NOT bypass this gate.</strong> Agent tokens carry operator intent, not role privilege. Narrow contract reduces blast radius if a token is compromised.</p>
+        </div>
+        <div class="card">
+          <h3>HIPAA Hard-Off</h3>
+          <p>Any account with the HIPAA flag set returns <code>403</code> on this API surface, period. <strong>No "with BAA acknowledgment" override on this path.</strong> Even a properly-BAA-covered agent endpoint creates a second exfiltration surface — the safer posture is to keep HIPAA accounts UI-only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">In practice</p>
+      <h2 class="section-title">Token management + sample response.</h2>
+      <div class="mockup-frame">
+        <img src="images/api-keys.png" alt="API token management">
+      </div>
+      <p class="mockup-caption">Token management UI &mdash; bearer tokens scoped to a single user's accounts</p>
+
+      <div class="mockup-frame" style="max-width:700px;">
+        <img src="images/Openclaw_et_health.png" alt="Sample JSON response from /api/openclaw/health">
+      </div>
+      <p class="mockup-caption">Sample JSON response from <code>/api/openclaw/health</code> &mdash; liveness, DB status, audit health, push watchers, build SHA</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="eyebrow">Integration patterns</p>
+      <h2 class="section-title">Four ways teams wire this up.</h2>
+
+      <div class="card" style="margin-bottom:24px;">
+        <h3>Tool-calling agent (Claude, custom GPT, internal LLM)</h3>
+        <p>Wire the API as a tool definition; the agent calls <code>list_messages</code> / <code>search_mail</code> / <code>triage</code> / <code>draft_reply</code> as natural-language requests come in. The agent never sees raw provider tokens; the operator manages OAuth lifecycle separately.</p>
+      </div>
+      <div class="card" style="margin-bottom:24px;">
+        <h3>Scripted automation (cron + curl)</h3>
+        <p>A daily cron job that calls <code>POST /accounts/&lt;id&gt;/triage</code> with a custom query, then <code>GET /api/openclaw/runs</code> to verify success. Useful for "run a sweep of marketing@ every Monday at 8am and post a summary to Slack."</p>
+      </div>
+      <div class="card" style="margin-bottom:24px;">
+        <h3>BI / analytics pipeline</h3>
+        <p>Pull <code>/api/openclaw/runs</code> into your data warehouse for triage volume + response-time analysis. The endpoint returns JSON; standard data-pipeline tooling (Airflow, dbt, Fivetran) handles the rest.</p>
+      </div>
+      <div class="card">
+        <h3>CRM integration</h3>
+        <p>A custom webhook from your CRM hits <code>GET /accounts/&lt;id&gt;/mail/search?from=customer@example.com</code> to surface relevant mail context inline in the CRM record. No scraping. No re-authenticating against the provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Limitations</p>
+      <h2 class="section-title">Transparent constraints.</h2>
+      <ul>
+        <li><strong>HIPAA accounts blocked on the API.</strong> Workaround: operator runs the agent through the web UI's authenticated session with proper audit posture. The API is reserved for non-HIPAA flows.</li>
+        <li><strong>No outbound webhook delivery FROM agents.</strong> The API is request/response. For "tell me when X happens," wire the existing watch-rule webhook system (operator-defined, audited) and have the agent consume the webhook stream.</li>
+        <li><strong>No bulk delete or bulk send.</strong> Deliberate. Bulk-write covers label/move/archive (reversible). Bulk-delete is foot-shooty and absent. Bulk-send was considered and rejected — every outbound message should reflect an explicit operator review, even when the body was AI-drafted.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2>Want to wire this to your agent stack?</h2>
+      <p>A 30-minute call to scope integration patterns, token scoping, and webhook design.</p>
+      <a href="contact.html?tier=api" class="cta-btn">Schedule a Conversation</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
