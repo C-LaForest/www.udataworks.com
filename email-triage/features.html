@@ -123,10 +123,87 @@
     </div>
   </section>
 
-  <!-- Drafting -->
-  <section>
+  <!-- Digests -->
+  <section id="digests">
     <div class="container">
       <p class="eyebrow">Section 3</p>
+      <h2 class="section-title">Digests &amp; Periodic Summaries</h2>
+      <p>Two digest features that solve the two recurring inbox problems every professional has: <strong>"I subscribe to too many newsletters to read"</strong> and <strong>"I've handed my inbox to an AI and now have no idea what it's doing."</strong></p>
+
+      <h3 style="margin-top:32px;">Newsletter Digest &mdash; for the high-subscription-volume professional</h3>
+      <p>Target user: the knowledge-work professional whose job requires staying current on a high-volume subscription feed. The research clinician subscribed to journal alerts + NIH funding announcements + IRB digests + society newsletters + sponsor communications. The financial analyst tracking 12 industry briefings. The consultant signed up for every category-defining substack in their vertical.</p>
+      <p>For someone like this, newsletter overload is a <strong>60-to-90-minute-per-day problem</strong>. Each newsletter has 2&ndash;4 articles worth a 30-second scan; only 5&ndash;10% of those articles deserve a real read. The current state-of-the-art is <code>Cmd+A &rarr; Archive</code> &mdash; losing the signal entirely.</p>
+      <p>The newsletter digest replaces that with <strong>one inbox entry at a scheduled time</strong> (typically 7 AM local, operator-configurable):</p>
+      <ol>
+        <li>The digest action pulls every newsletter-category message from the lookback window (default 24 hours)</li>
+        <li>The local LLM reads each newsletter body and extracts per-article structure: headline, 1&ndash;2 sentence summary, "read more" link</li>
+        <li>Articles are grouped by source so each newsletter's content clusters together</li>
+        <li>An HTML digest renders with section headings per newsletter, article cards beneath, and "Read more" buttons linking back to the original article URLs</li>
+        <li>The digest delivers to the account's own inbox (or sends, per operator policy)</li>
+      </ol>
+
+      <div class="callout">
+        <p><strong>Concrete outcome.</strong> A research clinician with 30 newsletter subscriptions averaging 3 articles each goes from "120 inbox entries the system can't help me with" to <strong>"one digest with 90 article cards I can scan in 5 minutes."</strong> The 5&ndash;10 articles worth a full read get a click-through; the other 80 are dismissed by closing the digest. <strong>Daily time saved: 60&ndash;90 minutes.</strong></p>
+      </div>
+
+      <h4 style="margin-top:28px;">Configuration (per-account, on the Digests tab)</h4>
+      <ul>
+        <li><strong>Schedule</strong> &mdash; time of day in the account's timezone, days of week</li>
+        <li><strong>Categories included</strong> &mdash; defaults to <code>newsletters</code> but can bundle any category (e.g. <code>team-internal</code>, <code>comments</code> for GitHub-style notifications)</li>
+        <li><strong>Lookback window</strong> &mdash; 24 hours for daily; 168 hours for weekly Monday digests</li>
+        <li><strong>Render template</strong> &mdash; HTML email shape; custom templates supported via the API for brand consistency</li>
+        <li><strong>Recipient</strong> &mdash; defaults to the account's own inbox; can be overridden for a "send digest to my assistant" pattern</li>
+      </ul>
+      <p>Each schedule slot has an independent enable/disable toggle and a <strong>"Run now"</strong> button for previewing without waiting 24 hours.</p>
+
+      <div class="mockup-frame">
+        <img src="images/digests.png" alt="Digest schedule editor">
+      </div>
+      <p class="mockup-caption">/accounts/&lt;id&gt;/edit on the Digests tab &mdash; Daily Activity, custom digests (Morning Newsletter, Weekly Wrap), per-slot Preview and Send-test-now buttons</p>
+
+      <h4 style="margin-top:32px;">What a rendered newsletter digest looks like</h4>
+      <p>The HTML body of a generated newsletter digest as it arrives in your inbox &mdash; section headings per source, article cards with headlines, 1&ndash;2 sentence summaries, and "Read more" links back to the original article URLs. The visual <strong>"30 emails &rarr; 1 digest"</strong> outcome:</p>
+
+      <div class="mockup-frame">
+        <img src="images/sample-newsletter-digest.html.png" alt="Rendered newsletter digest">
+      </div>
+      <p class="mockup-caption">A daily 7 AM newsletter digest &mdash; 12 articles across 5 sources (NIH funding, NEJM, AHA, STAT News, JAMA), each with a headline + summary + "Read more" link</p>
+
+      <h3 style="margin-top:40px;">Triage-Activity Digest &mdash; for the "I want to know what the AI is doing" user</h3>
+      <p>The "set it and forget it" anti-pattern is real: an AI quietly classifies + drafts + moves mail for weeks, the operator's confidence drifts toward "I have no idea what it's doing," trust erodes, eventually the operator pulls the plug. The triage-activity digest is the antidote &mdash; <strong>every day, the operator gets a complete record of what email-triage did with their mail.</strong></p>
+      <p>Daily summary delivered to the account's own mailbox at the scheduled time (typically end-of-day, 6 PM local &mdash; operator-configurable):</p>
+      <ul>
+        <li><strong>Today's triage summary</strong> &mdash; counts per category ("47 newsletters, 12 to-respond, 8 meetings, 3 invoices"), counts per action ("12 drafts created, 47 moved, 8 labeled, 0 errors")</li>
+        <li><strong>Per-message detail</strong> &mdash; sender, subject, category, confidence, and the action chain that fired. Operator reads top-to-bottom in 2 minutes and knows exactly what got done.</li>
+        <li><strong>Drafts that need your attention</strong> &mdash; every saved draft linked back to the Drafts folder. Closes the "drafted reply forgotten in my Drafts folder" loop.</li>
+        <li><strong>Classification confidence flags</strong> &mdash; any message classified at &lt;0.85 confidence surfaces here so the operator can correct via rules. Turns the digest into a tuning surface.</li>
+        <li><strong>Errors</strong> &mdash; anything that went wrong (auth failures, draft-creation errors, watch-rule webhook timeouts). Surfaces operational issues to the user, not just the admin.</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>The system never feels like it's acting on your behalf without your knowledge.</strong> Every classification, every action, every draft is in the digest. For HIPAA-regulated environments this doubles as a lightweight audit surface &mdash; the compliance officer reviews the operator's last 5 daily digests instead of querying the access log.</p>
+      </div>
+
+      <h4 style="margin-top:28px;">Compliance posture, locked in code</h4>
+      <ul>
+        <li><strong>Locked to the account.</strong> Delivery is to the account's own email address &mdash; never to a notify_email or third party. "What email-triage did to MY mail goes back into MY mailbox."</li>
+        <li><strong>Owner-only initially.</strong> Delegates of the account don't get their own opt-in surface yet &mdash; only the account owner can enable the digest.</li>
+        <li><strong>Recipient verification, hard.</strong> If the account's email address changes and the configured to-address no longer matches, the digest <strong>refuses to send</strong> with an audit-log row.</li>
+      </ul>
+
+      <h4 style="margin-top:28px;">Delivery mechanics</h4>
+      <ul>
+        <li><strong>Supervised scheduler.</strong> Background worker polls every account's schedule slots once per minute and fires when a slot's wall-clock matches. Quarantine + auto-retry on transient failures.</li>
+        <li><strong>Idempotent fire.</strong> Each schedule slot tracks the last-fired timestamp &mdash; no double-fire within the same 60-second window even across a container restart.</li>
+        <li><strong>HIPAA-aware.</strong> Newsletter-digest action runs against the LLM (local Ollama by default; cloud only with BAA ack). Triage-activity digest renders only category names + action verbs + counts &mdash; no PHI in the digest body itself.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Drafting -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 4</p>
       <h2 class="section-title">Smart Reply Drafting</h2>
       <p>The <code>draft_reply</code> action generates a contextual response using your local language model. The draft lands in your Drafts folder. <strong>Nothing is ever sent automatically.</strong></p>
 
@@ -172,9 +249,9 @@
   </section>
 
   <!-- Calendar -->
-  <section style="background:#F8FAFC;">
+  <section>
     <div class="container">
-      <p class="eyebrow">Section 4</p>
+      <p class="eyebrow">Section 5</p>
       <h2 class="section-title">Calendar-Aware Meeting Scheduling</h2>
       <p>The highest-leverage feature for anyone whose calendar is the bottleneck. When mail is classified as <code>meeting-request</code>, the system reads your calendar, picks slots, and drafts a calendar-aware reply.</p>
 
@@ -207,9 +284,9 @@
   </section>
 
   <!-- Provider support -->
-  <section>
+  <section style="background:#F8FAFC;">
     <div class="container">
-      <p class="eyebrow">Section 5</p>
+      <p class="eyebrow">Section 6</p>
       <h2 class="section-title">Email Provider Support</h2>
       <table class="feature-table">
         <thead><tr><th>Provider</th><th>Push</th><th>Labels/Folders</th><th>Calendar API</th></tr></thead>
@@ -237,9 +314,9 @@
   </section>
 
   <!-- Multi-user -->
-  <section style="background:#F8FAFC;">
+  <section>
     <div class="container">
-      <p class="eyebrow">Section 6</p>
+      <p class="eyebrow">Section 7</p>
       <h2 class="section-title">Multi-User &amp; Multi-Account</h2>
       <p>One install supports any number of users, each with their own accounts, categories, style profile, and meeting preferences. Three role tiers: <strong>Admin</strong> (install-wide config), <strong>User</strong> (owns own accounts), <strong>Delegate</strong> (granted view/triage/draft on another user's account).</p>
       <p>Per-user isolation is enforced at the data layer. Delegate actions are audited with both actor and account-owner stamped. The HIPAA §164.312(b) audit gate distinguishes owner self-access from delegate access — the former is a §164.502(a) self-disclosure carve-out and isn't audited as PHI access; the latter writes an audit row every time.</p>
@@ -252,9 +329,9 @@
   </section>
 
   <!-- Operations -->
-  <section>
+  <section style="background:#F8FAFC;">
     <div class="container">
-      <p class="eyebrow">Section 7</p>
+      <p class="eyebrow">Section 8</p>
       <h2 class="section-title">Operations &amp; Configuration</h2>
       <p>Every operational signal is exposed through the admin UI &mdash; classifier latency, cache hit ratio, embedding metrics, supervised-task state, push watcher health, ingestion rollups. JSON for machine consumption (Nagios, Datadog, Prometheus); HTML for the admin stats page.</p>
 

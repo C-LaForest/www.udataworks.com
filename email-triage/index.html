@@ -38,10 +38,32 @@
   <section class="hero">
     <div class="container">
       <h1>Stop triaging your inbox by hand.</h1>
-      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, and schedules meetings — running on infrastructure you control. <strong>Sovereign AI by default.</strong> HIPAA-ready. Provider-agnostic.</p>
+      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, schedules meetings, and produces aggregated digests — running on infrastructure you control. <strong>60–90 minutes back. Every day.</strong> Sovereign AI by default. HIPAA-ready.</p>
       <div class="cta-group">
         <a href="contact.html" class="cta-btn">Schedule a Demo</a>
-        <a href="features.html" class="cta-btn secondary">See the Features</a>
+        <a href="features.html#digests" class="cta-btn secondary">See the Newsletter Digest</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Time-recovered strip -->
+  <section style="background:linear-gradient(90deg,#4F46E5,#06B6D4); padding:32px 0; color:#fff;">
+    <div class="container" style="display:flex; gap:24px; align-items:center; justify-content:center; text-align:center; flex-wrap:wrap;">
+      <div style="flex:1; min-width:160px;">
+        <div style="font-size:2.4rem; font-weight:700;">60–90 min</div>
+        <div style="font-size:0.95rem; opacity:0.95;">per day saved by the newsletter digest</div>
+      </div>
+      <div style="flex:1; min-width:160px;">
+        <div style="font-size:2.4rem; font-weight:700;">30+ → 1</div>
+        <div style="font-size:0.95rem; opacity:0.95;">subscription feeds collapsed into one inbox entry</div>
+      </div>
+      <div style="flex:1; min-width:160px;">
+        <div style="font-size:2.4rem; font-weight:700;">2 min</div>
+        <div style="font-size:0.95rem; opacity:0.95;">to scan the daily triage-activity summary</div>
+      </div>
+      <div style="flex:1; min-width:160px;">
+        <div style="font-size:2.4rem; font-weight:700;">5 sec</div>
+        <div style="font-size:0.95rem; opacity:0.95;">end-to-end push → classify → action</div>
       </div>
     </div>
   </section>
@@ -147,10 +169,47 @@
           <p>Reads your calendar, suggests free slots, drafts meeting-acceptance replies with proper iCal threading.</p>
         </div>
         <div class="card">
+          <h3>Aggregated Digests</h3>
+          <p>Newsletter digest collapses 30+ subscription feeds into one inbox entry at 7 AM with summarized article cards. Triage-activity digest at end-of-day shows you exactly what the system did with your mail.</p>
+        </div>
+        <div class="card">
           <h3>Agent-Friendly API</h3>
           <p>27+ JSON endpoints with bearer auth, per-token rate limiting, HIPAA hard-off. Built for AI-agent tool-calling.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Featured: Newsletter Digest -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Killer feature for the high-subscription professional</p>
+      <h2 class="section-title">30+ newsletters &rarr; 1 inbox entry.</h2>
+      <p class="section-subtitle">The newsletter digest pulls every subscription feed from the last 24 hours, has the local LLM extract per-article structure (headline, summary, link), groups by source, and delivers one HTML digest to your inbox at 7 AM.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>The Problem</h3>
+          <p>Research clinicians, financial analysts, consultants — anyone whose job requires staying current on a high-volume subscription feed — spend <strong>60&ndash;90 minutes per day</strong> on newsletter skimming. Only 5&ndash;10% of articles deserve a real read.</p>
+        </div>
+        <div class="card">
+          <h3>The Outcome</h3>
+          <p>From "120 inbox entries the system can't help me with" to <strong>"one digest with 90 article cards I can scan in 5 minutes."</strong> Click through the 5&ndash;10 worth reading. Close the tab on the rest. Daily time recovered: <strong>60&ndash;90 minutes.</strong></p>
+        </div>
+        <div class="card">
+          <h3>Plus a Daily "What Did the AI Do?" Digest</h3>
+          <p>Companion triage-activity digest at end-of-day: counts per category, per-message detail, drafts awaiting review, low-confidence flags for rule tuning. <strong>You never lose visibility into what email-triage did with your mail.</strong></p>
+        </div>
+      </div>
+
+      <div class="mockup-frame" style="max-width:560px; margin: 32px auto 0 auto;">
+        <img src="images/sample-newsletter-digest.html.png" alt="Rendered newsletter digest">
+      </div>
+      <p class="mockup-caption">A daily 7 AM digest &mdash; 12 articles across 5 sources, scannable in 5 minutes</p>
+
+      <p style="text-align:center; margin-top:24px;">
+        <a href="features.html#digests" class="cta-btn secondary">See the full digest spec &rarr;</a>
+      </p>
     </div>
   </section>
 

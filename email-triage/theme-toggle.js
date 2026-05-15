@@ -5,7 +5,7 @@
 (function () {
   var STORAGE_KEY = 'et-screenshot-theme';
   // Files without -l variants — keep them as-is regardless of theme.
-  var NO_LIGHT_VARIANT = ['Draft.png', 'Openclaw_et_health.png'];
+  var NO_LIGHT_VARIANT = ['Draft.png', 'Openclaw_et_health.png', 'sample-newsletter-digest.html.png'];
 
   function getStored() {
     try { return localStorage.getItem(STORAGE_KEY) || 'moon'; }
