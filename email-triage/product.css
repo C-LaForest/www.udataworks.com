@@ -38,8 +38,24 @@ section { padding: 48px 0; }
 /* Header */
 header { background: var(--color-header); color: #fff; }
 header .container { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; flex-wrap: wrap; gap: 12px; }
+.brand-row { display: flex; align-items: center; gap: 10px; }
 header .brand { font-weight: 700; font-size: 1.2rem; color: #fff; }
 header .brand span { color: var(--color-secondary-bright); }
+.theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--color-secondary-bright);
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.theme-toggle:hover { background: rgba(103,232,249,0.12); border-color: var(--color-secondary-bright); }
+.theme-toggle svg { width: 18px; height: 18px; display: block; }
 header nav a { color: #fff; margin-left: 18px; font-size: 0.95rem; opacity: 0.85; }
 header nav a:hover { opacity: 1; color: var(--color-secondary-bright); text-decoration: none; }
 header nav a.active { opacity: 1; color: var(--color-secondary-bright); border-bottom: 2px solid var(--color-secondary-bright); padding-bottom: 4px; }

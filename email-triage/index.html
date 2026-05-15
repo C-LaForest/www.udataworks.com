@@ -16,7 +16,13 @@
 <body>
   <header>
     <div class="container">
-      <a href="index.html" class="brand">Email <span>Triage</span></a>
+      <div class="brand-row">
+        <a href="index.html" class="brand">Email <span>Triage</span></a>
+        <button class="theme-toggle" type="button" onclick="toggleScreenshotTheme()" aria-label="Switch screenshots to light theme" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
       <nav>
         <a href="index.html" class="active">Overview</a>
         <a href="features.html">Features</a>
@@ -150,8 +156,9 @@
 
   <section>
     <div class="container">
-      <p class="eyebrow">See it in action</p>
-      <h2 class="section-title">Three views from the running system.</h2>
+      <p class="eyebrow">Inside the running system</p>
+      <h2 class="section-title">Operator-controlled. Visible. Auditable.</h2>
+      <p class="section-subtitle">No black-box behavior. Every category, every rule, every operational signal is visible in the admin UI.</p>
 
       <div class="mockup-frame">
         <img src="images/rules.png" alt="Rules editor">
@@ -159,9 +166,27 @@
       <p class="mockup-caption">/rules — operator-controlled mailing-list, sender, and regex rules that bypass the classifier</p>
 
       <div class="mockup-frame">
+        <img src="images/categories.png" alt="Categories admin page">
+      </div>
+      <p class="mockup-caption">/categories — system defaults + your custom categories with editable descriptions</p>
+
+      <div class="mockup-frame">
+        <img src="images/admin_stats.png" alt="Operational stats">
+      </div>
+      <p class="mockup-caption">/admin/stats — classifier latency, cache hit ratio, push watcher health, supervised tasks</p>
+    </div>
+  </section>
+
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">What lands in your inbox</p>
+      <h2 class="section-title">A draft, ready for one-click edit-and-send.</h2>
+      <p class="section-subtitle">Email Triage drafts; you review and send. Nothing leaves your outbox without explicit operator action.</p>
+
+      <div class="mockup-frame">
         <img src="images/Draft.png" alt="Drafted reply with meeting time suggestions">
       </div>
-      <p class="mockup-caption">A drafted reply in the email client's Drafts folder — ready for one-click edit-and-send</p>
+      <p class="mockup-caption">A drafted reply in the email client's Drafts folder — threaded into the original conversation, calendar-aware, ready for review</p>
     </div>
   </section>
 
@@ -267,6 +292,7 @@
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="theme-toggle.js"></script>
 
   <script type="application/ld+json">
   {
