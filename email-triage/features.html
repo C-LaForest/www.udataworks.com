@@ -347,6 +347,18 @@
         <img src="images/config.png" alt="Install-wide config">
       </div>
       <p class="mockup-caption">/config &mdash; install-wide configuration tabs</p>
+
+      <h3 style="margin-top:32px;">Container Image &amp; Lazy Embedding Stack</h3>
+      <p>The runtime container image is <strong>~250 MB compressed</strong>, Debian-13-slim with Python 3.12, non-root user, signed with cosign and SLSA-3 provenance. CPU-only PyTorch wheels (the GPU is reserved for the Ollama chat-model host). Fast pulls, fast CI, fits under GitHub Releases' 2 GiB asset cap for air-gap tarballs.</p>
+      <p>The embedding backend (PyTorch CPU runtime, sentence-transformers, <code>all-MiniLM-L6-v2</code> model &mdash; ~600 MB total) is <strong>not baked into the image</strong>. On first admin setup, the operator clicks <strong>[Install now]</strong> on the AI Backends config page; the installer fetches each manifest-listed file over HTTPS, verifies SHA-256 against a pinned manifest baked into the image, and <code>pip install</code>s into the persistent volume at <code>/app/data/runtime-deps/</code>.</p>
+      <p>Operators who choose Ollama for embedding (rather than the in-process CPU backend) skip the local install entirely; their embed calls go to the same Ollama host as the chat model.</p>
+
+      <h3 id="air-gap" style="margin-top:32px;">Air-Gap Installation</h3>
+      <p>For organizations on disconnected networks &mdash; classified environments, OT segments, regulated research enclaves &mdash; air-gap installs use <code>scripts/download-embedding-bits.sh</code> on a connected machine to produce a hash-pinned tarball + SHA-256 sidecar. Transfer the tarball to the air-gap host and sideload through the admin UI. <strong>Sideload runs the same hash verification as the auto-download path</strong> &mdash; operator-staged bytes are not trusted; a bit-corrupted tarball or a tampered air-gap drop trips the same refusal as a poisoned PyPI mirror.</p>
+
+      <div class="callout">
+        <p><strong>Image and source.</strong> Container: <code>ghcr.io/unlimited-data-works-llc/email-triage</code>. Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a> (Apache 2.0). Verification recipe in the repo's <code>docs/install.md</code>.</p>
+      </div>
     </div>
   </section>
 
@@ -374,6 +386,12 @@
         <a href="../medical-research/">Medical Research</a> ·
         <a href="../regulated-industries/">Regulated Industries</a>
       </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
       <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
     </div>
   </footer>

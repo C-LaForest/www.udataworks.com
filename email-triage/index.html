@@ -321,6 +321,32 @@
     </div>
   </section>
 
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Verify it yourself</p>
+      <h2 class="section-title">Open source. Signed releases. Air-gap-installable.</h2>
+      <p class="section-subtitle">The product is real, the supply chain is auditable, and the install is buildable by your own ops team — no service tier required to deploy.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Public Source</h3>
+          <p>Apache 2.0. Read the code, fork it, audit it.</p>
+          <p style="margin-top:10px;"><a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener"><code>github.com/Unlimited-Data-Works-LLC/Email-Triage</code></a></p>
+        </div>
+        <div class="card">
+          <h3>Signed Container Image</h3>
+          <p>Cosign-signed (keyless OIDC) with SLSA-3 provenance and a separate operator-attestation. HIPAA installs verify both attestations on the same digest before pull.</p>
+          <p style="margin-top:10px;"><code>ghcr.io/unlimited-data-works-llc/email-triage</code></p>
+        </div>
+        <div class="card">
+          <h3>Air-Gap Friendly</h3>
+          <p>Hash-pinned embedding-runtime tarball with SHA-256 sidecar. Sideload through the admin UI; same verification as the auto-download path.</p>
+          <p style="margin-top:10px;"><a href="features.html#air-gap">See the deployment story →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="sovereign-strip">
     <div class="container" style="text-align:center;">
       <h2><span class="accent">Ready</span> to take your inbox back?</h2>
@@ -347,6 +373,12 @@
         <a href="../medical-research/">Medical Research</a> ·
         <a href="../regulated-industries/">Regulated Industries</a>
       </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
       <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
     </div>
   </footer>

@@ -106,8 +106,48 @@
     </div>
   </section>
 
-  <!-- Encryption -->
+  <!-- Supply Chain Security -->
   <section>
+    <div class="container">
+      <p class="eyebrow">Supply Chain Security</p>
+      <h2 class="section-title">You verify the image before you trust it.</h2>
+      <p>Sovereign AI ends at the model boundary if the runtime itself isn't trustworthy. Email Triage publishes a verifiable supply chain so compliance officers can answer "where did this binary come from?" with a cryptographic chain instead of a vendor email.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Cosign-Signed Images</h3>
+          <p>Every published container image is signed with cosign using keyless OIDC against the GitHub Actions identity. No long-lived signing key to lose or rotate. Operators verify with <code>cosign verify</code> before pull.</p>
+        </div>
+        <div class="card">
+          <h3>SLSA-3 Build Provenance</h3>
+          <p>Each image carries a SLSA-3 build provenance attestation: who built it, when, from which source revision, in which builder. Proves the image came out of the public CI pipeline running against the public source — not a one-off developer laptop build.</p>
+        </div>
+        <div class="card">
+          <h3>Operator Approval Attestation</h3>
+          <p>A separate human-validated review event signed against the same digest (predicate <code>operator-approval/v1</code>). Distinguishes "the CI passed" from "an operator reviewed and approved this release."</p>
+        </div>
+        <div class="card">
+          <h3>HIPAA Install Gate</h3>
+          <p>HIPAA-flagged installs verify <strong>both</strong> attestations on the same image digest before allowing pull. A poisoned CI run with no operator attestation can't reach a HIPAA host. Verification recipe in the public repo's <code>docs/install.md</code>.</p>
+        </div>
+        <div class="card">
+          <h3>Air-Gap Verifiable</h3>
+          <p>Air-gap installs use <code>scripts/download-embedding-bits.sh</code> on a connected machine to produce a hash-pinned tarball + SHA-256 sidecar. Sideload through the admin UI runs the same hash verification as the auto-download path — operator-staged bytes are not trusted.</p>
+        </div>
+        <div class="card">
+          <h3>Pinned Tags, Floating Aliases</h3>
+          <p>Customers pin to immutable <code>vX.Y.Z</code> tags (same digest under both <code>vX.Y.Z</code> and <code>X.Y.Z</code> forms). Float to <code>X.Y</code>, <code>X</code>, or <code>:latest</code> for development-friendly upgrades. <code>:edge</code> for every push to main.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:32px;">
+        <p><strong>Source:</strong> <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a> &middot; <strong>Image:</strong> <code>ghcr.io/unlimited-data-works-llc/email-triage</code> &middot; License: Apache 2.0</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encryption -->
+  <section style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">Encryption at Rest</p>
       <h2 class="section-title">Fernet-encrypted secrets. Master key options operator-chosen.</h2>
@@ -123,7 +163,7 @@
   </section>
 
   <!-- TLS + Auth -->
-  <section style="background:#F8FAFC;">
+  <section>
     <div class="container">
       <div class="card-grid">
         <div class="card">
@@ -149,7 +189,7 @@
   </section>
 
   <!-- Multi-tenancy -->
-  <section>
+  <section style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">Multi-Tenancy &amp; Delegation</p>
       <h2 class="section-title">Three-role audit model.</h2>
@@ -164,7 +204,7 @@
   </section>
 
   <!-- Standards -->
-  <section style="background:#F8FAFC;">
+  <section>
     <div class="container">
       <p class="eyebrow">Standards Honored</p>
       <h2 class="section-title">RFCs and regulations the system aligns to.</h2>
@@ -214,6 +254,12 @@
         <a href="../medical-research/">Medical Research</a> ·
         <a href="../regulated-industries/">Regulated Industries</a>
       </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
       <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
     </div>
   </footer>

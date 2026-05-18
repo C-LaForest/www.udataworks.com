@@ -97,7 +97,7 @@
         <span class="tag">Self-hosted · no service tier needed</span>
         <h3>Privacy-First Homelab Operator</h3>
         <p><strong>Context:</strong> Self-hosting enthusiast running on Podman. Wants Email Triage as part of a Tailscale-funneled internal-services stack. LLM already running locally (Ollama, GPU).</p>
-        <p><strong>Outcome:</strong> Install + configure independently from the public repository. Service offering not needed but documentation and ongoing version updates are valued. Tailscale-issued TLS certificate. Audit chain and HIPAA-mode features work the same as in enterprise deployments — privacy posture isn't tier-gated.</p>
+        <p><strong>Outcome:</strong> Install + configure independently from the public repository at <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>. Pull the cosign-signed image from <code>ghcr.io/unlimited-data-works-llc/email-triage</code>, verify the SLSA-3 provenance, run on Podman with a systemd quadlet. <strong>Air-gap installable</strong> via the hash-pinned embedding-runtime tarball &mdash; same verification path as the auto-download. Audit chain and HIPAA-mode features work the same as in enterprise deployments &mdash; privacy posture isn't tier-gated.</p>
       </div>
     </div>
   </section>
@@ -126,6 +126,12 @@
         <a href="../medical-research/">Medical Research</a> ·
         <a href="../regulated-industries/">Regulated Industries</a>
       </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
       <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
     </div>
   </footer>
