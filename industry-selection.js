@@ -68,6 +68,13 @@ function redirectToIndustry(industry) {
 
 // Main logic
 document.addEventListener('DOMContentLoaded', function() {
+  // Landing-page-only: the redirect/menu logic touches #industry-selection,
+  // #loading, and #error-message, which exist only on the industry-selection
+  // landing page. On sub-pages the script is loaded solely for the exported
+  // clearIndustryPreferenceAndShowMenu() "Change Industry" handler, so bail out
+  // before dereferencing elements that aren't there (was a null-deref console error).
+  if (!document.getElementById('industry-selection')) return;
+
   const showMenu = getURLParameter('showMenu') === 'true';
   const industry = getIndustryPreference();
 
