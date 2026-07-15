@@ -306,10 +306,37 @@
     </div>
   </section>
 
-  <!-- Provider support -->
+  <!-- Regulatory Clock -->
   <section style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">Section 6</p>
+      <h2 class="section-title">Regulatory Deadline Clock</h2>
+      <p>For clinical-research teams, a missed safety-reporting deadline is a finding. Email Triage can watch for the mail that starts one of those clocks &mdash; an FDA IND safety report, an EU CTR SUSAR, an IRB notification &mdash; and track the deadline against a working-day calendar. It is built to <strong>assist a human&rsquo;s judgment, never replace it, and never quietly assume your legal liability.</strong></p>
+
+      <div class="callout">
+        <p><strong>Whose deadline is it? The tool is explicit.</strong> FDA IND (21 CFR 312.32) and EU CTR (Reg. 536/2014 Art. 42) SUSAR deadlines are the <strong>sponsor&rsquo;s</strong> filing obligation, so they ship as <em>informational</em> &mdash; a &ldquo;sponsor deadline noted&rdquo; receipt surfaced for awareness and <strong>never escalated as the site or PI&rsquo;s liability</strong>. The IRB reporting deadline <em>is</em> the site&rsquo;s obligation &mdash; but ICH E6(R3) removed the fixed number, so it ships <strong>UNCONFIGURED</strong>: the app never invents an IRB deadline, and the UI nudges you to enter your institution&rsquo;s own written policy before that clock can arm.</p>
+      </div>
+
+      <h3 style="margin-top:32px;">A human confirms every legal clock</h3>
+      <p>Nothing arms silently. Every deadline begins as a <strong>candidate</strong> a person must confirm. A clock only starts running when it is both marked as your responsibility to submit <em>and</em> has a computable deadline. &ldquo;Day-0&rdquo; is write-once and can never be edited in place &mdash; a correction is a new, appended event, not an overwrite (21 CFR Part 11). The app never silently starts or closes a legal clock.</p>
+
+      <h3 style="margin-top:32px;">The AI never does the math</h3>
+      <p>Deadline arithmetic runs <strong>offline</strong>, in working days, skipping weekends and your institution&rsquo;s configured holidays &mdash; the language model is never asked to compute a date. A working-day clock with no calendar configured <strong>refuses to arm</strong> rather than guess. And the &ldquo;who is responsible&rdquo; flag is read only from out-of-band operator configuration; it is <strong>never inferred from the content of an email</strong>.</p>
+
+      <h3 style="margin-top:32px;">Escalation, calendar, and an audit trail</h3>
+      <ul>
+        <li><strong>Escalation ladder.</strong> As a confirmed deadline approaches, it flags at-risk, escalates reminders, and marks overdue if missed &mdash; recomputed continuously so it self-heals across restarts, with a per-tick cap so a burst of reports can&rsquo;t stampede the notifier.</li>
+        <li><strong>PHI-free calendar write.</strong> Each escalating deadline is written to your own calendar exactly once &mdash; the event summary is the clock label only, never patient or case detail.</li>
+        <li><strong>Tamper-evident clock audit chain.</strong> Every legally-meaningful transition (detected, awareness, determination, escalation, breach, submission, dismissal, correction) is recorded in the same HMAC-keyed audit chain &mdash; bounded, non-PHI detail only, never the trigger email&rsquo;s content.</li>
+        <li><strong>Automatic detection is off by default.</strong> Optional scanning of inbound mail for safety-reporting language is flag-gated and ships disabled; even when enabled it only <em>proposes</em> a candidate for human confirmation.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Provider support -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">Section 7</p>
       <h2 class="section-title">Email Provider Support</h2>
       <table class="feature-table">
         <thead><tr><th>Provider</th><th>Push</th><th>Labels/Folders</th><th>Calendar API</th></tr></thead>
@@ -337,9 +364,9 @@
   </section>
 
   <!-- Multi-user -->
-  <section>
+  <section style="background:#F8FAFC;">
     <div class="container">
-      <p class="eyebrow">Section 7</p>
+      <p class="eyebrow">Section 8</p>
       <h2 class="section-title">Multi-User &amp; Multi-Account</h2>
       <p>One install supports any number of users, each with their own accounts, categories, style profile, and meeting preferences. Three role tiers: <strong>Admin</strong> (install-wide config), <strong>User</strong> (owns own accounts), <strong>Delegate</strong> (granted view/triage/draft on another user's account).</p>
       <p>Per-user isolation is enforced at the data layer. Delegate actions are audited with both actor and account-owner stamped. The HIPAA §164.312(b) audit gate distinguishes owner self-access from delegate access — the former is a §164.502(a) self-disclosure carve-out and isn't audited as PHI access; the latter writes an audit row every time.</p>
@@ -352,9 +379,9 @@
   </section>
 
   <!-- Operations -->
-  <section style="background:#F8FAFC;">
+  <section>
     <div class="container">
-      <p class="eyebrow">Section 8</p>
+      <p class="eyebrow">Section 9</p>
       <h2 class="section-title">Operations &amp; Configuration</h2>
       <p>Every operational signal is exposed through the admin UI &mdash; classifier latency, cache hit ratio, embedding metrics, supervised-task state, push watcher health, ingestion rollups. JSON for machine consumption (Nagios, Datadog, Prometheus); HTML for the admin stats page.</p>
 
