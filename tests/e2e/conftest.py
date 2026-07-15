@@ -33,6 +33,7 @@ PAGES = [
     "/email-triage/features.html",
     "/email-triage/privacy.html",
     "/email-triage/rigor.html",
+    "/email-triage/whats-new.html",
     "/email-triage/api.html",
     "/email-triage/service.html",
     "/email-triage/use-cases.html",

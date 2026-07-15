@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>What&rsquo;s New in v0.2.0 — Stronger Compliance Evidence &amp; Research-Workflow Features | Email Triage | Craig LaForest</title>
+  <meta name="description" content="Email Triage v0.2.0 for the PI and compliance counsel: whole-database AES-256 encryption at rest, a keyed HMAC audit chain across 8 tables, three more HIPAA safeguards mapped, a regulatory-deadline watcher, and a cross-inbox study digest — all verifiable in public source.">
+  <meta property="og:title" content="Email Triage v0.2.0 — What's New for Regulated Research Teams">
+  <meta property="og:description" content="Whole-DB encryption at rest, a wider keyed audit chain, a regulatory-deadline clock that never assumes your liability, and a cross-inbox study digest. Evidence you can check.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand-row">
+        <a href="index.html" class="brand">Email <span>Triage</span></a>
+        <button class="theme-toggle" type="button" onclick="toggleScreenshotTheme()" aria-label="Switch screenshots to light theme" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="rigor.html">How It Stays True</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow" style="color:#67E8F9;">Release &middot; v0.2.0</p>
+      <h1>What&rsquo;s new in v0.2.0</h1>
+      <p class="lead">This release deepens the evidence behind every compliance claim, hardens the data-at-rest story, and adds features built for the way regulated research teams actually work &mdash; written here for the two people who have to sign off on it: the <strong>principal investigator</strong> and <strong>compliance counsel</strong>. Everything below is live in the current release and verifiable in public source.</p>
+    </div>
+  </section>
+
+  <!-- Short version -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">The short version</p>
+      <h2 class="section-title">A release aimed squarely at your compliance file.</h2>
+      <p class="section-subtitle">v0.2.0 isn&rsquo;t a coat of paint. The database is now encrypted as a whole, the tamper-evident audit trail got stronger and wider, three more HIPAA safeguards are mapped to working controls, and two new features were built around obligations a research program already carries.</p>
+      <div class="callout">
+        <p><strong>The through-line: evidence, not adjectives.</strong> Every capability below is backed by a control you &mdash; or your auditor &mdash; can check in public source, not by a promise. Controls are <em>aligned to</em> the cited rules; alignment, not certification.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For counsel: compliance evidence -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">For compliance counsel</p>
+      <h2 class="section-title">Stronger evidence for your compliance file.</h2>
+      <p class="section-subtitle">The biggest investment in v0.2.0 is in the parts you have to defend to a regulator &mdash; encryption, the audit trail, and the safeguards behind them.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Whole-database encryption at rest</h3>
+          <p>The <strong>entire database</strong> &mdash; messages, classifications, accounts, credentials, and the audit log itself &mdash; is now <strong>AES-256 encrypted on disk</strong> (single-file SQLCipher), on by default for new installs. If the encryption library or master key is missing, the app <strong>refuses to start</strong> rather than write plaintext, and a stolen backup without the key is unrecoverable. Maps to HIPAA <strong>&sect;164.312(a)(2)(iv)</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>A stronger, wider audit trail</h3>
+          <p>The tamper-evident access log is now a <strong>keyed HMAC-SHA256 chain</strong> spanning <strong>eight event tables</strong> plus a per-request PHI-access log. &ldquo;Keyed&rdquo; means a row can&rsquo;t be quietly rewritten and re-hashed, and the chain survives a master-key rotation. Verify it yourself with the <code>audit-verify</code> CLI or the paginated <code>/compliance</code> view. Maps to <strong>&sect;164.312(c)(1)</strong>.</p>
+        </div>
+        <div class="card">
+          <h3>Three more safeguards mapped</h3>
+          <p><strong>Minimum-necessary</strong> (&sect;164.502(b)) through delegate-vs-owner gating and metadata-only alerts; <strong>accounting of disclosures</strong> (&sect;164.528) via the access-event chain; and <strong>breach safe-harbor</strong> (&sect;164.402) &mdash; encryption at rest renders lost or stolen data unusable, unreadable, and indecipherable.</p>
+        </div>
+        <div class="card">
+          <h3>Encrypted backups, fail-closed</h3>
+          <p>Scheduled database backups are <strong>encrypted</strong>, off by default, and validated fail-closed against an X25519 key &mdash; no plaintext PHI is ever written to a temp directory. Restore is deliberately <strong>CLI-only</strong>: there is no one-click button to fat-finger.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>About BAAs &mdash; the accurate version.</strong> Running the default local model keeps PHI on your own network, so <strong>no Business Associate Agreement with a cloud AI vendor is required</strong>. Turn on a cloud backend and a <strong>code-enforced gate</strong> blocks PHI from leaving until you&rsquo;ve recorded that vendor&rsquo;s BAA. The obligation attaches to whoever <em>receives</em> the PHI &mdash; enforced in code, not asserted in a policy PDF.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- For the PI: workflow features -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">For the principal investigator</p>
+      <h2 class="section-title">Features built for the regulated-research inbox.</h2>
+      <p class="section-subtitle">Two of these are new to v0.2.0; the rest sharpen how the tool already works &mdash; each drawn with the liability boundary in mind.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Regulatory Deadline Clock</h3>
+          <p>Email Triage can now watch for the mail that starts a safety-reporting clock &mdash; <strong>FDA IND</strong> (21 CFR 312.32), <strong>EU CTR SUSAR</strong>, <strong>IRB</strong> &mdash; and track it on a working-day calendar. The boundary is explicit: sponsor deadlines are shown as <strong>informational</strong> and never escalated to the site as if they were yours; the IRB clock ships <strong>unconfigured</strong> so the tool never invents a number; and a human confirms every legal clock before it arms. The AI never computes the date.</p>
+        </div>
+        <div class="card">
+          <h3>Topic / Study Digest</h3>
+          <p>Define a study once &mdash; a few keywords and the mailboxes it lives in &mdash; and get <strong>one scheduled digest</strong> of every matching message across those inboxes. Matching rides the existing classification pass, so there&rsquo;s <strong>no new place your mail is sent</strong>; the tool stores only message IDs and your own keywords, <strong>never subject or body</strong>; a PHI check blocks study definitions that contain protected data; and delivery goes only to your own mailbox, re-checked at send time.</p>
+        </div>
+        <div class="card">
+          <h3>Metadata-only alerting, five ways</h3>
+          <p>Route a triage signal to <strong>Slack, PagerDuty, Opsgenie, Teams, Discord</strong>, or a signed endpoint of your own. Alerts carry <strong>metadata, never the email body</strong>; each is HMAC-signed when you set a secret (and dropped rather than sent unsigned if that secret can&rsquo;t be read); external URLs are deny-by-default; and on a HIPAA-flagged account the payload collapses to category, timestamp, and a flow ID.</p>
+        </div>
+        <div class="card">
+          <h3>Smart Reply that earns your voice</h3>
+          <p>Drafts now come back as real, model-written reply bodies &mdash; but in a <strong>neutral professional voice</strong> until you explicitly ask the tool to learn from your sent mail. Nothing is scraped silently. On a HIPAA account it never reuses your verbatim past mail, only a privacy-scrubbed style descriptor, and it <strong>fails closed</strong> on any credential or BAA error.</p>
+        </div>
+        <div class="card">
+          <h3>Choose your AI backend</h3>
+          <p>A live <strong>model picker</strong> shows each backend&rsquo;s capabilities and memory footprint, with capability-aware <strong>failover</strong> &mdash; every switch written to a tamper-evident audit row &mdash; and a per-backend circuit breaker that tells &ldquo;the server is down&rdquo; apart from &ldquo;the answer was bad.&rdquo;</p>
+        </div>
+        <div class="card">
+          <h3>The whole picture, in one diagram</h3>
+          <p>The Features page now opens with an end-to-end map: real-time ingest and classification fanning out in a single pass to routes, watch rules, and topic matching, alongside the scheduled digests &mdash; over a band that marks what stays <strong>sovereign</strong> (local by default, content never leaves your network) and what is <strong>audited</strong>. <a href="features.html">See the pipeline &rarr;</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built to stay true -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">For the long engagement</p>
+      <h2 class="section-title">Built to stay true.</h2>
+      <p class="section-subtitle">Features are easy to ship and easy to let rot. v0.2.0 also invested in the parts a buyer only comes to value months later.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>&ldquo;How It Stays True&rdquo; &mdash; a new page</h3>
+          <p>A new page lays out the engineering discipline that keeps these compliance claims true <em>as the code keeps changing</em>: structural build-pins that fail CI when a control goes missing, a verify-don&rsquo;t-accept audit habit, a three-reviewer gate on every risk surface, and a six-year findings register. <a href="rigor.html">Read How It Stays True &rarr;</a></p>
+        </div>
+        <div class="card">
+          <h3>A versioned, stable API</h3>
+          <p>The integration API moved to a clean <code>/api/v1</code> namespace, and every legacy path now issues a permanent (<strong>308</strong>) redirect that preserves the method and body &mdash; so anything you&rsquo;ve already built keeps working. <a href="api.html">See the API &rarr;</a></p>
+        </div>
+        <div class="card">
+          <h3>Verified accessible and mobile-correct</h3>
+          <p>Every page in this subsite is now checked on <em>each change</em> by an automated gate &mdash; zero console errors and <strong>WCAG 2.1 AA</strong> accessibility (relevant to Section&nbsp;508 / ADA for federally-funded work), across desktop and mobile. The checks run offline and block a release that regresses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest scope -->
+  <section>
+    <div class="container">
+      <p style="padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#F8FAFC; font-size:0.95rem; color:#475569; margin:0;">
+        <strong>Honest scope.</strong> These are controls <em>aligned to</em> the cited rules &mdash; not a certification, and not legal advice. The software does not by itself make an organization HIPAA- or 21 CFR Part 11&ndash;compliant; compliance is a program you own, with its own policies, vendor agreements, and validation. What v0.2.0 gives you is controls you can verify in public source and a build that resists their decay. Confirm applicability with your own compliance counsel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bridge to consulting -->
+  <section class="sovereign-strip">
+    <div class="container" style="text-align:center;">
+      <p class="eyebrow">Why this matters</p>
+      <h2><span class="accent">This is the pace</span> of a program with an owner.</h2>
+      <p class="lead-light">A release like this &mdash; evidence deepened, liability boundaries drawn on purpose, controls pinned so they can&rsquo;t quietly decay &mdash; is what it looks like when a regulated system has a technologist accountable for it. Email Triage is a working proof of that posture. It&rsquo;s the same rigor I bring as a <strong>fractional CTO</strong> to research programs and regulated teams who need technology leadership they can defend to an auditor, a PI, and a board.</p>
+      <div class="cta-row">
+        <a href="../medical-research/" class="cta-btn on-dark">Fractional CTO for Medical Research &rarr;</a>
+        &nbsp;
+        <a href="../regulated-industries/" class="cta-btn on-dark">Fractional CTO for Regulated Industries &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> &middot;
+        <a href="features.html">Features</a> &middot;
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> &middot;
+        <a href="rigor.html">How It Stays True</a> &middot;
+        <a href="api.html">API</a> &middot;
+        <a href="service.html">Service</a> &middot;
+        <a href="use-cases.html">Use Cases</a> &middot;
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> &middot;
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
+      <p>&copy; <span id="year"></span> Craig LaForest &middot; Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="theme-toggle.js"></script>
+</body>
+</html>
