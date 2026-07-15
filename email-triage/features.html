@@ -43,6 +43,18 @@
     </div>
   </section>
 
+  <!-- Pipeline overview -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">The whole picture</p>
+      <h2 class="section-title">One pass in. Routes, watches, topics, and digests out.</h2>
+      <p>Every message flows through the same real-time path &mdash; ingest, classify, then <strong>routes</strong>, <strong>watch rules</strong>, and <strong>topic matching</strong> all act on that single classification pass (no second scan, no extra egress). Three kinds of <strong>digest</strong> run on their own schedule on top. The sections below walk each stage in detail; this is the map.</p>
+      <div class="mockup-frame">
+        <img src="mockups/pipeline-detailed.svg" alt="Detailed Email Triage pipeline: real-time ingest then classify, feeding routes, watch rules, and topic matching; plus scheduled newsletter, triage-activity, and topic/study digests. Local LLM by default, with an HMAC-chained audit row per action.">
+      </div>
+    </div>
+  </section>
+
   <!-- Classification -->
   <section>
     <div class="container">

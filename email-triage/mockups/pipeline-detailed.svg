@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Detailed Email Triage processing pipeline: real-time per-message ingest, classify, then routes, watch rules, and topic matching; plus scheduled newsletter, triage-activity, and topic/study digests. Local LLM by default; every action writes an HMAC-chained audit row.">
+  <rect width="960" height="700" fill="#EEF2FF"/>
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="700" fill="#0F172A">Email Triage — Detailed Processing Pipeline</text>
+  <text x="480" y="58" text-anchor="middle" font-size="12.5" fill="#64748B">Real-time per-message routing, plus scheduled digests — local by default, every action audited</text>
+
+  <!-- Section 1: real-time -->
+  <text x="40" y="92" font-size="12" font-weight="700" fill="#4F46E5">① REAL-TIME · per message</text>
+
+  <!-- Ingest -->
+  <rect x="60" y="104" width="180" height="82" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="150" y="132" text-anchor="middle" font-size="16" font-weight="700" fill="#4F46E5">Ingest</text>
+  <text x="150" y="152" text-anchor="middle" font-size="11" fill="#64748B">Gmail Pub/Sub</text>
+  <text x="150" y="166" text-anchor="middle" font-size="11" fill="#64748B">MS Graph webhook</text>
+  <text x="150" y="180" text-anchor="middle" font-size="11" fill="#64748B">IMAP IDLE</text>
+
+  <path d="M 240 145 L 298 145" stroke="#06B6D4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Classify -->
+  <rect x="300" y="104" width="180" height="82" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="390" y="132" text-anchor="middle" font-size="16" font-weight="700" fill="#4F46E5">Classify</text>
+  <text x="390" y="152" text-anchor="middle" font-size="11" fill="#64748B">Local LLM (Ollama)</text>
+  <text x="390" y="166" text-anchor="middle" font-size="11" fill="#64748B">rules + Redis cache</text>
+  <text x="390" y="180" text-anchor="middle" font-size="11" fill="#64748B">topic match rides here</text>
+
+  <!-- fan-out from Classify to the three lanes -->
+  <path d="M 390 186 C 300 206, 230 206, 180 218" fill="none" stroke="#06B6D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 390 186 L 475 216" stroke="#06B6D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 390 186 C 560 206, 700 206, 775 218" fill="none" stroke="#06B6D4" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Lane 1: Routes -->
+  <rect x="40" y="222" width="280" height="152" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="180" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Routes</text>
+  <text x="180" y="270" text-anchor="middle" font-size="12" fill="#475569">Per-category action chains</text>
+  <text x="180" y="294" text-anchor="middle" font-size="11" fill="#64748B">move · label · draft reply · RSVP</text>
+  <text x="180" y="312" text-anchor="middle" font-size="11" fill="#64748B">notify / escalate → webhooks</text>
+  <text x="180" y="330" text-anchor="middle" font-size="10.5" fill="#94A3B8">Slack · PagerDuty · Opsgenie · Teams · Discord</text>
+  <text x="180" y="352" text-anchor="middle" font-size="11" fill="#64748B">→ start regulatory clock (candidate)</text>
+
+  <!-- Lane 2: Watch Rules -->
+  <rect x="340" y="222" width="270" height="152" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="475" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Watch Rules</text>
+  <text x="475" y="270" text-anchor="middle" font-size="12" fill="#475569">Match sender / subject / body</text>
+  <text x="475" y="292" text-anchor="middle" font-size="11" fill="#64748B">independent of category</text>
+  <text x="475" y="316" text-anchor="middle" font-size="11" fill="#64748B">escalate · webhook · mute</text>
+
+  <!-- Lane 3: Topic Matching -->
+  <rect x="630" y="222" width="290" height="152" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="775" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Topic Matching</text>
+  <text x="775" y="270" text-anchor="middle" font-size="12" fill="#475569">Rides the classify pass — no new egress</text>
+  <text x="775" y="292" text-anchor="middle" font-size="11" fill="#64748B">keyword / IDF prefilter (no embeddings)</text>
+  <text x="775" y="314" text-anchor="middle" font-size="11" fill="#64748B">→ topic_hit store</text>
+  <text x="775" y="330" text-anchor="middle" font-size="10.5" fill="#94A3B8">durable IDs only — no message content</text>
+
+  <!-- Section 2: scheduled -->
+  <text x="40" y="414" font-size="12" font-weight="700" fill="#4F46E5">② SCHEDULED · periodic (lease-gated, idempotent sender)</text>
+
+  <!-- dashed feed: topic_hit store -> Topic/Study Digest -->
+  <path d="M 775 374 L 775 430" stroke="#4F46E5" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowI)"/>
+  <text x="785" y="404" font-size="10" fill="#4F46E5">topic_hits feed the digest</text>
+
+  <!-- Digest 1: Newsletter -->
+  <rect x="40" y="432" width="280" height="140" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="180" y="458" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Newsletter Digest</text>
+  <text x="180" y="482" text-anchor="middle" font-size="11" fill="#64748B">Batches newsletter-category mail →</text>
+  <text x="180" y="498" text-anchor="middle" font-size="11" fill="#64748B">one scannable HTML digest</text>
+  <text x="180" y="520" text-anchor="middle" font-size="11" fill="#64748B">delivered on your schedule</text>
+
+  <!-- Digest 2: Triage-Activity -->
+  <rect x="340" y="432" width="270" height="140" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="475" y="458" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Triage-Activity Digest</text>
+  <text x="475" y="482" text-anchor="middle" font-size="11" fill="#64748B">Daily record of what triage did</text>
+  <text x="475" y="498" text-anchor="middle" font-size="11" fill="#64748B">counts · drafts to review</text>
+  <text x="475" y="520" text-anchor="middle" font-size="11" fill="#64748B">low-confidence flags</text>
+
+  <!-- Digest 3: Topic/Study -->
+  <rect x="630" y="432" width="290" height="140" rx="8" fill="#fff" stroke="#4F46E5" stroke-width="2"/>
+  <text x="775" y="458" text-anchor="middle" font-size="15" font-weight="700" fill="#4F46E5">Topic / Study Digest</text>
+  <text x="775" y="482" text-anchor="middle" font-size="11" fill="#64748B">From topic_hits, per schedule</text>
+  <text x="775" y="498" text-anchor="middle" font-size="11" fill="#64748B">Full or Differential (new-since-last)</text>
+  <text x="775" y="520" text-anchor="middle" font-size="10.5" fill="#94A3B8">HIPAA: delivers only to your own mailbox</text>
+
+  <!-- Cross-cutting band -->
+  <rect x="40" y="600" width="880" height="66" rx="8" fill="#0F172A"/>
+  <text x="480" y="627" text-anchor="middle" font-size="13" font-weight="700" fill="#06B6D4">SOVEREIGN — local LLM by default · email content never leaves your network</text>
+  <text x="480" y="648" text-anchor="middle" font-size="11" fill="#fff">AUDITED — every action writes an HMAC-SHA256-chained audit row</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#06B6D4"/>
+    </marker>
+    <marker id="arrowI" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4F46E5"/>
+    </marker>
+  </defs>
+</svg>
