@@ -402,12 +402,23 @@
       <p class="mockup-caption">/admin/stats &mdash; operational signals dashboard showing the system is healthy at a glance</p>
 
       <h3 style="margin-top:32px;">Install-Wide Configuration</h3>
-      <p>Tabbed configuration page covers ingestion, classifier model, integrations (Redis cache, webhooks), AI backends, TLS / security, and BAA acknowledgments. Operator-controlled, audit-logged, no config-file editing.</p>
+      <p>A single Settings area with six tabs &mdash; General, Integrations, AI Backends, TLS, Backup, and Security &mdash; with legacy admin URLs 303-redirecting to the matching tab. The <strong>Backup</strong> and <strong>AI Backends</strong> tabs are new in v0.2.0. Operator-controlled, audit-logged, no config-file editing.</p>
 
       <div class="mockup-frame">
         <img src="images/config.png" alt="Install-wide config">
       </div>
       <p class="mockup-caption">/config &mdash; install-wide configuration tabs</p>
+
+      <h3 style="margin-top:32px;">AI Backend Configuration</h3>
+      <p>The classifier model is chosen from a <strong>live model picker</strong>, not a free-text field: the AI Backends tab fetches what is actually installed on your Ollama endpoint and shows each model&rsquo;s capabilities, size, quantization, context length, and whether it is currently resident in VRAM. Embedding-only models are flagged and can&rsquo;t be selected for classification. A free-text &ldquo;enter manually&rdquo; escape hatch remains for non-enumerable backends.</p>
+      <p>An ordered <code>backup_models</code> list provides <strong>capability-aware failover</strong>: if the primary model hits a capability or resource error, the classifier falls over to the next model and writes a tamper-evident <code>model_failover</code> audit row. A per-backend circuit breaker distinguishes &ldquo;the AI server is down&rdquo; from &ldquo;the AI gave a bad answer,&rdquo; so a brief outage isn&rsquo;t misread as a per-email failure.</p>
+
+      <h3 style="margin-top:32px;">Encrypted Backups &amp; Restore</h3>
+      <p>Automated, encrypted database backups on a manual / daily / weekly cadence, configured in the Backup tab. <strong>Off by default</strong> &mdash; the operator must set a key and directory and explicitly enable it. A supervised, lease-gated sweeper produces either a full <code>.etbk</code> bundle (database + config + TLS certs + MSAL cache) or a raw SQLCipher <code>.db</code>, inheriting the boot encryption context so <strong>no plaintext PHI is ever written to <code>/tmp</code></strong>. Public-key mode requires a parseable X25519 PEM, validated fail-closed before the config is saved.</p>
+      <ul>
+        <li><strong>Restore is deliberately CLI-only.</strong> The restore command sniffs the bundle&rsquo;s magic bytes, unwraps an <code>.etbk</code> with <code>--private-key</code>, and <code>--list</code> verifies a bundle&rsquo;s contents without extracting &mdash; a non-destructive check. Restore is never a one-click web action.</li>
+        <li><strong>Restore-key freshness reminder.</strong> The dashboard and the daily health email carry a &ldquo;last restore-key export&rdquo; line, so an operator can see at a glance whether their restore key is current &mdash; a nudge, not a false guarantee.</li>
+      </ul>
 
       <h3 style="margin-top:32px;">Container Image &amp; Lazy Embedding Stack</h3>
       <p>The runtime container image is <strong>~250 MB compressed</strong>, Debian-13-slim with Python 3.12, non-root user, signed with cosign and SLSA-3 provenance. CPU-only PyTorch wheels (the GPU is reserved for the Ollama chat-model host). Fast pulls, fast CI, fits under GitHub Releases' 2 GiB asset cap for air-gap tarballs.</p>
