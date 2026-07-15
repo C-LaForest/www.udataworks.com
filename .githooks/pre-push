@@ -1,0 +1,18 @@
+#!/bin/sh
+# Pre-push gate: run the Email Triage e2e suite; block the push on failure.
+#
+# Activate once per clone:
+#     git config core.hooksPath .githooks
+#
+# Bypass in an emergency (not recommended):
+#     git push --no-verify
+#
+# The suite starts its own static server, so nothing needs to be running.
+set -e
+
+echo "[pre-push] running tests/e2e (console / required-elements / responsive / a11y)..."
+if ! python -m pytest tests/e2e -q; then
+  echo "[pre-push] e2e suite FAILED — push blocked. Fix, or bypass with: git push --no-verify"
+  exit 1
+fi
+echo "[pre-push] e2e suite passed."

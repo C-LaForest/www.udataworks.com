@@ -1,0 +1,4 @@
+# Email Triage subsite e2e suite (Playwright for Python).
+# axe-core is vendored (tests/e2e/vendor/axe.min.js) — no extra dep for a11y.
+pytest>=8
+pytest-playwright>=0.5
