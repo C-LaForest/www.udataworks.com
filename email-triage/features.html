@@ -216,6 +216,17 @@
         <li><strong>Idempotent fire.</strong> Each schedule slot tracks the last-fired timestamp &mdash; no double-fire within the same 60-second window even across a container restart.</li>
         <li><strong>HIPAA-aware.</strong> Newsletter-digest action runs against the LLM (local Ollama by default; cloud only with BAA ack). Triage-activity digest renders only category names + action verbs + counts &mdash; no PHI in the digest body itself.</li>
       </ul>
+
+      <h3 style="margin-top:40px;">Topic / Study Digest &mdash; for the clinical researcher tracking a study</h3>
+      <p>Define a <strong>Topic</strong> &mdash; a study, project, or subject &mdash; with a few Subject keyword chips and the mailboxes it should watch. Email Triage collects every matching message across those mailboxes into one scheduled digest: Full, Differential (new since last), or both. Built for the PI following an IND across a sponsor inbox, an IRB inbox, and a coordinator inbox at once.</p>
+      <ul>
+        <li><strong>Matching rides the classify pass &mdash; no new egress.</strong> Topics are checked as mail is already being triaged, not on a separate scan job. A keyword/IDF pre-filter (no embeddings) narrows to at most a handful of candidate Topics before a single precise check; <strong>no message body is ever sent externally.</strong></li>
+        <li><strong>It stores no message content.</strong> The hit store keeps durable identity (message-ID + your own public matched terms) with an accurate first-seen date &mdash; never the subject or body. The real subject and sender are fetched at display time and immediately discarded, so PHI-bearing content is never persisted.</li>
+        <li><strong>You can&rsquo;t even save a PHI-laden Topic.</strong> A fail-closed scrubber runs the HIPAA-18 identifier catalogue over a Topic&rsquo;s Subjects and Details on save; any hit blocks it before it reaches the database (canonical public NCT trial IDs are allowed).</li>
+        <li><strong>Back-scan the past.</strong> Scan 30 / 60 / 90 days or the whole mailbox to surface matches that predate the Topic, and preview matches live while you edit it.</li>
+        <li><strong>HIPAA-safe delivery.</strong> A Topic aggregating protected mailboxes delivers <strong>only</strong> into one of your own HIPAA-checked mailboxes (internal use, never an outside disclosure) and refuses to send if there is no safe recipient. At send time it re-checks your <em>current</em> access and drops any match from a mailbox you no longer manage &mdash; a stale Topic can&rsquo;t email content you&rsquo;re no longer entitled to see.</li>
+        <li><strong>Reversible confidence floor.</strong> Set, per Topic, how strong a match must be to appear. The floor applies at surface time, so lowering it instantly re-surfaces previously hidden hits.</li>
+      </ul>
     </div>
   </section>
 
