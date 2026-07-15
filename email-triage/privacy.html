@@ -150,15 +150,19 @@
   <section style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">Encryption at Rest</p>
-      <h2 class="section-title">Fernet-encrypted secrets. Master key options operator-chosen.</h2>
-      <p>Provider passwords, OAuth refresh tokens, and other secrets are encrypted with Fernet (AES-128-CBC + HMAC-SHA256) using a master key held outside the SQLite database. Storage options for the master key:</p>
+      <h2 class="section-title">The whole database is encrypted. Secrets are encrypted again inside it.</h2>
+      <p><strong>Layer 1 &mdash; whole-database encryption (SQLCipher).</strong> The entire database file &mdash; emails, classifications, accounts, audit logs, and credentials &mdash; is <strong>AES-256 encrypted on disk</strong> (single-file SQLCipher: AES-256-CBC with HMAC-SHA512 page integrity). Encryption at rest is <strong>on by default for new installs</strong> as of v0.2.0. The storage key is HKDF-SHA256&ndash;derived from your master key, and <strong>every</strong> connection &mdash; live, backup, and migration &mdash; opens through one encryption-aware path, so no code path can quietly write a plaintext copy.</p>
+      <div class="callout">
+        <p><strong>Fail-closed boot.</strong> If encryption is required (HIPAA mode) or requested but the SQLCipher library or master key is missing, the application <strong>refuses to start</strong> rather than silently falling back to plaintext. A HIPAA install that hasn&rsquo;t requested encryption is loudly advised, not silently downgraded &mdash; disk-level LUKS is a documented equivalent.</p>
+      </div>
+      <p><strong>Layer 2 &mdash; secrets encrypted again, inside the encrypted database.</strong> Provider passwords, OAuth refresh tokens, and other secrets are <em>additionally</em> encrypted with Fernet (AES-128-CBC + HMAC-SHA256). One master key powers both layers &mdash; it directly unlocks the Fernet secrets and, via HKDF, derives the SQLCipher storage key &mdash; and it is held <strong>outside</strong> the database. Storage options for that master key:</p>
       <ul>
-        <li><strong>Container secret</strong> (Podman / Docker secret store) — recommended for production</li>
+        <li><strong>Container secret</strong> (Podman / Docker secret store) &mdash; recommended for production</li>
         <li><strong>Keyfile</strong> on the host filesystem (mode 0400, owned by the service user)</li>
         <li><strong>OS keyring</strong> (GNOME Keyring, Windows Credential Manager)</li>
         <li><strong>Environment variable</strong> (development only)</li>
       </ul>
-      <p><strong>Backing up the database without also backing up the master key leaves the secrets unrecoverable</strong> — a safety property for off-site backup storage.</p>
+      <p><strong>Backing up the database without also backing up the master key leaves it unrecoverable</strong> &mdash; a safety property for off-site backup storage.</p>
     </div>
   </section>
 
