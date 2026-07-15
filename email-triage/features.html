@@ -104,7 +104,7 @@
         <tbody>
           <tr><td><code>move</code></td><td>Move to a different folder. Per-category folder mapping.</td></tr>
           <tr><td><code>label</code></td><td>Apply the category as a label / Gmail label.</td></tr>
-          <tr><td><code>notify</code></td><td>Slack, SMS-via-gateway, custom webhook.</td></tr>
+          <tr><td><code>notify</code></td><td>Metadata-only alert (never the email body) fanned out to the outbound webhook system &mdash; Slack, PagerDuty, Opsgenie, Teams, Discord, or a custom signed endpoint.</td></tr>
           <tr><td><code>draft_reply</code></td><td>Generate a contextual draft reply, save to Drafts folder.</td></tr>
           <tr><td><code>suggest_meeting_times</code></td><td>Calendar-aware draft listing free slots. Auto-fires on <code>meeting-request</code>.</td></tr>
           <tr><td><code>accept_invite</code> / <code>decline</code> / <code>tentative</code></td><td>Calendar invite handling with iMIP-threaded replies.</td></tr>
@@ -120,6 +120,25 @@
 
       <h3 style="margin-top:32px;">Watch Rules</h3>
       <p>Independent of category. Match a sender, subject, body pattern → fire <code>escalate</code> / <code>webhook</code> / <code>mute</code>. Useful for "alert me immediately when X arrives" patterns that don't fit a category.</p>
+
+      <h3 style="margin-top:32px;">Alerting &amp; Integrations</h3>
+      <p>The <code>notify</code> action and any watch rule fan an event out through the <strong>outbound event webhook</strong> system. Five receiver types ship with tuned default payloads; a sixth &ldquo;custom&rdquo; option delivers Email Triage&rsquo;s own signed envelope to your own relay or SIEM.</p>
+      <table class="feature-table">
+        <thead><tr><th>Target</th><th>Delivered as</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Slack</strong></td><td>Incoming-webhook message</td></tr>
+          <tr><td><strong>PagerDuty</strong></td><td>Events API v2 trigger</td></tr>
+          <tr><td><strong>Opsgenie</strong></td><td>Alert API alert (GenieKey auth)</td></tr>
+          <tr><td><strong>Microsoft Teams</strong></td><td>Incoming-webhook MessageCard</td></tr>
+          <tr><td><strong>Discord</strong></td><td>Webhook message</td></tr>
+          <tr><td><code>custom</code></td><td><code>{event, timestamp, data}</code> envelope &mdash; verbatim, HMAC-signed</td></tr>
+        </tbody>
+      </table>
+      <p>Each payload is a template you can edit per target (<code>{{data.category}}</code>, <code>{{data.subject}}</code>, <code>{{data.flow_id}}</code>, &hellip;), rendered through one shared code path so the wire shape can&rsquo;t drift between targets.</p>
+
+      <div class="callout">
+        <p><strong>Signed, gated, metadata-only.</strong> Give a target a shared secret and every POST carries an <code>X-Signature-256</code> HMAC-SHA256 over the exact rendered bytes &mdash; and if that secret ever fails to decrypt, the delivery is <strong>dropped, never sent unsigned</strong>. External URLs are <strong>deny-by-default</strong>: the operator explicitly allows each off-host destination, and every send is egress-gated and idempotency-guarded against double-fire. Payloads carry <strong>metadata only</strong> &mdash; never the email body; on a HIPAA-flagged account the operator&rsquo;s template is ignored entirely and the wire collapses to <code>{event, category, timestamp, flow_id}</code>. A webhook failure never breaks triage &mdash; the application log is the durable receipt.</p>
+      </div>
     </div>
   </section>
 
