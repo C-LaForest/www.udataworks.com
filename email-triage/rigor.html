@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>How It Stays True — Compliance Rigor &amp; Engineering Discipline | Email Triage | Craig LaForest</title>
+  <meta name="description" content="How Email Triage stays correct as it changes: count-agnostic structural pins, verify-don't-accept audit discipline, a 3-SME review gate, a §164.316 findings register, and incident-to-pin lineage. The engineering rigor a fractional CTO brings to regulated environments.">
+  <meta property="og:title" content="Email Triage — How It Stays True">
+  <meta property="og:description" content="Structural pins, verify-don't-accept, a 3-SME review gate, a 6-year findings register, and incident-to-pin lineage. Evidence, not adjectives.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand-row">
+        <a href="index.html" class="brand">Email <span>Triage</span></a>
+        <button class="theme-toggle" type="button" onclick="toggleScreenshotTheme()" aria-label="Switch screenshots to light theme" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="features.html">Features</a>
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a>
+        <a href="rigor.html" class="active">How It Stays True</a>
+        <a href="api.html">API</a>
+        <a href="service.html">Service</a>
+        <a href="use-cases.html">Use Cases</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>How It Stays True</h1>
+      <p class="lead">A control you can point to on Tuesday is worthless if a Thursday commit quietly removes it. This page is about the discipline that keeps the compliance claims true <em>as the code changes</em> &mdash; the engineering rigor a fractional CTO brings to a regulated environment.</p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">For the compliance reviewer</p>
+      <h2 class="section-title">Your real question isn&rsquo;t &ldquo;does it have an audit chain?&rdquo;</h2>
+      <p>It&rsquo;s &ldquo;how do I know the audit chain is <em>still</em> there, still keyed, still covering every table, after six months of feature work by people I&rsquo;ll never meet?&rdquo; Screenshots and a feature list can&rsquo;t answer that. Executable, count-agnostic discipline can. Email Triage is a working reference implementation of that discipline &mdash; the same posture I bring when a research program retains me to own its technology.</p>
+      <div class="callout">
+        <p><strong>The through-line: evidence, not adjectives.</strong> Every claim on the Privacy page is backed by a build-time gate, a re-verified finding, a signed review, or a registered incident &mdash; not by a promise. What follows is where those come from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Structural pins -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">1 &middot; Structural pins</p>
+      <h2 class="section-title">A build that fails when a control goes missing.</h2>
+      <p>Every recurring defect class is answered in two moves: collapse the scattered sites onto a <strong>single source of truth</strong>, then add a <strong>structural pin</strong> &mdash; an <code>ast.walk</code> / repo-wide test that enforces the invariant across the <em>whole</em> tree. The pin is deliberately <strong>count-agnostic</strong>: it asserts &ldquo;every match must have property P,&rdquo; not &ldquo;we expect exactly seven sites.&rdquo; So the next hand-rolled eighth site &mdash; the one a human reviewer would skim past &mdash; fails CI the moment it lands, from anywhere in the codebase.</p>
+      <table class="feature-table">
+        <thead><tr><th>Pin guards&hellip;</th><th>Class</th></tr></thead>
+        <tbody>
+          <tr><td>No raw <code>INSERT</code> into a chained audit table outside the one <code>_chain_insert</code> writer &mdash; a stray insert would fork the HMAC chain.</td><td>audit-chain</td></tr>
+          <tr><td>Every PHI&rarr;LLM egress site sits inside a function that references an allowed HIPAA control (or an explicit allow-list).</td><td>hipaa-gate</td></tr>
+          <tr><td>Every outbound HTTP / SMTP / IMAP / DNS client is built through the egress funnel with a declared intent &mdash; raw <code>httpx</code> / <code>smtplib</code> / <code>urllib</code> is banned.</td><td>egress</td></tr>
+          <tr><td>Every credential write routes through the never-clobber-on-blank secret-write SSOT &mdash; browser autofill can&rsquo;t zero a stored token.</td><td>secret-handling</td></tr>
+          <tr><td>Every <code>sqlite3.connect</code> in the source tree goes through the encryption-aware opener &mdash; no path can open the DB unencrypted.</td><td>db-safety</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:18px;">The taxonomy spans <strong>secret-handling, audit-chain, egress, hipaa-gate, db-safety, view-render, ssot-consolidation, route-coverage,</strong> and <strong>meta-pin</strong>. And the pins are themselves censused: a meta-pin fails the build if a pin walks the tree the wrong way. A pin over the pins isn&rsquo;t paranoia &mdash; a control that can silently rot is not a control.</p>
+    </div>
+  </section>
+
+  <!-- Verify don't accept -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">2 &middot; Verify, don&rsquo;t accept</p>
+      <h2 class="section-title">An audit finding is a question, not a verdict.</h2>
+      <p>External audit reports, expert hand-offs, and the project&rsquo;s own automated census output are never filed as defects on their word. Every cited <code>file:line</code> is re-opened at the current <code>HEAD</code> and assigned one of seven canonical labels:</p>
+      <p><strong>VERIFIED &middot; STALE &middot; REFUTED &middot; DOWNGRADED &middot; UPGRADED &middot; PARTIAL &middot; DUPLICATE.</strong></p>
+      <p>The report&rsquo;s claim is the <em>question</em>; the answer is what the code says today. Empirically about half of findings reshape after that check &mdash; a claim that read as critical turns out already-fixed (STALE), or a low note turns out to hide a real gap (UPGRADED). Acting on an unverified finding is how teams &ldquo;fix&rdquo; things that were never broken and miss the ones that were.</p>
+    </div>
+  </section>
+
+  <!-- SME gate + Evidence-or-Block -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">3 &middot; The review gate</p>
+      <h2 class="section-title">No change to a risk surface reaches <code>main</code> unreviewed.</h2>
+      <p>Any change whose diff touches a medical-scope surface &mdash; PHI/HIPAA logic, the audit chain, encryption, auth, egress, LLM prompts, schema/migrations &mdash; is blocked from <code>main</code> unless the commit carries a valid review verdict. The gate is enforced <strong>twice</strong>: once client-side in the commit flow, once server-side in CI, so a bypass has to defeat both. The panel is three independent reviewers, each with a distinct lens:</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>HIPAA SME</h3>
+          <p>Regulatory framing &mdash; the correct §-anchor, OCR-posture severity, and equivalent-measure verdicts under §164.306(d). Owns the §164.316 safeguards register.</p>
+        </div>
+        <div class="card">
+          <h3>Data-path SME</h3>
+          <p>Data integrity, performance, reliability, and test soundness. Owns the verify-don&rsquo;t-accept walks &mdash; re-checking every external claim against the live code.</p>
+        </div>
+        <div class="card">
+          <h3>Devil&rsquo;s advocate</h3>
+          <p>A full-time skeptic that hedge-checks the lead recommendation against the &ldquo;take the easier path&rdquo; bias <em>before</em> it reaches a decision &mdash; on every trade-off.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Evidence-or-block.</strong> The one way to override the gate is not a plaintext note &mdash; a plaintext escape hatch was proven forgeable and closed the same day. An override now requires a signature from the operator&rsquo;s hardware security key, binding the exact finding and file paths, with a <strong>physical touch required</strong> on the key. The trust root is the signature, verified server-side against a pinned signer list &mdash; not anything a rebase or a stealth edit could fake.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Register + incident lineage -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">4 &middot; The paper trail</p>
+      <h2 class="section-title">Every finding lands on a permanent, retained register.</h2>
+      <p>Whether a finding is opened by an outside auditor, an automated census, the review panel, or a live incident, it lands on one register keyed to <strong>§164.316(b)(1)</strong> &mdash; ID, title, §-anchor, severity, status, opened/closed, owner, and a rationale link. Every status transition emits an HMAC-chained audit row, and the register is retained for the full <strong>§164.316(b)(2)(i) six years</strong> in-tree, in git history, and in off-host backup. No closed row is ever silently dropped.</p>
+
+      <h3 style="margin-top:32px;">Incident &rarr; structural pin lineage</h3>
+      <p>The register records <em>what</em> was found. This is the &ldquo;how does that not happen again&rdquo; answer &mdash; each real production failure paired with the count-agnostic pin that now fails the build if the shape ever recurs:</p>
+      <ul>
+        <li><strong>A save button silently wiped OAuth credentials for eight days.</strong> Eleven credential-write sites inferred intent from field presence, so autofill clobbered stored secrets. Now: an interprocedural pin forces every form-derived credential write through a never-clobber SSOT &mdash; blank preserves, only an explicit clear zeroes.</li>
+        <li><strong>A whole feature was dead in production behind 167 green tests.</strong> Three files imported names that only existed as function-local imports elsewhere; every unit test injected a fake at the seam, so the real path had zero coverage. Now: a static walker proves every first-party import resolves to a real module attribute, plus a test that drives the un-injected wiring.</li>
+        <li><strong>An edit to an already-applied migration downed a deploy.</strong> A &ldquo;behavior-neutral&rdquo; refactor changed the source of two shipped migrations; the boot-time checksum verifier refused to start. Now: a frozen normalized checksum of every shipped migration body fails CI if an applied body is edited or a new migration ships unpinned.</li>
+      </ul>
+      <p>Each incident bought a permanent, tree-wide guarantee &mdash; not a note in a wiki that the next hire never reads.</p>
+    </div>
+  </section>
+
+  <!-- Honest scope -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Honest scope</p>
+      <h2 class="section-title">What this is &mdash; and what it isn&rsquo;t.</h2>
+      <p style="padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#fff; font-size:0.95rem; color:#475569;">
+        This is engineering discipline <em>aligned to</em> the cited rules &mdash; not a certification, and not legal advice. It does not by itself make an organization HIPAA- or 21 CFR Part 11&ndash;compliant; compliance is a program an organization owns, with its own policies, vendor agreements, validation, and attestations. What the discipline above <em>does</em> give you is something most vendors&rsquo; compliance decks can&rsquo;t: a way to check the claims yourself, in public source, and a build that refuses to let them quietly decay. Confirm applicability with your own compliance counsel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bridge to consulting -->
+  <section class="sovereign-strip">
+    <div class="container" style="text-align:center;">
+      <p class="eyebrow">Beyond Email</p>
+      <h2><span class="accent">This is how I build.</span> Want it running your stack?</h2>
+      <p class="lead-light">Email Triage is one working proof of a posture &mdash; count-agnostic controls, verify-don&rsquo;t-accept audit hygiene, evidence-bound review gates, sovereign-by-default AI. It&rsquo;s the same rigor I bring as a fractional CTO to research programs and regulated teams who need technology leadership they can defend to an auditor, a PI, and a board. If that&rsquo;s the gap you&rsquo;re staring at, let&rsquo;s talk.</p>
+      <div class="cta-row">
+        <a href="../medical-research/" class="cta-btn on-dark">Fractional CTO for Medical Research →</a>
+        &nbsp;
+        <a href="../regulated-industries/" class="cta-btn on-dark">Fractional CTO for Regulated Industries →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="index.html">Overview</a> ·
+        <a href="features.html">Features</a> ·
+        <a href="privacy.html">Privacy &amp; Sovereign AI</a> ·
+        <a href="rigor.html">How It Stays True</a> ·
+        <a href="api.html">API</a> ·
+        <a href="service.html">Service</a> ·
+        <a href="use-cases.html">Use Cases</a> ·
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="vertical-links">
+        <strong>Fractional CTO Services by Craig LaForest</strong>
+        <a href="../medical-research/">Medical Research</a> ·
+        <a href="../regulated-industries/">Regulated Industries</a>
+      </div>
+      <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
+        Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
+        &middot;
+        Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
+        &middot; Apache 2.0
+      </p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="theme-toggle.js"></script>
+</body>
+</html>
