@@ -222,9 +222,20 @@
           <tr><td><strong>HIPAA §164.312(b)</strong></td><td>Technical Safeguards — Audit Controls. Hash-chained audit log; CLI verifier.</td></tr>
           <tr><td><strong>HIPAA §164.312(e)(1)</strong></td><td>Transmission Security. TLS posture, certificate lifecycle.</td></tr>
           <tr><td><strong>HIPAA §164.502(a)</strong></td><td>Self-Disclosure carve-out. Audit gate avoids spurious "PHI access" rows on owner self-access.</td></tr>
+          <tr><td><strong>HIPAA §164.502(b)</strong></td><td>Minimum-necessary. Delegate-vs-owner gating, metadata-only notifications, and PHI-locked alerting limit exposure by construction.</td></tr>
+          <tr><td><strong>HIPAA §164.528</strong></td><td>Accounting of disclosures. The tamper-evident HMAC access-event chain is built to support the disclosure record.</td></tr>
+          <tr><td><strong>HIPAA §164.402(2)</strong></td><td>Breach safe-harbor. Encryption at rest renders lost or stolen PHI unusable — outside the reportable-breach definition.</td></tr>
           <tr><td><strong>NERC CIP-007-R4</strong></td><td>Logging and Monitoring. Audit-log shape informed by CIP-007.</td></tr>
         </tbody>
       </table>
+
+      <div class="callout" style="margin-top:28px;">
+        <p><strong>What self-hosting wins you.</strong> Because Email Triage runs entirely on <strong>your own infrastructure</strong>, the vendor never receives your PHI &mdash; so running the software needs <strong>no Business Associate Agreement with Unlimited Data Works LLC</strong>. Encryption at rest puts unreadable PHI inside the <strong>§164.402(2) breach safe-harbor</strong>; the HMAC audit chain is built to support a <strong>§164.528 accounting of disclosures</strong>; and delegate-vs-owner gating plus PHI-locked alerting keep access <strong>minimum-necessary</strong> by construction.</p>
+      </div>
+
+      <p style="margin-top:20px; padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#fff; font-size:0.9rem; color:#475569;">
+        <strong>Honest scope.</strong> These are engineering controls <em>aligned to</em> the cited rules &mdash; not a certification, and not legal advice. Email Triage is a technical tool that helps you meet your obligations; it does not by itself make an organization HIPAA- or 21 CFR Part 11&ndash;compliant. Compliance is a program you own: your policies, your BAAs with <em>other</em> vendors, your validation and your attestations. The cryptographic attestations described here prove an image&rsquo;s provenance, not your regulatory posture. Confirm applicability with your own compliance counsel.
+      </p>
     </div>
   </section>
 
