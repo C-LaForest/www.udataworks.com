@@ -70,14 +70,18 @@
   <section style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">API Surface</p>
-      <h2 class="section-title">27+ endpoints under <code>/api/openclaw/*</code></h2>
+      <h2 class="section-title">27+ endpoints under <code>/api/v1/*</code></h2>
       <p>Organized into five families. All return JSON. All bearer-token authenticated.</p>
+
+      <div class="callout" style="margin:24px 0;">
+        <p><strong>Renamed in v0.2.0.</strong> This surface was <code>/api/openclaw/*</code> through v0.1.x. Existing integrations keep working unchanged &mdash; every legacy path issues a <code>308 Permanent Redirect</code> to its <code>/api/v1/*</code> equivalent, preserving the HTTP method and request body.</p>
+      </div>
 
       <table class="feature-table">
         <thead><tr><th>Family</th><th>Endpoint</th><th>Purpose</th></tr></thead>
         <tbody>
-          <tr><td rowspan="2"><strong>Account + Health</strong></td><td><code>GET /api/openclaw/health</code></td><td>Liveness + token-scope verification</td></tr>
-          <tr><td><code>GET /api/openclaw/accounts</code></td><td>List accounts the token is scoped to</td></tr>
+          <tr><td rowspan="2"><strong>Account + Health</strong></td><td><code>GET /api/v1/health</code></td><td>Liveness + token-scope verification</td></tr>
+          <tr><td><code>GET /api/v1/accounts</code></td><td>List accounts the token is scoped to</td></tr>
 
           <tr><td rowspan="6"><strong>Mail Read + Search</strong></td><td><code>GET /accounts/&lt;id&gt;/messages</code></td><td>Paginated mail list with filter</td></tr>
           <tr><td><code>GET /accounts/&lt;id&gt;/messages/&lt;msg_id&gt;</code></td><td>Single message detail</td></tr>
@@ -93,7 +97,7 @@
           <tr><td><code>POST /accounts/&lt;id&gt;/bulk/mail/write</code></td><td>Batch label/move/archive</td></tr>
 
           <tr><td rowspan="2"><strong>Triage</strong></td><td><code>POST /accounts/&lt;id&gt;/triage</code></td><td>Trigger triage with a custom query + limit</td></tr>
-          <tr><td><code>GET /api/openclaw/runs</code></td><td>Historical triage runs</td></tr>
+          <tr><td><code>GET /api/v1/runs</code></td><td>Historical triage runs</td></tr>
 
           <tr><td rowspan="6"><strong>Calendar</strong></td><td><code>GET /accounts/&lt;id&gt;/calendar/events</code></td><td>List events in a date range</td></tr>
           <tr><td><code>GET /accounts/&lt;id&gt;/calendar/events/&lt;id&gt;</code></td><td>Single event detail</td></tr>
@@ -141,9 +145,9 @@
       <p class="mockup-caption">Token management UI &mdash; bearer tokens scoped to a single user's accounts</p>
 
       <div class="mockup-frame" style="max-width:700px;">
-        <img src="images/Openclaw_et_health.png" alt="Sample JSON response from /api/openclaw/health">
+        <img src="images/Openclaw_et_health.png" alt="Sample JSON response from /api/v1/health">
       </div>
-      <p class="mockup-caption">Sample JSON response from <code>/api/openclaw/health</code> &mdash; liveness, DB status, audit health, push watchers, build SHA</p>
+      <p class="mockup-caption">Sample JSON response from <code>/api/v1/health</code> &mdash; liveness, DB status, audit health, push watchers, build SHA</p>
     </div>
   </section>
 
@@ -158,11 +162,11 @@
       </div>
       <div class="card" style="margin-bottom:24px;">
         <h3>Scripted automation (cron + curl)</h3>
-        <p>A daily cron job that calls <code>POST /accounts/&lt;id&gt;/triage</code> with a custom query, then <code>GET /api/openclaw/runs</code> to verify success. Useful for "run a sweep of marketing@ every Monday at 8am and post a summary to Slack."</p>
+        <p>A daily cron job that calls <code>POST /accounts/&lt;id&gt;/triage</code> with a custom query, then <code>GET /api/v1/runs</code> to verify success. Useful for "run a sweep of marketing@ every Monday at 8am and post a summary to Slack."</p>
       </div>
       <div class="card" style="margin-bottom:24px;">
         <h3>BI / analytics pipeline</h3>
-        <p>Pull <code>/api/openclaw/runs</code> into your data warehouse for triage volume + response-time analysis. The endpoint returns JSON; standard data-pipeline tooling (Airflow, dbt, Fivetran) handles the rest.</p>
+        <p>Pull <code>/api/v1/runs</code> into your data warehouse for triage volume + response-time analysis. The endpoint returns JSON; standard data-pipeline tooling (Airflow, dbt, Fivetran) handles the rest.</p>
       </div>
       <div class="card">
         <h3>CRM integration</h3>
