@@ -6,7 +6,7 @@
   <title>Privacy, Sovereign AI &amp; HIPAA — Email Triage Compliance Posture | Craig LaForest</title>
   <meta name="description" content="How Email Triage implements sovereign AI: local-by-default LLM, BAA-gated cloud, hard-locked embedding allowlist. HIPAA mode with PHI-scrubbed logs and tamper-evident audit chain.">
   <meta property="og:title" content="Email Triage — Privacy &amp; Sovereign AI">
-  <meta property="og:description" content="Local LLM by default. Code-enforced BAA gating. SHA-256 audit chain. HIPAA-ready by design.">
+  <meta property="og:description" content="Local LLM by default. Code-enforced BAA gating. HMAC-SHA256 audit chain. HIPAA-ready by design.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -95,7 +95,7 @@
         </div>
         <div class="card">
           <h3>Tamper-Evident Audit Log</h3>
-          <p>Every login, account view, and credential use is recorded in an append-only access log with a SHA-256 hash chain. Any alteration of a past row breaks the chain — detectable in seconds via the <code>email-triage audit verify</code> CLI command.</p>
+          <p>Every login, account view, credential use, and security-relevant event is written into an append-only <strong>HMAC-SHA256 keyed hash chain</strong> — each row cryptographically linked to the one before it. As of v0.2.0 the chain spans <strong>8 audit-event tables plus a per-request PHI-access log</strong>. Because it is <em>keyed</em> (not a plain SHA-256 hash), an attacker can't recompute a valid chain after editing a past row; it survives master-key rotation and <strong>fails closed</strong> — with no key present, a chained write is refused rather than downgraded to a secretless hash. Any alteration is detectable in seconds via the <code>email-triage audit verify</code> CLI or the paginated <code>/compliance</code> review surface.</p>
         </div>
       </div>
 
