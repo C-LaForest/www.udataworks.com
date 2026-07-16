@@ -280,6 +280,47 @@ code { overflow-wrap: anywhere; }
 .badge.warning { background: #FEF3C7; color: #78350F; }
 .badge.info { background: var(--color-accent-bg); color: var(--color-primary); }
 
+/* Release announcement banner (under the nav, homepage only) */
+.release-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: var(--color-cta-hover);
+  color: #fff;
+  text-decoration: none;
+  padding: 11px 20px;
+  font-size: 0.97rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background 0.15s ease;
+}
+.release-banner:hover { background: var(--color-cta); }
+.release-banner:focus-visible { outline: 3px solid var(--color-secondary-bright); outline-offset: -3px; }
+.release-banner .rb-badge {
+  background: var(--color-secondary-bright);
+  color: var(--color-header);
+  border-radius: 999px;
+  padding: 2px 11px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.release-banner .rb-cta {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+@media (max-width: 620px) {
+  .release-banner .rb-text { display: none; }
+}
+
 /* Responsive */
 @media (max-width: 700px) {
   .hero { padding: 48px 0; }
