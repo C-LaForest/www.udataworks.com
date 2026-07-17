@@ -103,7 +103,7 @@
         </div>
         <div class="card">
           <h3>PHI-Aware Caching</h3>
-          <p>The classification cache is disabled by default for HIPAA-flagged accounts. The cost (re-classifying repeats) buys the audit posture (no PHI in a side-cache).</p>
+          <p>On HIPAA-flagged accounts the classification cache stores no free text: the classifier&rsquo;s free-text reason is stripped at write time and the cache key is hashed, so no PHI sits in the side-cache.</p>
         </div>
         <div class="card">
           <h3>Tamper-Evident Audit Log</h3>
@@ -140,7 +140,7 @@
         </div>
         <div class="card">
           <h3>HIPAA Install Gate</h3>
-          <p>HIPAA-flagged installs verify <strong>both</strong> attestations on the same image digest before allowing pull. A poisoned CI run with no operator attestation can't reach a HIPAA host. Verification recipe in the public repo's <code>docs/install.md</code>.</p>
+          <p>For HIPAA installs the operator verifies <strong>both</strong> attestations on the same image digest before pulling. A poisoned CI run with no operator attestation can't satisfy the check, so it can't reach a HIPAA host. Verification recipe in the public repo's <code>docs/</code>.</p>
         </div>
         <div class="card">
           <h3>Air-Gap Verifiable</h3>
@@ -185,7 +185,7 @@
         <div class="card">
           <h3>Transmission Integrity (TLS)</h3>
           <ul>
-            <li>ACME / Let's Encrypt automatic renewal</li>
+            <li>Operator-managed TLS (bring-your-own or existing ACME / Let's Encrypt cert)</li>
             <li>Self-signed for internal-only deployments</li>
             <li>Operator-supplied certificates</li>
             <li>Tailscale-issued certificates for funnel deployments</li>

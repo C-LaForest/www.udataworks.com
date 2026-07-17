@@ -90,7 +90,7 @@
       <h3 style="margin-top:32px;">Classification Hints</h3>
       <p>Two types of fast-path rules bypass the LLM entirely:</p>
       <ul>
-        <li><strong>Mailing-list rules.</strong> Map a <code>List-Id</code> header to a category. Sub-millisecond routing.</li>
+        <li><strong>Mailing-list rules.</strong> Map a <code>List-Id</code> header to a category with a deterministic rule.</li>
         <li><strong>Pattern rules.</strong> Match on sender domain, subject substring, or arbitrary regex.</li>
       </ul>
 
@@ -100,7 +100,7 @@
       <p class="mockup-caption">/rules — mailing-list, sender, and regex rules with 30-day hit counts</p>
 
       <h3 style="margin-top:32px;">Caching</h3>
-      <p>An email the system has effectively seen before doesn&rsquo;t pay for a second AI look &mdash; it reuses the earlier decision, so repeat and near-duplicate mail is fast and cheap. On <strong>HIPAA-flagged accounts this reuse is off by default</strong>: every message is re-classified so the audit trail has no gaps &mdash; the extra cost buys audit posture. <span style="color:#64748B;">(For your IT reviewer: a two-level cache in Redis keyed on sender + normalized subject + a body hash.)</span></p>
+      <p>An email the system has effectively seen before doesn&rsquo;t pay for a second AI look &mdash; it reuses the earlier decision, so repeat and near-duplicate mail is fast and cheap. On <strong>HIPAA-flagged accounts the cache stores no free text</strong>: the same reuse still applies, but the classifier&rsquo;s free-text reason is stripped at write time and the cache key is hashed &mdash; so no PHI sits in the side-cache. <span style="color:#64748B;">(For your IT reviewer: a two-level Redis cache keyed on a hash of sender + normalized subject + body; on HIPAA accounts the free-text reason field is dropped at store time.)</span></p>
     </div>
   </section>
 
@@ -335,7 +335,7 @@
     <div class="container">
       <p class="eyebrow">Section 6</p>
       <h2 class="section-title">Regulatory Deadline Clock</h2>
-      <p>For clinical-research teams, a missed safety-reporting deadline is a finding. Email Triage can watch for the mail that starts one of those clocks &mdash; an FDA IND safety report, an EU CTR SUSAR, an IRB notification &mdash; and track the deadline against a working-day calendar. It is built to <strong>assist a human&rsquo;s judgment, never replace it, and never quietly assume your legal liability.</strong></p>
+      <p>For clinical-research teams, a missed safety-reporting deadline is a finding. Email Triage can watch for the mail that starts one of those clocks &mdash; an FDA IND safety report, an EU CTR SUSAR, an IRB notification &mdash; and track the deadline against a working-day calendar. Detection is opt-in and off by default &mdash; you enable each rule, and a human confirms every clock before it arms. It is built to <strong>assist a human&rsquo;s judgment, never replace it, and never quietly assume your legal liability.</strong></p>
 
       <div class="callout">
         <p><strong>Whose deadline is it? The tool is explicit.</strong> FDA IND (21 CFR 312.32) and EU CTR (Reg. 536/2014 Art. 42) SUSAR deadlines are the <strong>sponsor&rsquo;s</strong> filing obligation, so they ship as <em>informational</em> &mdash; a &ldquo;sponsor deadline noted&rdquo; receipt surfaced for awareness and <strong>never escalated as the site or PI&rsquo;s liability</strong>. The IRB reporting deadline <em>is</em> the site&rsquo;s obligation &mdash; but ICH E6(R3) removed the fixed number, so it ships <strong>UNCONFIGURED</strong>: the app never invents an IRB deadline, and the UI nudges you to enter your institution&rsquo;s own written policy before that clock can arm.</p>
