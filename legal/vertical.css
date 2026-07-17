@@ -1,0 +1,196 @@
+/* Legal — Color overrides (deep leather + oxblood burgundy) */
+:root {
+  --color-header: #3A2A20;
+  --color-primary: #7B2D26;
+  --color-accent-bg: #F3EBE0;
+  --color-heading: #3A2A20;
+  --color-cta: #7B2D26;
+  --color-cta-hover: #3A2A20;
+  --color-sidebar-accent: #7B2D26;
+  --color-hr: #3A2A20;
+  --color-link: #7B2D26;
+  --color-footer: #3A2A20;
+  --color-card-border: #7B2D26;
+  --color-card-bg: #FBF7F1;
+}
+
+/* Service tier styling */
+.service-tier {
+  background: #FBF7F1;
+  border-left: 6px solid #7B2D26;
+}
+.service-tier h3 { color: #3A2A20; }
+.service-tier ul { list-style: none; padding: 0; margin: 0; }
+.service-tier li { margin-bottom: 0.6em; color: #3A2A20; font-size: 1.05em; }
+
+/* Benefit styling */
+.benefit {
+  background: #F3EBE0;
+  border-left: 4px solid #7B2D26;
+  color: #3A2A20;
+}
+
+/* Case / reference-implementation styling */
+.case {
+  background: #FBF7F1;
+  border-left: 4px solid #7B2D26;
+  color: #3A2A20;
+  padding: 18px;
+  margin: 14px 0;
+  border-radius: 4px;
+}
+
+/* Featured Sovereign AI section — full-bleed treatment */
+.sovereign-feature {
+  background: linear-gradient(135deg, #F3EBE0 0%, #FBF7F1 100%);
+  border-top: 4px solid #7B2D26;
+  border-bottom: 4px solid #7B2D26;
+  padding: 40px 0;
+  margin: 40px 0;
+}
+.sovereign-feature .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  color: #7B2D26;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.sovereign-feature h2 {
+  color: #3A2A20;
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+}
+.sovereign-definition {
+  background: #fff;
+  border-left: 6px solid #7B2D26;
+  padding: 18px 22px;
+  margin: 20px 0 28px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(123,45,38,0.08);
+}
+.sovereign-definition strong { color: #7B2D26; }
+.sovereign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.sovereign-grid .card {
+  background: #fff;
+  border-top: 3px solid #7B2D26;
+  padding: 18px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(58,42,32,0.08);
+}
+.sovereign-grid .card h3 {
+  color: #3A2A20;
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+}
+.sovereign-grid .card ul { padding-left: 1.2rem; margin: 0; }
+.sovereign-grid .card li { margin-bottom: 0.5rem; font-size: 0.95rem; color: #3A2A20; }
+.sovereign-grid .card p { margin: 0; font-size: 0.95rem; color: #3A2A20; }
+
+/* Maturity model styling */
+.maturity-stages { counter-reset: stage; margin: 24px 0; }
+.maturity-stage {
+  background: #fff;
+  border-left: 4px solid #7B2D26;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  position: relative;
+  padding-left: 60px;
+}
+.maturity-stage::before {
+  counter-increment: stage;
+  content: counter(stage);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #7B2D26;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.maturity-stage h4 { margin: 0 0 6px 0; color: #3A2A20; }
+.maturity-stage p { margin: 0; color: #3A2A20; font-size: 0.95rem; }
+
+/* Why-it-matters call-out */
+.callout {
+  background: #3A2A20;
+  color: #fff;
+  padding: 22px 26px;
+  border-radius: 6px;
+  margin: 28px 0;
+  font-size: 1.08rem;
+  border-left: 6px solid #7B2D26;
+}
+.callout strong { color: #E0B54A; }
+
+/* Soft disclaimer note (technology strategy, not legal advice) */
+.legal-disclaimer {
+  background: #FBF7F1;
+  border: 1px dashed #7B2D26;
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 0.92rem;
+  color: #4A3626;
+  line-height: 1.55;
+}
+.legal-disclaimer strong { color: #7B2D26; }
+
+/* Architecture layer list */
+.architecture-layers { margin: 20px 0; }
+.architecture-layer {
+  background: #fff;
+  border: 1px solid #7B2D26;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+.architecture-layer h4 { margin: 0 0 6px 0; color: #7B2D26; }
+.architecture-layer p { margin: 0; font-size: 0.95rem; color: #3A2A20; }
+
+/* Ruled-column hero pattern — evokes legal pleading / columns of order */
+.hero {
+  background:
+    linear-gradient(90deg, rgba(123,45,38,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,42,32,0.04) 1px, transparent 1px),
+    var(--color-accent-bg);
+  background-size: 96px 100%, 24px 100%;
+  background-position: 0 0, 0 0;
+}
+
+/* About page — achievements */
+.mission { background: var(--color-accent-bg); border-radius: 6px; padding: 18px 16px; margin: 24px 0; color: var(--color-heading); font-weight: 500; border-left: 4px solid var(--color-primary); }
+.achievements-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; }
+.achievement-card { flex: 1 1 200px; min-width: 180px; background: #FBF7F1; border-radius: 6px; padding: 18px 12px; text-align: center; }
+.achievement-card strong { font-size: 1.5em; color: var(--color-primary); }
+.aiml-capabilities { padding-left: 1.2rem; margin: 0.5rem 0 0 0; }
+.aiml-capabilities li { margin-bottom: 0.5rem; font-size: 1.05rem; }
+.leadership-philosophy ul { padding-left: 1.2rem; margin: 0.5rem 0 0 0; }
+.leadership-philosophy li { margin-bottom: 0.5rem; font-size: 1.05rem; }
+
+/* Footer cross-vertical (practice-area) links */
+.vertical-links {
+  margin: 10px 0 0 0;
+  font-size: 0.95em;
+  color: #EADFD2;
+}
+.vertical-links a { color: #E0B54A; text-decoration: none; }
+.vertical-links a:hover { text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .achievements-grid { flex-direction: column; gap: 12px; }
+  .sovereign-feature h2 { font-size: 1.5rem; }
+}

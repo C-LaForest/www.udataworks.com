@@ -89,6 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
       setIndustryPreference('regulated-industries');
       redirectToIndustry('regulated-industries');
     });
+    document.getElementById('select-legal').addEventListener('click', function() {
+      setIndustryPreference('legal');
+      redirectToIndustry('legal');
+    });
     return;
   }
 
@@ -100,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // If user has a current preference, redirect to it
-  if (industry === 'medical-research' || industry === 'regulated-industries') {
+  if (industry === 'medical-research' || industry === 'regulated-industries' || industry === 'legal') {
     redirectToIndustry(industry);
     return;
   }

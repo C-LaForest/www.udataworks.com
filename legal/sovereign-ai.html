@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <title>Sovereign AI for Law Firms &amp; Legal Departments — Privilege, Confidentiality, and Four-Walls Architecture | Craig LaForest</title>
+  <meta name="description" content="Sovereign AI for legal: definition, the professional-responsibility and discovery landscape (ABA Model Rule 1.6, Rule 1.1 cmt. 8, ABA Formal Opinion 512, work-product doctrine), four-walls reference architecture, maturity model, and engagement options.">
+  <meta property="og:title" content="Sovereign AI for Law Firms &amp; Legal Departments | Craig LaForest">
+  <meta property="og:description" content="Adopt AI without sending privileged communications or work product to a third party. Strategy, architecture, and implementation guidance for firms and legal departments.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="vertical.css">
+  <script src="../industry-selection.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sovereign-ai.html" class="active">Sovereign AI</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <div class="container">
+    <section class="hero">
+      <h1>Sovereign AI for Law Firms and Legal Departments</h1>
+      <p>Adopt AI without sending privileged communications or attorney work product outside the firm.</p>
+      <a href="contact.html" class="cta-btn">Start a Conversation</a>
+    </section>
+
+    <section class="results" style="padding:32px 0;">
+      <div class="container">
+        <div style="background:linear-gradient(135deg,#3A2A20,#7B2D26); color:#fff; padding:32px 36px; border-radius:12px; box-shadow:0 8px 24px rgba(58,42,32,0.22); display:flex; gap:32px; align-items:center; flex-wrap:wrap;">
+          <div style="flex:1; min-width:280px;">
+            <div style="text-transform:uppercase; letter-spacing:0.12em; font-size:0.8rem; color:#E0B54A; font-weight:700; margin-bottom:10px;">Sovereign AI in Production</div>
+            <h3 style="color:#fff; margin:0 0 12px 0; font-size:1.35rem; line-height:1.3;">See it shipping: Privileged-Inbox Triage</h3>
+            <p style="color:rgba(255,255,255,0.92); margin:0; line-height:1.55;">I've built a privacy-first email automation system that uses sovereign AI as a core architectural principle &mdash; local-by-default LLM, a hard-locked local-only embedding allowlist, and a full in-house audit trail. It is the working pattern for letting AI classify, route, and draft on a sensitive inbox without a vendor ever holding the messages.</p>
+          </div>
+          <div style="flex:0 0 auto;">
+            <a href="../email-triage/" class="cta-btn" style="background:#E0B54A; color:#3A2A20; font-weight:700; padding:14px 24px; border-radius:8px; white-space:nowrap;">See Email Triage &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">What is Sovereign AI?</h2>
+        <p>Sovereign AI is the deliberate practice of deploying artificial intelligence so that your firm retains control over three things: the <strong>data</strong> that flows in and out of the models (privileged communications, work product, matter files), the <strong>models</strong> themselves (including weights and lifecycle), and the <strong>audit trail</strong> of every prompt and response. Sovereign AI keeps these inside the firm's four walls rather than handing them to a third-party SaaS provider.</p>
+        <p>For a legal practice, sovereign AI is the AI-adoption pattern that aligns with how confidentiality, privilege, and discovery actually work. Every other path asks you to send privileged material to an outside party and then reason about whether that was safe. Sovereign AI removes the question by removing the outside party.</p>
+        <p>Sovereign AI is also a posture toward clients: their confidences stay in the firm they hired, processed by systems the firm controls, on a record the firm holds.</p>
+
+        <div class="legal-disclaimer">
+          <strong>Read this as strategy, not a legal opinion.</strong> The doctrines below &mdash; privilege, waiver, work product, professional responsibility &mdash; are summarized to explain <em>why</em> firms care about where AI data goes. They are evolving and fact-specific, and nothing here is legal advice about your matters. What sovereign AI delivers is concrete and technical: privileged material stays in-house, so there is no vendor to subpoena and no outside disclosure to argue waiver from.
+        </div>
+
+        <h3>What Sovereign AI is NOT</h3>
+        <ul>
+          <li><strong>Not "anti-AI."</strong> It is responsible AI adoption &mdash; the way a firm gets AI leverage at all without a new external holder of client confidences.</li>
+          <li><strong>Not "no cloud."</strong> A firm-controlled private-cloud tenancy, BYO-cloud, and hybrid patterns can all be sovereign. The question is who controls the data, models, and audit trail &mdash; not where the racks are.</li>
+          <li><strong>Not "build a model from scratch."</strong> Open-weight foundation models, run in-house, are the dominant pattern. You do not train from zero to be sovereign.</li>
+          <li><strong>Not just "private deployment."</strong> True sovereignty adds governance, audit, and lifecycle control. A black-box model you cannot inspect or log is not sovereign, even if it runs on your hardware.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">Why Now — The Professional-Responsibility &amp; Discovery Landscape</h2>
+        <p>The obligations are not new; the tools that strain them are. The moment AI touches privileged material, several long-standing doctrines come into play at once.</p>
+
+        <ul>
+          <li><strong>Duty of confidentiality (ABA Model Rule 1.6)</strong> — Covers all information relating to the representation, not just privileged material, and requires reasonable efforts to prevent unauthorized disclosure. Sending that information to a third-party AI vendor is exactly the disclosure the rule asks you to guard against.</li>
+          <li><strong>Duty of technology competence (Rule 1.1, cmt. 8)</strong> — Lawyers are expected to understand the benefits and risks of relevant technology. "I didn't know the tool kept a copy" is not a comfortable position.</li>
+          <li><strong>ABA Formal Opinion 512 (2024)</strong> — Addresses generative AI directly: confidentiality, informed consent, competence, and supervision when using these tools. State bars are issuing their own guidance in parallel.</li>
+          <li><strong>Attorney-client privilege and waiver</strong> — Privilege can be waived by voluntary disclosure to an outside party. Whether disclosure to an AI vendor is such a waiver is unsettled and fact-specific &mdash; which is exactly why removing the disclosure is the clean answer.</li>
+          <li><strong>Work-product doctrine (Hickman v. Taylor; Fed. R. Civ. P. 26(b)(3))</strong> — More durable than privilege against third-party disclosure, but not unconditional, and its contours in the AI-vendor context are untested.</li>
+          <li><strong>Discovery and third-party subpoenas</strong> — A vendor that holds your data is a party that can be served. Its logs, retention, and sub-processors are outside your control and inside a subpoena's reach.</li>
+          <li><strong>Federal Rule of Evidence 502</strong> — Governs the scope and inadvertence of privilege waiver in federal proceedings; a useful backstop, not a substitute for keeping the material in-house.</li>
+          <li><strong>Outside-counsel guidelines &amp; client DPAs</strong> — Corporate clients increasingly dictate where their matter data may be processed and prohibit third-party AI on it. Sovereign AI is how you comply and still use AI.</li>
+        </ul>
+
+        <p><strong>Implication:</strong> If your firm is running privileged material through consumer or SaaS AI today, you are relying on a favorable resolution of several unsettled questions at once. Sovereign AI makes those questions moot for the material that matters.</p>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">The Four Risks of Non-Sovereign AI in a Legal Practice</h2>
+        <div class="sovereign-grid">
+          <div class="card">
+            <h3>1. Privilege &amp; Waiver</h3>
+            <p>Privilege can be waived by voluntary disclosure to an outside party. Sending privileged text to a third-party AI is precisely that disclosure. The law here is unsettled &mdash; so the defensible move is to not create the disclosure at all. Sovereign AI keeps the material in-house and removes the waiver surface.</p>
+          </div>
+          <div class="card">
+            <h3>2. Discovery &amp; Subpoena Exposure</h3>
+            <p>A vendor that receives your data becomes a holder of discoverable material and a target for a third-party subpoena. Its retention, logging, and sub-processors are outside your control. If nothing leaves your walls, there is no vendor for opposing counsel to serve.</p>
+          </div>
+          <div class="card">
+            <h3>3. Confidentiality &amp; Ethics</h3>
+            <p>Model Rule 1.6 covers far more than privileged material, and Rule 1.1's competence duty now reaches the tools themselves. A structural, in-house safeguard is far easier to defend as "reasonable efforts" than a policy nobody can enforce.</p>
+          </div>
+          <div class="card">
+            <h3>4. Client Trust &amp; Outside-Counsel Guidelines</h3>
+            <p>Clients increasingly restrict where their matter data may go and audit for it. "Which vendors saw our matter?" should have a one-word answer. Sovereign AI turns a compliance headache into a business-development advantage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">A Four-Walls Reference Architecture</h2>
+        <p>Sovereign AI for legal is not a single product. It is a layered architecture that integrates with the document, matter, identity, and security systems your firm already runs. The layered model:</p>
+
+        <div class="architecture-layers">
+          <div class="architecture-layer">
+            <h4>Compute Layer</h4>
+            <p>On-premises servers or GPUs, a firm-controlled private-cloud tenancy, or hybrid. The control point is contractual and jurisdictional, not just physical &mdash; the firm, not a vendor, decides what runs and what is retained.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Model Layer</h4>
+            <p>Open-weight foundation models (Llama, Mistral, Gemma, Qwen) run in-house, optionally fine-tuned on firm precedent. No prompts shipped to an external endpoint; no model swapped out from under you.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Inference Layer</h4>
+            <p>vLLM, TGI, llama.cpp, or similar, hosted inside the firm. Optimized for the drafting, review, and retrieval workloads a practice actually runs.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Orchestration &amp; Retrieval Layer</h4>
+            <p>Retrieval-augmented generation over the firm's own documents and precedent &mdash; DMS, matter files, knowledge base &mdash; without exporting any of it. Prompt logging and routing built in.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Governance Layer</h4>
+            <p>Model registry, evaluation, prompt/response logging, and version lineage. The control plane that lets you show what the AI did, on which matter, with which model &mdash; from a record the firm holds.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Identity &amp; Ethical-Wall Layer</h4>
+            <p>Integrated with existing IAM, SSO, and RBAC. AI respects conflicts screens and matter-level access &mdash; the same boundaries as the rest of the firm, not a parallel access regime.</p>
+          </div>
+          <div class="architecture-layer">
+            <h4>Observability Layer</h4>
+            <p>Usage logs, performance monitoring, and anomaly alerting that feed the firm's existing security and records tooling &mdash; so oversight is continuous, not annual.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">The Sovereign AI Maturity Model</h2>
+        <p>Most firms are at stage 1 or 2 today. The move from stage 2 to stage 3 is the highest-risk window: a policy exists, but nothing in the architecture enforces it.</p>
+
+        <div class="maturity-stages">
+          <div class="maturity-stage">
+            <h4>Unmanaged</h4>
+            <p>Shadow AI everywhere. No policy, no inventory, no governance. Client facts and draft work product are moving through consumer chatbots. Most firms underestimate how much.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Policy</h4>
+            <p>A written AI acceptable-use policy and an approved-tools list. Attorneys know the rules but route around them under deadline. Policy without architecture is hope.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Controlled</h4>
+            <p>DLP integrated, sanctioned tools deployed with logging, unsanctioned ones blocked or monitored, an AI inventory maintained. Risk is reduced &mdash; but privileged workloads still lean on third-party AI.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Sovereign</h4>
+            <p>In-house or firm-controlled AI deployed for privileged and confidential workloads. Open-weight models, governance operational, audit trail held by the firm, ethical-wall-aware access. Hybrid routing by sensitivity.</p>
+          </div>
+          <div class="maturity-stage">
+            <h4>Optimized</h4>
+            <p>AI woven into drafting, review, and knowledge retrieval with mature oversight and continuous evaluation. AI becomes a defensible firm capability and a client-facing differentiator.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results">
+      <div class="container">
+        <h2 class="section-title">Engagement Models — How I Help</h2>
+        <div class="sovereign-grid">
+          <div class="card">
+            <h3>Sovereign AI Strategy Assessment</h3>
+            <p><strong>2&ndash;4 weeks.</strong> Inventory of where AI touches privileged material, exposure mapping, build-vs-buy-vs-host recommendation, and a briefing for partners, GC, or the risk committee. Right starting point at maturity stages 1&ndash;2.</p>
+          </div>
+          <div class="card">
+            <h3>Reference Architecture Design</h3>
+            <p><strong>4&ndash;8 weeks.</strong> A four-walls architecture tailored to your document, matter, and identity systems. Vendor-neutral, with clear build-buy-host decisions per layer.</p>
+          </div>
+          <div class="card">
+            <h3>Sovereign AI Pilot Implementation</h3>
+            <p><strong>8&ndash;16 weeks.</strong> Stand up a working in-house capability for one or two priority workloads &mdash; a privileged-inbox triage or a precedent-retrieval assistant &mdash; with governance and audit trail included.</p>
+          </div>
+          <div class="card">
+            <h3>Ongoing Sovereign AI Advisory</h3>
+            <p><strong>Fractional CTO retainer.</strong> Continuous strategy, architecture, and operational leadership as the firm's AI program matures and scales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="results">
+      <div class="container">
+        <h2 class="section-title">Sovereign AI Deep FAQ</h2>
+
+        <h5>Is sovereign AI just on-premises AI?</h5>
+        <p>No. Sovereign AI is about control over data, models, and audit trails &mdash; not solely about where the servers sit. A firm-controlled private-cloud tenancy, BYO-cloud, and hybrid patterns can all be sovereign. The test is contractual, jurisdictional, and architectural: does the firm control what runs, what is retained, and who can see it?</p>
+
+        <h5>Does sending privileged material to an AI vendor waive privilege?</h5>
+        <p>It is unsettled and fact-specific, and I will not tell you it definitely does &mdash; that is your analysis to run. The point is narrower: a waiver argument is built on voluntary disclosure to an outside party, and a third-party AI vendor is such a party. Sovereign AI removes the disclosure, so the argument has nothing to attach to. Think of it as reducing the surface for a waiver argument, not as a legal guarantee.</p>
+
+        <h5>Can we use a big cloud provider and still be sovereign?</h5>
+        <p>Sometimes, with the right patterns: a firm-controlled tenancy, customer-managed keys, private endpoints, no-training and no-retention contract terms, and in-tenancy inference. The work is matching the pattern to your obligations and your clients' outside-counsel guidelines. For the most sensitive workloads, in-house hosting is the simplest thing to defend.</p>
+
+        <h5>Do open-weight models perform well enough for legal work?</h5>
+        <p>For the tasks firms actually run &mdash; classification, extraction, summarization, retrieval-based Q&amp;A over your own documents, structured drafting &mdash; open-weight models are strongly competitive, and the gap closes monthly. Fine-tuning on your precedent often beats a generic frontier model on your specific work. Output still gets reviewed by a lawyer; the model is a drafting and triage aid, not a decision-maker.</p>
+
+        <h5>What does a sovereign AI deployment cost?</h5>
+        <p>Highly variable. A focused in-house workload can start modestly on a single well-specified server; a firm-wide program scales from there. Total cost of ownership is often comparable to or lower than per-seat enterprise SaaS AI at scale &mdash; with full control and no per-token billing surprises. I give you a build-vs-buy-vs-host picture with real numbers before you commit.</p>
+
+        <h5>How long does it take to stand up?</h5>
+        <p>A useful pilot in 8&ndash;16 weeks for a focused workload. A broader program with governance across practice groups in 6&ndash;12 months. The pace is set by change management and review cycles, not by the technology.</p>
+
+        <h5>Can our existing IT run this, or do we need an AI team?</h5>
+        <p>Existing IT can operate it with the right tooling and, sometimes, one or two targeted hires. Most of the work is closer to security and records engineering than to data science &mdash; which is exactly the discipline a confidentiality-driven firm already values.</p>
+
+        <h5>Is any of this legal advice?</h5>
+        <p>No. I deliver technology strategy, architecture, and implementation. The privilege, ethics, and discovery judgments about your matters stay with you and your counsel &mdash; I build the systems that keep the underlying material inside the firm so those judgments are easier to make.</p>
+      </div>
+    </section>
+
+    <section id="cta" class="results">
+      <div class="container">
+        <h2 class="section-title">Ready to talk about sovereign AI?</h2>
+        <p>If your firm is wrestling with how to adopt AI without sending privileged material outside your walls, a 30-minute call helps identify your top exposure points, your current maturity stage, and the highest-leverage next step.</p>
+        <a href="contact.html" class="cta-btn">Start a Conversation</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="sovereign-ai.html">Sovereign AI</a> |
+      <a href="services.html">Services</a> |
+      <a href="about.html">About</a> |
+      <a href="contact.html">Contact</a> |
+      <a href="../index.html" onclick="clearIndustryPreferenceAndShowMenu(); return false;">Change Industry</a>
+    </nav>
+    <p class="vertical-links">Practice areas:
+      <a href="../medical-research/">Medical Research</a> &middot;
+      <a href="../regulated-industries/">Regulated Industries</a> &middot;
+      <a href="index.html">Legal</a>
+    </p>
+    <p>&copy; <span id="year"></span> Craig LaForest | Fractional CTO for Law Firms &amp; Legal Departments | Unlimited Data Works LLC</p>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

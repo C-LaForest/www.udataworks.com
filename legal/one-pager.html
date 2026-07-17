@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craig LaForest — Fractional CTO for Law Firms &amp; Legal Departments | Sovereign AI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; color: #222; background: #fff; }
+  .page { max-width: 8.5in; margin: 0 auto; padding: 0.45in 0.55in 0.4in 0.55in; }
+
+  .header {
+    display: flex; align-items: center; gap: 20px;
+    background: #3A2A20; color: #fff; padding: 16px 22px;
+    border-radius: 6px; margin-bottom: 14px;
+  }
+  .header img {
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 3px solid #F3EBE0; object-fit: cover; flex-shrink: 0;
+  }
+  .header-text h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.3px; margin-bottom: 2px; }
+  .header-text .title-role { font-size: 14px; font-weight: 600; margin-bottom: 3px; color: #E0B54A; }
+  .header-text .tagline { font-size: 11.5px; font-weight: 400; opacity: 0.92; line-height: 1.35; }
+
+  .contact-strip {
+    display: flex; justify-content: center; gap: 28px;
+    font-size: 10px; color: #555;
+    padding: 6px 0 10px 0;
+    border-bottom: 2px solid #F3EBE0; margin-bottom: 12px;
+  }
+  .contact-strip a { color: #7B2D26; text-decoration: none; }
+
+  .section-title {
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: #3A2A20;
+    border-bottom: 2px solid #7B2D26;
+    padding-bottom: 3px; margin-bottom: 7px; margin-top: 11px;
+  }
+  .summary { font-size: 11px; line-height: 1.5; color: #333; margin-bottom: 2px; }
+
+  /* Sovereign AI eyebrow */
+  .sovereign-eyebrow {
+    background: linear-gradient(90deg, #F3EBE0 0%, #FBF7F1 100%);
+    border-left: 4px solid #7B2D26;
+    padding: 8px 12px; margin: 8px 0 4px 0;
+    font-size: 10.5px; line-height: 1.5; color: #3A2A20;
+  }
+  .sovereign-eyebrow strong { color: #7B2D26; }
+
+  .two-col { display: flex; gap: 22px; }
+  .col-left { flex: 1.1; }
+  .col-right { flex: 0.9; }
+
+  .expertise-group { margin-bottom: 8px; }
+  .expertise-group h4 { font-size: 10.5px; font-weight: 700; color: #7B2D26; margin-bottom: 3px; }
+  .expertise-group p { font-size: 10px; line-height: 1.45; color: #444; }
+  .expertise-group.headline { background: #F3EBE0; padding: 8px 10px; border-left: 3px solid #7B2D26; border-radius: 3px; }
+  .expertise-group.headline h4 { color: #3A2A20; font-weight: 700; }
+  .expertise-group.headline p { color: #3A2A20; }
+
+  .achievements { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 4px; }
+  .achievement-badge {
+    background: #F3EBE0; border-left: 3px solid #7B2D26;
+    padding: 5px 8px; font-size: 10px; font-weight: 600;
+    color: #3A2A20; border-radius: 2px; text-align: center;
+  }
+  .achievement-badge.wide { grid-column: 1 / -1; }
+
+  .services-list { display: flex; gap: 8px; margin-top: 4px; }
+  .service-card {
+    flex: 1; background: #FBF7F1; border: 1px solid #E0B54A;
+    border-radius: 4px; padding: 7px 9px; text-align: center;
+  }
+  .service-card h4 { font-size: 10px; font-weight: 700; color: #7B2D26; margin-bottom: 2px; }
+  .service-card p { font-size: 9px; color: #555; line-height: 1.4; }
+
+  .audience { font-size: 10.5px; line-height: 1.5; color: #333; margin-top: 4px; }
+  .audience strong { color: #7B2D26; }
+
+  .disclaimer {
+    font-size: 8.5px; line-height: 1.4; color: #777;
+    margin-top: 8px; font-style: italic;
+  }
+
+  .cta-bar {
+    margin-top: 14px; background: #3A2A20; color: #fff; text-align: center;
+    padding: 10px 16px; border-radius: 6px; font-size: 11px; line-height: 1.5;
+  }
+  .cta-bar a { color: #E0B54A; font-weight: 600; }
+
+  @media print {
+    html, body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 0.35in 0.45in 0.3in 0.45in; max-width: none; }
+    @page { size: letter; margin: 0; }
+  }
+  @media screen and (max-width: 700px) {
+    .page { padding: 16px; }
+    .two-col { flex-direction: column; gap: 8px; }
+    .services-list { flex-direction: column; }
+    .achievements { grid-template-columns: 1fr; }
+    .contact-strip { flex-wrap: wrap; gap: 10px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <img src="../images/1731310780472.jpg" alt="Craig LaForest">
+    <div class="header-text">
+      <h1>Craig LaForest</h1>
+      <div class="title-role">Fractional CTO for Law Firms &amp; Legal Departments | Sovereign AI</div>
+      <div class="tagline">Keeping privileged communications and work product inside the firm's four walls</div>
+    </div>
+  </div>
+
+  <div class="contact-strip">
+    <span>Saline, MI</span>
+    <span><a href="https://linkedin.com/in/craiglaforest">linkedin.com/in/craiglaforest</a></span>
+    <span><a href="https://calendly.com/claforest">calendly.com/claforest</a></span>
+    <span><a href="https://www.udataworks.com/legal/">udataworks.com</a></span>
+  </div>
+
+  <div class="sovereign-eyebrow">
+    <strong>Sovereign AI is the headline differentiator.</strong> I help firms adopt AI on infrastructure they control &mdash; keeping privileged communications, work product, and matter data inside the firm rather than handing them to a third-party AI vendor. Nothing leaves your walls, so there is nothing for an opposing party to subpoena from a vendor and no outside disclosure to argue waiver from.
+  </div>
+
+  <div class="summary">
+    With 25+ years leading technology in mission-critical, confidentiality-driven environments, I help managing partners, general counsel, and legal-ops leaders bring AI capability into the firm without creating a new external holder of client confidences. My approach is vendor-neutral, confidentiality-first, and grounded in operational reality.
+  </div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="section-title">Key Expertise</div>
+
+      <div class="expertise-group headline">
+        <h4>Sovereign AI Strategy &amp; Implementation</h4>
+        <p>On-premises and firm-controlled private-cloud AI, open-weight model deployment, and AI governance kept inside the firm &mdash; so privileged material never transits a vendor's systems.</p>
+      </div>
+      <div class="expertise-group">
+        <h4>Confidentiality-Aligned Governance</h4>
+        <p>Acceptable-use made enforceable by architecture, prompt/response logging, model lineage, and a defensible audit trail the firm holds.</p>
+      </div>
+      <div class="expertise-group">
+        <h4>Privileged-Inbox &amp; Intake Triage</h4>
+        <p>Working reference implementation: classify, route, and draft on a sensitive inbox entirely in-house &mdash; email never leaves the network.</p>
+      </div>
+      <div class="expertise-group">
+        <h4>Secure Infrastructure &amp; Legal Systems Integration</h4>
+        <p>Ethical-wall-aware access, zero-trust design, and AI over your document and matter systems without exporting the data.</p>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div class="section-title">Proven Results</div>
+      <div class="achievements">
+        <div class="achievement-badge">99.99%+<br>System Uptime</div>
+        <div class="achievement-badge">100%<br>Audit Pass Rate</div>
+        <div class="achievement-badge">95%<br>Downtime Reduction</div>
+        <div class="achievement-badge">In-House<br>AI Reference Impl.</div>
+      </div>
+
+      <div class="section-title">Who I Work With</div>
+      <div class="audience">
+        <strong>Managing partners, GCs, and legal-ops leaders</strong> at solo/boutique firms, litigation groups, and corporate legal departments adopting AI where confidentiality and privilege make the obvious tools risky &mdash; who need experienced technology leadership without a full-time executive hire.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Engagement Models</div>
+  <div class="services-list">
+    <div class="service-card">
+      <h4>Fractional CTO</h4>
+      <p>Ongoing strategic technology leadership integrated with your firm</p>
+    </div>
+    <div class="service-card">
+      <h4>Strategy Sessions</h4>
+      <p>Focused advisory on sovereign AI, confidentiality, or architecture</p>
+    </div>
+    <div class="service-card">
+      <h4>Project Engagements</h4>
+      <p>Hands-on delivery for sovereign AI pilots and privileged-inbox triage</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    This is technology strategy, not legal advice. Whether a given use of a third-party AI tool waives privilege or triggers a discovery obligation is fact-specific and unsettled &mdash; your privilege analysis is yours to run. Sovereign AI is the narrower, concrete step: it removes the third-party holder a subpoena would target and the outside disclosure a waiver argument is built on.
+  </div>
+
+  <div class="cta-bar">
+    Ready to talk about sovereign AI, confidentiality, or legal technology leadership? &nbsp;
+    <a href="https://calendly.com/claforest">Schedule a conversation</a>
+    &nbsp;|&nbsp;
+    <a href="https://linkedin.com/in/craiglaforest">Connect on LinkedIn</a>
+  </div>
+
+</div>
+</body>
+</html>
