@@ -1,0 +1,8 @@
+# Audit / research scratch — never commit
+WEBSITE-AUDIT-2026-07-16.md
+tasks/
+*.output
+
+# Local tooling
+.claude/
+.playwright-mcp/
