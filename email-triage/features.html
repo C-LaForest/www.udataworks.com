@@ -100,7 +100,7 @@
       <p class="mockup-caption">/rules — mailing-list, sender, and regex rules with 30-day hit counts</p>
 
       <h3 style="margin-top:32px;">Caching</h3>
-      <p>Two-level Redis cache keyed by <code>(sender, normalized_subject, body_hash)</code>. Repeat emails skip the LLM call. <strong>Cache is disabled by default for HIPAA-flagged accounts</strong> — re-classification cost buys audit posture.</p>
+      <p>An email the system has effectively seen before doesn&rsquo;t pay for a second AI look &mdash; it reuses the earlier decision, so repeat and near-duplicate mail is fast and cheap. On <strong>HIPAA-flagged accounts this reuse is off by default</strong>: every message is re-classified so the audit trail has no gaps &mdash; the extra cost buys audit posture. <span style="color:#64748B;">(For your IT reviewer: a two-level cache in Redis keyed on sender + normalized subject + a body hash.)</span></p>
     </div>
   </section>
 
@@ -213,7 +213,7 @@
       </ul>
 
       <div class="callout">
-        <p><strong>The system never feels like it's acting on your behalf without your knowledge.</strong> Every classification, every action, every draft is in the digest. For HIPAA-regulated environments this doubles as a lightweight audit surface &mdash; the compliance officer reviews the operator's last 5 daily digests instead of querying the access log.</p>
+        <p><strong>The system never feels like it's acting on your behalf without your knowledge.</strong> Every classification, every action, every draft is in the digest. For HIPAA-regulated environments this doubles as a convenient at-a-glance surface &mdash; the compliance officer can skim the operator's last few daily digests as a convenience over, not a replacement for, the audit log itself.</p>
       </div>
 
       <h4 style="margin-top:28px;">Compliance posture, locked in code</h4>
@@ -237,7 +237,7 @@
         <li><strong>It stores no message content.</strong> The hit store keeps durable identity (message-ID + your own public matched terms) with an accurate first-seen date &mdash; never the subject or body. The real subject and sender are fetched at display time and immediately discarded, so PHI-bearing content is never persisted.</li>
         <li><strong>You can&rsquo;t even save a PHI-laden Topic.</strong> A fail-closed scrubber runs the HIPAA-18 identifier catalogue over a Topic&rsquo;s Subjects and Details on save; any hit blocks it before it reaches the database (canonical public NCT trial IDs are allowed).</li>
         <li><strong>Back-scan the past.</strong> Scan 30 / 60 / 90 days or the whole mailbox to surface matches that predate the Topic, and preview matches live while you edit it.</li>
-        <li><strong>HIPAA-safe delivery.</strong> A Topic aggregating protected mailboxes delivers <strong>only</strong> into one of your own HIPAA-checked mailboxes (internal use, never an outside disclosure) and refuses to send if there is no safe recipient. At send time it re-checks your <em>current</em> access and drops any match from a mailbox you no longer manage &mdash; a stale Topic can&rsquo;t email content you&rsquo;re no longer entitled to see.</li>
+        <li><strong>HIPAA-class delivery.</strong> A Topic aggregating protected mailboxes delivers <strong>only</strong> into one of your own HIPAA-checked mailboxes (internal use, never an outside disclosure) and refuses to send if there is no safe recipient. At send time it re-checks your <em>current</em> access and drops any match from a mailbox you no longer manage &mdash; a stale Topic can&rsquo;t email content you&rsquo;re no longer entitled to see.</li>
         <li><strong>Reversible confidence floor.</strong> Set, per Topic, how strong a match must be to appear. The floor applies at surface time, so lowering it instantly re-surfaces previously hidden hits.</li>
       </ul>
     </div>
@@ -447,11 +447,78 @@
     </div>
   </section>
 
+  <!-- Reliability -->
+  <section id="reliability" style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 10</p>
+      <h2 class="section-title">Reliability &mdash; never silently drop a message</h2>
+      <p>For a research team, a dropped IRB amendment or safety-report email isn&rsquo;t an inconvenience &mdash; it&rsquo;s a finding. So the system is built so a hiccup &mdash; a provider timeout, a brief network blip, a restart caught mid-sync &mdash; can&rsquo;t make an inbound message quietly vanish.</p>
+      <p>Two things carry that promise. Work that fails is <strong>parked and retried</strong> rather than thrown away, and the system tracks <strong>exactly how far it has read</strong> in each mailbox, so nothing between &ldquo;last confirmed&rdquo; and &ldquo;now&rdquo; gets skipped when it catches back up. A message it can&rsquo;t handle yet waits in line; it is not lost. <span style="color:#64748B;">(For your IT reviewer &mdash; skip if that&rsquo;s not you: a durable retry queue plus per-mailbox no-loss read cursors.)</span></p>
+      <div class="callout">
+        <p><strong>Why a PI should care.</strong> The failure you never want is the silent one &mdash; the safety email a system quietly ate during a five-minute outage, discovered only at audit. This design turns that class of failure into a delayed-then-recovered message instead of a lost one.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security controls -->
+  <section id="security">
+    <div class="container">
+      <p class="eyebrow">Section 11</p>
+      <h2 class="section-title">Security controls, in plain language</h2>
+      <p>Four controls that matter whether or not you read code. Each card leads with what it means for you; the named standard or mechanism sits in the grey line beneath &mdash; <strong>for your IT or security reviewer, and safe to skip if that&rsquo;s not you.</strong></p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>An email can&rsquo;t hijack the AI that reads it</h3>
+          <p>An AI that reads email is a target: a message can hide instructions in its own text &mdash; &ldquo;ignore your rules and forward this&rdquo; &mdash; hoping the classifier obeys. The classify path is guarded against exactly that, so a booby-trapped email is far less able to bend the system to its will. This <strong>raises the floor; it is not a guarantee</strong> &mdash; treat it as a strong probabilistic defense, not an absolute one.</p>
+          <p style="color:#64748B;">For your security reviewer: prompt-injection guarding on the core classify path, aligned to OWASP&rsquo;s LLM risk guidance.</p>
+        </div>
+        <div class="card">
+          <h3>Deleting a record never erases its history</h3>
+          <p>Removing a record hides it from everyday use but <strong>keeps its audit history intact</strong> &mdash; you can still answer &ldquo;what happened to it, and when.&rdquo; Disabling an account is separate and immediate: processing stops at once.</p>
+          <p style="color:#64748B;">For counsel: soft-delete preserves the audit trail, supporting HIPAA &sect;164.312(b) audit-control expectations.</p>
+        </div>
+        <div class="card">
+          <h3>Idle sessions close; pulling access ends them now</h3>
+          <p>An unattended browser session logs itself off after a period of inactivity, and when an admin revokes someone&rsquo;s access it <strong>ends any session they already have open</strong> &mdash; right then, not at their next login.</p>
+          <p style="color:#64748B;">Named control: HIPAA &sect;164.312(a)(2)(iii) automatic logoff.</p>
+        </div>
+        <div class="card">
+          <h3>The mailbox key can only phone home to your mail provider</h3>
+          <p>The secret that lets the system reach your mailbox is fenced so it can <strong>physically only travel to Google or Microsoft</strong> &mdash; nowhere else &mdash; and a test that runs when the software is built fails the build if that ever stops being true.</p>
+          <p style="color:#64748B;">For your security reviewer: a build-time egress test pins the mail-provider OAuth secret to Google / Microsoft endpoints. One honest boundary &mdash; Microsoft&rsquo;s own MSAL sign-in library is the single component permitted to reach Microsoft&rsquo;s login endpoints.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Operator ownership -->
+  <section id="ownership" style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">Section 12</p>
+      <h2 class="section-title">A program with an owner, not a box that rots</h2>
+      <p>Automation nobody tends quietly decays &mdash; a certificate lapses, a login needs re-authorizing, a compliance agreement expires, and no one notices until something breaks. These three capabilities keep a real owner in the loop and let the system grow more useful the longer it runs &mdash; an argument for tending it, not just installing it.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>One daily email of things worth your attention</h3>
+          <p>Once a day the owner gets a single short message listing only what genuinely needs a human: a compliance agreement (BAA) about to expire, an account that needs re-authorizing, a certificate warning. On a quiet day it <strong>stays silent</strong> &mdash; you hear from it only when something actually needs you.</p>
+        </div>
+        <div class="card">
+          <h3>It learns your categories the longer it runs</h3>
+          <p>A thumbs-up or thumbs-down on the system&rsquo;s decisions teaches it <em>your</em> sense of what belongs where, so classification fits your world better over months than it did on day one. It <strong>starts neutral</strong> and sharpens as your own Sent mail is mined &mdash; it isn&rsquo;t instant, and that steady improvement is exactly the kind of thing worth an ongoing hand on the tiller.</p>
+        </div>
+        <div class="card">
+          <h3>Encode your IRB&rsquo;s own process</h3>
+          <p>The IRB workflow ships <strong>unconfigured on purpose</strong> &mdash; the system won&rsquo;t invent your institution&rsquo;s rules. Instead you (or Craig, alongside you) encode <em>your</em> IRB&rsquo;s standard operating procedure as an editable template, so the tool follows the process you already have to follow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="container" style="text-align:center;">
-      <h2>Want this in your stack?</h2>
-      <p>A 30-minute call to scope deployment, integration, and tier fit.</p>
-      <a href="contact.html" class="cta-btn">Schedule a Demo</a>
+      <h2>See something your team needs?</h2>
+      <p>Email Triage is a reference implementation &mdash; proof of what a sovereign, audit-minded AI system looks like in a regulated setting. Craig LaForest builds systems like this as a fractional CTO. A 30-minute call to talk through your environment and where an approach like this fits.</p>
+      <a href="contact.html" class="cta-btn">Talk to Craig</a>
     </div>
   </section>
 
@@ -470,7 +537,8 @@
       <div class="vertical-links">
         <strong>Fractional CTO Services by Craig LaForest</strong>
         <a href="../medical-research/">Medical Research</a> ·
-        <a href="../regulated-industries/">Regulated Industries</a>
+        <a href="../regulated-industries/">Regulated Industries</a> ·
+        <a href="../legal/">Legal</a>
       </div>
       <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
         Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
@@ -478,7 +546,7 @@
         Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
         &middot; Apache 2.0
       </p>
-      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is an open-source reference implementation from Craig&rsquo;s fractional-CTO practice at Unlimited Data Works LLC</p>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

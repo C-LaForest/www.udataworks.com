@@ -6,7 +6,7 @@
   <title>Privacy, Sovereign AI &amp; HIPAA — Email Triage Compliance Posture | Craig LaForest</title>
   <meta name="description" content="How Email Triage implements sovereign AI: local-by-default LLM, BAA-gated cloud, hard-locked embedding allowlist. HIPAA mode with PHI-scrubbed logs and tamper-evident audit chain.">
   <meta property="og:title" content="Email Triage — Privacy &amp; Sovereign AI">
-  <meta property="og:description" content="Local LLM by default. Code-enforced BAA gating. HMAC-SHA256 audit chain. HIPAA-ready by design.">
+  <meta property="og:description" content="Local LLM by default. Code-enforced BAA gating. HMAC-SHA256 audit chain. HIPAA-class by design.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -39,7 +39,18 @@
   <section class="hero">
     <div class="container">
       <h1>Privacy, Sovereign AI &amp; HIPAA</h1>
-      <p class="lead">Email content never leaves your network. By default. Always. By design.</p>
+      <p class="lead">Email content never leaves your network. By default. By design.</p>
+      <p class="hero-sub">The plain version: the AI that reads your mail runs on hardware you control, so nothing is handed to an outside AI company. Below is the proof in depth — the code-level and cryptographic detail is written for an IT or security reviewer, so skip the parts that aren't your job.</p>
+    </div>
+  </section>
+
+  <!-- Privilege &amp; discovery (legal) -->
+  <section style="background:#F8FAFC;">
+    <div class="container">
+      <p class="eyebrow">For legal teams</p>
+      <h2 class="section-title">Sovereignty is a confidentiality and privilege argument — not only a compliance one.</h2>
+      <p>When privileged client communications or attorney work-product pass through a third-party AI service, two problems follow. First, that vendor now <strong>holds discoverable material</strong> an opposing party could try to compel. Second, routing privileged content to an outside party can be argued as a <strong>waiver of attorney-client privilege or work-product protection</strong>. A sovereign, on-box AI removes both surfaces: the classifier and drafter run inside your walls, so <strong>there is no third-party AI vendor to subpoena</strong> and <strong>no third-party disclosure to argue a waiver from</strong>. Nothing leaves your network — there is nothing at a vendor to produce.</p>
+      <p style="margin-top:16px; padding:14px 18px; border:1px solid #CBD5E1; border-radius:8px; background:#fff; font-size:0.9rem; color:#475569;"><strong>Strategy, not legal advice.</strong> This is a technology-architecture argument for shrinking the surface a privilege or discovery fight can reach; your privilege analysis is yours to run with your own counsel. The <a href="../legal/">Legal / law-firm vertical</a> covers it in full.</p>
     </div>
   </section>
 
@@ -87,8 +98,8 @@
           <p>SMS / push notifications include category and timestamp only. Never the sender, subject, or body content.</p>
         </div>
         <div class="card">
-          <h3>Recipient Verification</h3>
-          <p>The daily-digest feature refuses to send if the configured to-address doesn't match the account owner. Protects against accidentally cc'ing PHI to the wrong stakeholder.</p>
+          <h3>Recipient Verification <span style="font-weight:400; font-size:0.8em; opacity:0.7;">(opt-in)</span></h3>
+          <p>When you enable it, the daily-digest feature refuses to send if the configured to-address doesn't match the account owner — protection against accidentally cc'ing PHI to the wrong stakeholder. Off by default; you turn it on.</p>
         </div>
         <div class="card">
           <h3>PHI-Aware Caching</h3>
@@ -204,7 +215,7 @@
         <li><strong>User</strong> — owns their own accounts; configures own routes / rules / digests.</li>
         <li><strong>Delegate</strong> — granted view / triage / draft permission on another user's account.</li>
       </ul>
-      <p>Delegate actions are stamped with both the actor and the account-owner in the audit log. The HIPAA §164.312(b) audit gate distinguishes owner self-access from delegate access — the former is a §164.502(a) self-disclosure carve-out and isn't audited as PHI access; the latter is and writes an audit row every time.</p>
+      <p>Delegate actions are stamped with both the actor and the account-owner in the audit log. The audit gate distinguishes owner self-access from delegate access — owner self-access is treated, by operator-configurable design aligned to the §164.502(a) self-disclosure carve-out, as not a loggable PHI-access disclosure; delegate access is, and writes an audit row every time. (Whether that carve-out applies to your setup is your compliance call — not a determination the software makes for you.)</p>
     </div>
   </section>
 
@@ -225,13 +236,13 @@
           <tr><td><strong>HIPAA §164.502(a)</strong></td><td>Self-Disclosure carve-out. Audit gate avoids spurious "PHI access" rows on owner self-access.</td></tr>
           <tr><td><strong>HIPAA §164.502(b)</strong></td><td>Minimum-necessary. Delegate-vs-owner gating, metadata-only notifications, and PHI-locked alerting limit exposure by construction.</td></tr>
           <tr><td><strong>HIPAA §164.528</strong></td><td>Accounting of disclosures. The tamper-evident HMAC access-event chain is built to support the disclosure record.</td></tr>
-          <tr><td><strong>HIPAA §164.402(2)</strong></td><td>Breach safe-harbor. Encryption at rest renders lost or stolen PHI unusable — outside the reportable-breach definition.</td></tr>
+          <tr><td><strong>HIPAA §164.402(2)</strong></td><td>Breach safe-harbor. Encryption at rest is the technical basis a breach analysis turns on — unreadable PHI supports, but does not by itself conclude, a safe-harbor determination.</td></tr>
           <tr><td><strong>NERC CIP-007-R4</strong></td><td>Logging and Monitoring. Audit-log shape informed by CIP-007.</td></tr>
         </tbody>
       </table>
 
       <div class="callout" style="margin-top:28px;">
-        <p><strong>What self-hosting wins you.</strong> Because Email Triage runs on <strong>your own infrastructure</strong> and classifies with a <strong>local model by default</strong>, PHI never leaves your network &mdash; no outside AI vendor receives it, so <strong>no BAA with a cloud AI vendor is required</strong>. If you deliberately enable a cloud backend, the <strong>code-enforced BAA gate</strong> blocks PHI from reaching it until you record that specific vendor&rsquo;s BAA. Encryption at rest puts unreadable PHI inside the <strong>§164.402(2) breach safe-harbor</strong>; the HMAC audit chain is built to support a <strong>§164.528 accounting of disclosures</strong>; and delegate-vs-owner gating plus PHI-locked alerting keep access <strong>minimum-necessary</strong> by construction.</p>
+        <p><strong>What self-hosting wins you.</strong> Because Email Triage runs on <strong>your own infrastructure</strong> and classifies with a <strong>local model by default</strong>, PHI never leaves your network &mdash; no outside AI vendor receives it, so <strong>no BAA with a cloud AI vendor is required</strong>. If you deliberately enable a cloud backend, the <strong>code-enforced BAA gate</strong> blocks PHI from reaching it until you record that specific vendor&rsquo;s BAA. Encryption at rest gives your breach analysis its technical basis under <strong>§164.402(2)</strong> &mdash; unreadable PHI is the fact a safe-harbor determination turns on; the HMAC audit chain is built to support a <strong>§164.528 accounting of disclosures</strong>; and delegate-vs-owner gating plus PHI-locked alerting keep access <strong>minimum-necessary</strong> by construction.</p>
       </div>
 
       <p style="margin-top:20px; padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#fff; font-size:0.9rem; color:#475569;">
@@ -250,6 +261,8 @@
         <a href="../medical-research/sovereign-ai.html" class="cta-btn on-dark">Sovereign AI for Medical Research →</a>
         &nbsp;
         <a href="../regulated-industries/sovereign-ai.html" class="cta-btn on-dark">Sovereign AI for Regulated Industries →</a>
+        &nbsp;
+        <a href="../legal/sovereign-ai.html" class="cta-btn on-dark">Sovereign AI for Legal →</a>
       </div>
     </div>
   </section>
@@ -269,7 +282,8 @@
       <div class="vertical-links">
         <strong>Fractional CTO Services by Craig LaForest</strong>
         <a href="../medical-research/">Medical Research</a> ·
-        <a href="../regulated-industries/">Regulated Industries</a>
+        <a href="../regulated-industries/">Regulated Industries</a> ·
+        <a href="../legal/">Legal</a>
       </div>
       <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
         Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
@@ -277,7 +291,7 @@
         Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
         &middot; Apache 2.0
       </p>
-      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is the reference implementation behind Unlimited Data Works LLC's fractional-CTO practice</p>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

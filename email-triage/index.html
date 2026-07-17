@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <title>Email Triage — Privacy-First Email Automation with Sovereign AI | Craig LaForest</title>
-  <meta name="description" content="Self-hosted email automation that classifies, routes, drafts replies, and schedules meetings. Sovereign AI by default. HIPAA-ready. Gmail / Office 365 / IMAP. Built by Craig LaForest.">
+  <meta name="description" content="Self-hosted email automation that classifies, routes, drafts replies, and schedules meetings. Sovereign AI by default. HIPAA-class controls. Gmail / Office 365 / IMAP. A reference implementation by Craig LaForest, fractional CTO.">
   <meta property="og:title" content="Email Triage — Privacy-First Email Automation with Sovereign AI">
   <meta property="og:description" content="Self-hosted, HIPAA-aware, multi-provider email automation. Email content never leaves your network.">
   <meta property="og:type" content="website">
@@ -45,9 +45,10 @@
   <section class="hero">
     <div class="container">
       <h1>Stop triaging your inbox by hand.</h1>
-      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, schedules meetings, and produces aggregated digests — running on infrastructure you control. <strong>60–90 minutes back. Every day.</strong> Sovereign AI by default. HIPAA-ready.</p>
+      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, schedules meetings, and produces aggregated digests — running on infrastructure you control. Sovereign AI by default. HIPAA-class controls throughout. For high-subscription readers, the newsletter digest alone gives back <strong>60–90 minutes a day</strong>.</p>
+      <p class="hero-sub">It's the working reference implementation behind Craig LaForest's fractional-CTO practice — proof of what a sovereign, regulated-grade build looks like in a real inbox, not a product to buy off a shelf.</p>
       <div class="cta-group">
-        <a href="contact.html" class="cta-btn">Schedule a Demo</a>
+        <a href="contact.html" class="cta-btn">Talk to Craig</a>
         <a href="features.html#digests" class="cta-btn secondary">See the Newsletter Digest</a>
       </div>
     </div>
@@ -120,15 +121,15 @@
       <div class="card-grid">
         <div class="card">
           <h3>Local-First Classifier</h3>
-          <p>Default Ollama backend with Qwen / Llama / Mistral families. Email content never traverses a third-party API. No SOC 2 boundary to argue about.</p>
+          <p>The classifier runs on your own hardware (local Ollama; Qwen / Llama / Mistral). Email content never crosses a third-party API — so there's no outside vendor to vet, no data-sharing agreement, and no external audit boundary to argue about.</p>
         </div>
         <div class="card">
           <h3>BAA-Gated Cloud Option</h3>
           <p>OpenAI / Gemini / OpenAI-compatible cloud backends supported. HIPAA-flagged messages skip cloud routing until BAA acknowledgment is recorded in the audit log. Code-enforced, not policy-enforced.</p>
         </div>
         <div class="card">
-          <h3>Hard-Locked Embedding Allowlist</h3>
-          <p>The RAG path (sent-mail context for drafted replies) is hard-coded to local-only. Adding a cloud embedding backend literally fails the build via static privacy-invariant tests.</p>
+          <h3>The reply-drafting lookup can't reach the cloud</h3>
+          <p>When it drafts a reply, the system reads your past sent email — the most privacy-sensitive step. That lookup is permanently locked to your own servers; wiring it to a cloud service fails the build automatically. <span style="color:#475569;">(For your reviewer: the embedding/RAG path is allowlisted local-only, enforced by a static privacy-invariant test.)</span></p>
         </div>
       </div>
 
@@ -160,8 +161,8 @@
           <p>Local Ollama by default. Cloud backends supported with BAA gating. Hybrid patterns possible. You pick.</p>
         </div>
         <div class="card">
-          <h3>HIPAA-Ready by Design</h3>
-          <p>Single toggle enables PHI-scrubbed logs, recipient verification, redacted notifications, and cryptographic audit chain.</p>
+          <h3>HIPAA-Class by Design</h3>
+          <p>A HIPAA profile turns the always-on controls on together — PHI-scrubbed logs, redacted notifications, and a cryptographic audit chain. Stricter gates like recipient verification are opt-in on top. Aligned to (not certified against) HIPAA §164.</p>
         </div>
         <div class="card">
           <h3>Provider-Agnostic</h3>
@@ -180,8 +181,8 @@
           <p>Newsletter digest collapses 30+ subscription feeds into one inbox entry at 7 AM with summarized article cards. Triage-activity digest at end-of-day shows you exactly what the system did with your mail.</p>
         </div>
         <div class="card">
-          <h3>Agent-Friendly API</h3>
-          <p>27+ JSON endpoints with bearer auth, per-token rate limiting, HIPAA hard-off. Built for AI-agent tool-calling.</p>
+          <h3>Automation-Ready API</h3>
+          <p>Everything the system does is scriptable, so your own tools or AI agents can drive it. <span style="color:#475569;">(For your IT team: 27+ JSON endpoints, bearer-token auth, per-token rate limits, HIPAA hard-off. See the <a href="api.html">API page</a>.)</span></p>
         </div>
       </div>
     </div>
@@ -258,9 +259,9 @@
 
   <section style="background:#F8FAFC;">
     <div class="container">
-      <p class="eyebrow">Service Offering</p>
-      <h2 class="section-title">Three ways to engage.</h2>
-      <p class="section-subtitle">The product is open-source self-hostable. The service offering wraps it in implementation, customization, and ongoing operation.</p>
+      <p class="eyebrow">Engagement models</p>
+      <h2 class="section-title">Three ways to work with Craig.</h2>
+      <p class="section-subtitle">The code is open-source and self-hostable on your own. These are engagement models for having a fractional CTO stand it up, harden it for your regulatory posture, and keep it running.</p>
 
       <div class="tier-grid">
         <div class="tier-card">
@@ -321,7 +322,7 @@
         </div>
         <div class="card">
           <h3>Privacy-First Homelab</h3>
-          <p>Podman + Tailscale + Ollama on a GPU you own. Self-service deployment with the same compliance posture as enterprise.</p>
+          <p>Podman + Tailscale + Ollama on a GPU you own. Self-service deployment with the same compliance posture as enterprise. <em>Want it hardened for a regulated workload? That's a CTO conversation.</em></p>
         </div>
       </div>
       <p style="text-align:center; margin-top:24px;"><a href="use-cases.html">All use cases →</a></p>
@@ -332,7 +333,7 @@
     <div class="container">
       <p class="eyebrow">Verify it yourself</p>
       <h2 class="section-title">Open source. Signed releases. Air-gap-installable.</h2>
-      <p class="section-subtitle">The product is real, the supply chain is auditable, and the install is buildable by your own ops team — no service tier required to deploy.</p>
+      <p class="section-subtitle">Everything here is inspectable: the supply chain is auditable and the install is buildable by your own ops team — no engagement required to deploy it yourself.</p>
 
       <div class="card-grid">
         <div class="card">
@@ -341,8 +342,8 @@
           <p style="margin-top:10px;"><a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener"><code>github.com/Unlimited-Data-Works-LLC/Email-Triage</code></a></p>
         </div>
         <div class="card">
-          <h3>Signed Container Image</h3>
-          <p>Cosign-signed (keyless OIDC) with SLSA-3 provenance and a separate operator-attestation. HIPAA installs verify both attestations on the same digest before pull.</p>
+          <h3>Signed, Traceable Releases</h3>
+          <p>Every release is cryptographically signed and tied to the exact public build it came from — so you can prove the software you run is what was published. <span style="color:#475569;">(For your reviewer: cosign keyless-OIDC signature, SLSA-3 provenance, and a separate operator-approval attestation; HIPAA installs verify both before pull.)</span></p>
           <p style="margin-top:10px;"><code>ghcr.io/unlimited-data-works-llc/email-triage</code></p>
         </div>
         <div class="card">
@@ -357,7 +358,7 @@
   <section>
     <div class="container">
       <p class="eyebrow">Latest release &middot; v0.2.0</p>
-      <h2 class="section-title">Actively shipping &mdash; and it shows.</h2>
+      <h2 class="section-title">Under active development &mdash; and it shows.</h2>
       <p class="section-subtitle">v0.2.0 deepened the compliance evidence and added features built for regulated research. A few highlights:</p>
       <div class="card-grid">
         <div class="card">
@@ -380,9 +381,9 @@
   <section class="sovereign-strip">
     <div class="container" style="text-align:center;">
       <h2><span class="accent">Ready</span> to take your inbox back?</h2>
-      <p class="lead-light">A 30-minute call helps identify whether Email Triage fits your stack, your compliance posture, and your team's workflow.</p>
+      <p class="lead-light">A 30-minute call with Craig covers whether a sovereign build like this fits your environment, your compliance posture, and your team's workflow — and what it would take to stand it up for you.</p>
       <div class="cta-row">
-        <a href="contact.html" class="cta-btn on-dark">Schedule a Demo</a>
+        <a href="contact.html" class="cta-btn on-dark">Talk to Craig</a>
       </div>
     </div>
   </section>
@@ -402,7 +403,8 @@
       <div class="vertical-links">
         <strong>Fractional CTO Services by Craig LaForest</strong>
         <a href="../medical-research/">Medical Research</a> ·
-        <a href="../regulated-industries/">Regulated Industries</a>
+        <a href="../regulated-industries/">Regulated Industries</a> ·
+        <a href="../legal/">Legal</a>
       </div>
       <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
         Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
@@ -410,7 +412,7 @@
         Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
         &middot; Apache 2.0
       </p>
-      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is the reference implementation behind Unlimited Data Works LLC's fractional-CTO practice</p>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

@@ -72,6 +72,7 @@
     <div class="container">
       <p class="eyebrow">API Surface</p>
       <h2 class="section-title">27+ endpoints under <code>/api/v1/*</code></h2>
+      <p style="font-style:italic; color:#475569;">In plain terms: anything the admin screen can do, another program can do too &mdash; over a stable web address that returns plain, machine-readable data.</p>
       <p>Organized into five families. All return JSON. All bearer-token authenticated.</p>
 
       <div class="callout" style="margin:24px 0;">
@@ -115,6 +116,7 @@
     <div class="container">
       <p class="eyebrow">Auth + Authorization</p>
       <h2 class="section-title">Bearer tokens. Owner-or-delegate scope. HIPAA hard-off.</h2>
+      <p style="font-style:italic; color:#475569;">In plain terms: every automated caller carries a key that can only ever reach the mailboxes its human owner could reach &mdash; nothing more &mdash; and any mailbox marked HIPAA is switched off on this door entirely.</p>
       <div class="card-grid">
         <div class="card">
           <h3>Bearer Tokens</h3>
@@ -191,8 +193,8 @@
   <section>
     <div class="container" style="text-align:center;">
       <h2>Want to wire this to your agent stack?</h2>
-      <p>A 30-minute call to scope integration patterns, token scoping, and webhook design.</p>
-      <a href="contact.html?tier=api" class="cta-btn">Schedule a Conversation</a>
+      <p>A 30-minute call with Craig to scope integration patterns, token scoping, and webhook design.</p>
+      <a href="contact.html?tier=api" class="cta-btn">Talk to Craig</a>
     </div>
   </section>
 
@@ -211,7 +213,8 @@
       <div class="vertical-links">
         <strong>Fractional CTO Services by Craig LaForest</strong>
         <a href="../medical-research/">Medical Research</a> ·
-        <a href="../regulated-industries/">Regulated Industries</a>
+        <a href="../regulated-industries/">Regulated Industries</a> ·
+        <a href="../legal/">Legal</a>
       </div>
       <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
         Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
@@ -219,7 +222,7 @@
         Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
         &middot; Apache 2.0
       </p>
-      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is an open-source reference implementation from Unlimited Data Works LLC</p>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

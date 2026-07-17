@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <title>How It Stays True — Compliance Rigor &amp; Engineering Discipline | Email Triage | Craig LaForest</title>
-  <meta name="description" content="How Email Triage stays correct as it changes: count-agnostic structural pins, verify-don't-accept audit discipline, a 3-SME review gate, a §164.316 findings register, and incident-to-pin lineage. The engineering rigor a fractional CTO brings to regulated environments.">
+  <meta name="description" content="How Email Triage stays correct as it changes: count-agnostic structural pins, verify-don't-accept audit discipline, a three-lens review gate, a §164.316 findings register, and incident-to-pin lineage. The engineering rigor a fractional CTO brings to regulated environments.">
   <meta property="og:title" content="Email Triage — How It Stays True">
-  <meta property="og:description" content="Structural pins, verify-don't-accept, a 3-SME review gate, a 6-year findings register, and incident-to-pin lineage. Evidence, not adjectives.">
+  <meta property="og:description" content="Structural pins, verify-don't-accept, a three-lens review gate, a 6-year findings register, and incident-to-pin lineage. Evidence, not adjectives.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://www.udataworks.com/images/og-email-triage.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -80,7 +80,7 @@
     <div class="container">
       <p class="eyebrow">2 &middot; Verify, don&rsquo;t accept</p>
       <h2 class="section-title">An audit finding is a question, not a verdict.</h2>
-      <p>External audit reports, expert hand-offs, and the project&rsquo;s own automated census output are never filed as defects on their word. Every cited <code>file:line</code> is re-opened at the current <code>HEAD</code> and assigned one of seven canonical labels:</p>
+      <p>External audit reports, structured expert-style reviews, and the project&rsquo;s own automated census output are never filed as defects on their word. Every cited <code>file:line</code> is re-opened at the current <code>HEAD</code> and assigned one of seven canonical labels:</p>
       <p><strong>VERIFIED &middot; STALE &middot; REFUTED &middot; DOWNGRADED &middot; UPGRADED &middot; PARTIAL &middot; DUPLICATE.</strong></p>
       <p>The report&rsquo;s claim is the <em>question</em>; the answer is what the code says today. Empirically about half of findings reshape after that check &mdash; a claim that read as critical turns out already-fixed (STALE), or a low note turns out to hide a real gap (UPGRADED). Acting on an unverified finding is how teams &ldquo;fix&rdquo; things that were never broken and miss the ones that were.</p>
     </div>
@@ -91,19 +91,19 @@
     <div class="container">
       <p class="eyebrow">3 &middot; The review gate</p>
       <h2 class="section-title">No change to a risk surface reaches <code>main</code> unreviewed.</h2>
-      <p>Any change whose diff touches a medical-scope surface &mdash; PHI/HIPAA logic, the audit chain, encryption, auth, egress, LLM prompts, schema/migrations &mdash; is blocked from <code>main</code> unless the commit carries a valid review verdict. The gate is enforced <strong>twice</strong>: once client-side in the commit flow, once server-side in CI, so a bypass has to defeat both. The panel is three independent reviewers, each with a distinct lens:</p>
+      <p>Any change whose diff touches a medical-scope surface &mdash; PHI/HIPAA logic, the audit chain, encryption, auth, egress, LLM prompts, schema/migrations &mdash; is blocked from <code>main</code> unless the commit carries a valid review verdict. The gate is enforced <strong>twice</strong>: once client-side in the commit flow, once server-side in CI, so a bypass has to defeat both. It applies three independent review <strong>lenses</strong> &mdash; distinct evaluative perspectives built into the process, not a staffed committee. In a solo practice they are largely structured AI personas, each held to its own brief, plus the operator&rsquo;s hardware-key sign-off:</p>
       <div class="card-grid">
         <div class="card">
-          <h3>HIPAA SME</h3>
+          <h3>Regulatory lens</h3>
           <p>Regulatory framing &mdash; the correct §-anchor, OCR-posture severity, and equivalent-measure verdicts under §164.306(d). Owns the §164.316 safeguards register.</p>
         </div>
         <div class="card">
-          <h3>Data-path SME</h3>
+          <h3>Data-path lens</h3>
           <p>Data integrity, performance, reliability, and test soundness. Owns the verify-don&rsquo;t-accept walks &mdash; re-checking every external claim against the live code.</p>
         </div>
         <div class="card">
-          <h3>Devil&rsquo;s advocate</h3>
-          <p>A full-time skeptic that hedge-checks the lead recommendation against the &ldquo;take the easier path&rdquo; bias <em>before</em> it reaches a decision &mdash; on every trade-off.</p>
+          <h3>Devil&rsquo;s-advocate lens</h3>
+          <p>A standing skeptic that hedge-checks the lead recommendation against the &ldquo;take the easier path&rdquo; bias <em>before</em> it reaches a decision &mdash; on every trade-off.</p>
         </div>
       </div>
       <div class="callout">
@@ -117,7 +117,7 @@
     <div class="container">
       <p class="eyebrow">4 &middot; The paper trail</p>
       <h2 class="section-title">Every finding lands on a permanent, retained register.</h2>
-      <p>Whether a finding is opened by an outside auditor, an automated census, the review panel, or a live incident, it lands on one register keyed to <strong>§164.316(b)(1)</strong> &mdash; ID, title, §-anchor, severity, status, opened/closed, owner, and a rationale link. Every status transition emits an HMAC-chained audit row, and the register is retained for the full <strong>§164.316(b)(2)(i) six years</strong> in-tree, in git history, and in off-host backup. No closed row is ever silently dropped.</p>
+      <p>Whether a finding is opened by an outside auditor, an automated census, the review panel, or a live incident, it lands on one register keyed to <strong>§164.316(b)(1)</strong> &mdash; ID, title, §-anchor, severity, status, opened/closed, owner, and a rationale link. Every status transition emits an HMAC-chained audit row, and the register is retained for the full <strong>§164.316(b)(2)(i) six years</strong> in-tree and in git history &mdash; and in off-host backup where the operator enables it (off-host backup ships disabled). No closed row is ever silently dropped.</p>
 
       <h3 style="margin-top:32px;">Incident &rarr; structural pin lineage</h3>
       <p>The register records <em>what</em> was found. This is the &ldquo;how does that not happen again&rdquo; answer &mdash; each real production failure paired with the count-agnostic pin that now fails the build if the shape ever recurs:</p>
@@ -170,7 +170,8 @@
       <div class="vertical-links">
         <strong>Fractional CTO Services by Craig LaForest</strong>
         <a href="../medical-research/">Medical Research</a> ·
-        <a href="../regulated-industries/">Regulated Industries</a>
+        <a href="../regulated-industries/">Regulated Industries</a> ·
+        <a href="../legal/">Legal</a>
       </div>
       <p style="font-size:0.85rem; margin-top:14px; color:rgba(255,255,255,0.7);">
         Source: <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener" style="color:#67E8F9;">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>
@@ -178,7 +179,7 @@
         Image: <code style="background:rgba(255,255,255,0.08); color:#67E8F9; padding:1px 6px; border-radius:3px;">ghcr.io/unlimited-data-works-llc/email-triage</code>
         &middot; Apache 2.0
       </p>
-      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is built and operated by Unlimited Data Works LLC</p>
+      <p>&copy; <span id="year"></span> Craig LaForest · Email Triage is the reference implementation behind Unlimited Data Works LLC's fractional-CTO practice</p>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
