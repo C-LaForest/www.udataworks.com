@@ -150,6 +150,10 @@
           <h3>Pinned Tags, Floating Aliases</h3>
           <p>Customers pin to immutable <code>vX.Y.Z</code> tags (same digest under both <code>vX.Y.Z</code> and <code>X.Y.Z</code> forms). Float to <code>X.Y</code>, <code>X</code>, or <code>:latest</code> for development-friendly upgrades. <code>:edge</code> for every push to main.</p>
         </div>
+        <div class="card">
+          <h3>Automated Dependency-CVE Watch</h3>
+          <p>Every dependency baked into the image is watched automatically across six public advisory sources &mdash; pip-audit, OSV, the National Vulnerability Database, GitHub Security Advisories, upstream releases, and base images &mdash; so a newly disclosed vulnerability surfaces on its own instead of waiting for someone to remember to look. Ecosystem noise that can&rsquo;t reach a live code path is filtered out; a CVE that genuinely reaches the code raises an alert, and the fix ships only after the full test suite passes and a human signs off &mdash; each leaving a &sect;164.316 register entry. Proven by the pyasn1 remote-code-execution advisories (CVE-2026-59885/59886), closed in a single release cycle.</p>
+        </div>
       </div>
 
       <div class="callout" style="margin-top:32px;">
