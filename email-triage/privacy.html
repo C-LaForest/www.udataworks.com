@@ -166,6 +166,7 @@
       <p><strong>Layer 1 &mdash; whole-database encryption (SQLCipher).</strong> The entire database file &mdash; emails, classifications, accounts, audit logs, and credentials &mdash; is <strong>AES-256 encrypted on disk</strong> (single-file SQLCipher: AES-256-CBC with HMAC-SHA512 page integrity). Encryption at rest is <strong>on by default for new installs</strong> as of v0.2.0. The storage key is HKDF-SHA256&ndash;derived from your master key, and <strong>every</strong> connection &mdash; live, backup, and migration &mdash; opens through one encryption-aware path, so no code path can quietly write a plaintext copy.</p>
       <div class="callout">
         <p><strong>Fail-closed boot.</strong> If encryption is required (HIPAA mode) or requested but the SQLCipher library or master key is missing, the application <strong>refuses to start</strong> rather than silently falling back to plaintext. A HIPAA install that hasn&rsquo;t requested encryption is loudly advised, not silently downgraded &mdash; disk-level LUKS is a documented equivalent.</p>
+        <p><strong>The crypto build itself is pinned.</strong> The container source-builds SQLCipher from a version-pinned amalgamation (v4.17.0), and a boot-time assertion <strong>refuses to start</strong> on any SQLCipher below the required version floor. A base-image rebuild or dependency change can&rsquo;t silently downgrade the encryption path underneath you &mdash; the app fails closed rather than serve on a weaker crypto library.</p>
       </div>
       <p><strong>Layer 2 &mdash; secrets encrypted again, inside the encrypted database.</strong> Provider passwords, OAuth refresh tokens, and other secrets are <em>additionally</em> encrypted with Fernet (AES-128-CBC + HMAC-SHA256). One master key powers both layers &mdash; it directly unlocks the Fernet secrets and, via HKDF, derives the SQLCipher storage key &mdash; and it is held <strong>outside</strong> the database. Storage options for that master key:</p>
       <ul>
@@ -185,7 +186,7 @@
         <div class="card">
           <h3>Transmission Integrity (TLS)</h3>
           <ul>
-            <li>Built-in ACME / Let's Encrypt issuance + automatic renewal (DNS-01), or bring-your-own cert</li>
+            <li>Built-in ACME / Let's Encrypt issuance + automatic renewal (DNS-01 via RFC-2136, or HTTP-01 in standalone or webroot mode), or bring-your-own cert</li>
             <li>Self-signed for internal-only deployments</li>
             <li>Operator-supplied certificates</li>
             <li>Tailscale-issued certificates for funnel deployments</li>
