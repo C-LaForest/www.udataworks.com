@@ -112,7 +112,10 @@ header nav a.active { opacity: 1; color: var(--color-secondary-bright); border-b
 }
 .card h3 { color: var(--color-heading); margin: 0 0 10px 0; font-size: 1.15rem; }
 .card p { font-size: 0.95rem; color: var(--color-text); margin: 0; }
+.card p + p { margin-top: 0.9rem; }
+.card h4 { margin: 1.3rem 0 0.5rem 0; font-size: 1rem; color: var(--color-heading); }
 .card ul { padding-left: 1.2rem; margin: 0; }
+.card p + ul, .card ul + p { margin-top: 0.6rem; }
 .card ul li { margin-bottom: 0.4rem; font-size: 0.95rem; }
 .card.dark { background: var(--color-header); color: #fff; border-top-color: var(--color-secondary); }
 .card.dark h3 { color: #fff; }

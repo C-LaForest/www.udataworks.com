@@ -1,5 +1,7 @@
 # Audit / research scratch — never commit
-WEBSITE-AUDIT-2026-07-16.md
+WEBSITE-AUDIT-*.md
+FEATURE-REPORT-EVAL-*.md
+FEATURE-REPORT-EVAL-*.json
 tasks/
 *.output
 

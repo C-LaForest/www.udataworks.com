@@ -47,7 +47,7 @@
   <section style="background:linear-gradient(90deg,#4F46E5,#06B6D4); padding:28px 0; color:#fff;">
     <div class="container" style="text-align:center;">
       <div style="font-size:1.1rem; opacity:0.95; margin-bottom:6px;">Flagship outcome &mdash; medical research / PI inbox:</div>
-      <div style="font-size:2.2rem; font-weight:700;">1.5–2 hours per day recovered.</div>
+      <div style="font-size:2.2rem; font-weight:700;">An estimated 1.5–2 hours per day recovered.</div>
       <div style="font-size:0.95rem; opacity:0.95; margin-top:6px;">Newsletter digest collapses 30+ subscription feeds. Triage-activity digest keeps you in control. The AI runs on your own hardware, so the whole flow stays auditable and under your roof.</div>
     </div>
   </section>
@@ -58,11 +58,31 @@
       <div class="card" style="margin-bottom:32px; border-top-width:6px; border-top-color:var(--color-primary); background:var(--color-card-bg);">
         <span class="tag">Flagship use case · Standard or Embedded engagement</span>
         <h3>Medical Researcher / Principal Investigator</h3>
-        <p><strong>Profile:</strong> PI, clinical investigator, post-doc, or research-track physician. Inbox accumulates 200+ messages/day across journal alerts, NIH/sponsor communications, IRB notices, society newsletters, trainee updates, manuscript reviews, clinical-trial coordinator threads. HIPAA-aware by institutional default.</p>
-        <p><strong>The two-hour daily problem.</strong> Pre-system: 90 minutes of newsletter / journal-alert skimming first thing in the morning, another 30 minutes of inbox triage between clinic and bench. Most of it is mechanical — categorize, file, or skim-and-discard. None of it is research.</p>
-        <p><strong>Post-system outcome &mdash; newsletter digest is the killer feature.</strong> All 30+ subscription feeds collapse into one 7 AM digest with 80&ndash;120 article cards organized by source. <strong>Daily time recovered: 60&ndash;90 minutes</strong>, back into the day. The clinician scans the digest with their first coffee, clicks through to the 5&ndash;8 articles actually worth reading, archives the rest by closing the tab.</p>
-        <p><strong>Plus the rest of the stack.</strong> Sponsor mail labeled <code>sponsor</code> + drafted reply waiting for review. IRB notices auto-filed into a dedicated folder. Trainee questions routed to the daily catch-up window. Triage-activity digest at end-of-day shows what the system did with the inbox &mdash; no "what is the AI doing while I'm not looking" anxiety. HIPAA mode flagged on the patient-correspondence account for institutional review.</p>
-        <p><strong>Total recovered: 1.5&ndash;2 hours/day</strong>, with full transparency over what the system handled and what's waiting for personal attention.</p>
+        <p><strong>Profile.</strong> PI, clinical investigator, post-doc, or research-track physician. 200+ messages/day across journal alerts, NIH/sponsor communications, IRB notices, society newsletters, trainee updates, manuscript reviews, and coordinator threads. HIPAA-aware by institutional default.</p>
+
+        <h4>The two-hour daily problem</h4>
+        <p>90 minutes of newsletter / journal-alert skimming first thing, another 30 of inbox triage between clinic and bench. Most of it is mechanical &mdash; categorize, file, skim-and-discard. None of it is research.</p>
+
+        <h4>The outcome &mdash; the newsletter digest is the killer feature</h4>
+        <p>All 30+ subscription feeds collapse into one 7 AM digest, 80&ndash;120 article cards organized by source. <strong>An estimated 60&ndash;90 minutes/day recovered</strong> for a subscription-heavy inbox. Scan it with your first coffee, click through to the 5&ndash;8 articles worth reading, archive the rest by closing the tab.</p>
+
+        <h4>Plus the rest of the stack</h4>
+        <ul>
+          <li>Sponsor mail labeled <code>sponsor</code>, with a drafted reply waiting for review.</li>
+          <li>IRB notices auto-filed into a dedicated folder.</li>
+          <li>Trainee questions routed to the daily catch-up window.</li>
+          <li>An end-of-day triage-activity digest &mdash; no "what is the AI doing while I'm not looking" anxiety.</li>
+          <li>HIPAA mode on the patient-correspondence account for institutional review.</li>
+        </ul>
+
+        <h4>Two v0.2.0 features built for this persona</h4>
+        <p>A <strong>Regulatory Deadline Clock</strong> watches for the mail that starts an FDA IND / EU&nbsp;CTR SUSAR / IRB reporting clock (detection is opt-in), tracks it on a working-day calendar, and escalates before it lapses &mdash; a human confirms every clock and the AI never computes the date. A <strong>Topic / Study Digest</strong> pulls every message tied to one study &mdash; sponsor, IRB, and coordinator inboxes at once &mdash; into a single scheduled digest, with a thumbs up/down that teaches which senders matter. PHI never leaves your servers.</p>
+        <div class="mockup-frame">
+          <img src="images/clocks.png" alt="Regulatory deadlines view — an armed IRB continuing-review clock with a working-day countdown">
+        </div>
+        <p class="mockup-caption">The Deadlines view &mdash; an armed IRB continuing-review clock (Running, working-day countdown, explicit due date, Acknowledge / Mark-submitted / Dismiss). Detection is opt-in and a human confirms every clock; sponsor FDA/EU deadlines surface as informational only.</p>
+
+        <p><strong>Total recovered: an estimated 1.5&ndash;2 hours/day</strong>, with full transparency over what the system handled and what's waiting for you.</p>
         <p><a href="../medical-research/">See the Medical Research Fractional CTO engagement →</a></p>
       </div>
 
@@ -70,9 +90,14 @@
       <div class="card" style="margin-bottom:32px;">
         <span class="tag">Confidentiality &amp; privilege · Standard or Embedded engagement</span>
         <h3>Law Firm / Legal Department (Privileged Inbox)</h3>
-        <p><strong>Context:</strong> A litigation boutique, in-house legal team, or solo practitioner whose inbox is a running record of privileged client communications and attorney work-product. The volume is real &mdash; client threads, opposing counsel, court notices, e-filing alerts &mdash; but the sharper concern is <em>where the mail goes</em> the moment an AI reads it.</p>
-        <p><strong>The problem with routing privileged mail through cloud AI.</strong> Send a privileged inbox through a hosted, third-party AI service and you have handed a client's confidential communications to an outside party that now <em>received</em> them. That outside party is a new custodian a subpoena can reach in discovery, and its receipt of the mail is a disclosure the other side can point to when arguing the privilege was waived. The convenience of a hosted model quietly widens the circle of who holds the file.</p>
-        <p><strong>Outcome &mdash; the AI stays inside the firm's walls.</strong> The classifier runs on the firm's own hardware; privileged mail and work-product are read and sorted on-box and never transit an outside model. There is no third-party AI vendor to name in a subpoena and no external disclosure to build a waiver argument from &mdash; the mail stays under the firm's sole control, the way the file room already does. Sensitive-matter routing, drafted replies held for a lawyer's review (never auto-sent), and a tamper-evident log of who opened which matter round it out.</p>
+        <p><strong>Context.</strong> A litigation boutique, in-house legal team, or solo practitioner whose inbox is a running record of privileged client communications and attorney work-product. The volume is real &mdash; client threads, opposing counsel, court notices, e-filing alerts &mdash; but the sharper concern is <em>where the mail goes</em> the moment an AI reads it.</p>
+
+        <h4>The problem with routing privileged mail through cloud AI</h4>
+        <p>Send a privileged inbox through a hosted, third-party AI service and you have handed a client's confidential communications to an outside party that now <em>received</em> them. That outside party is a new custodian a subpoena can reach in discovery, and its receipt of the mail is a disclosure the other side can point to when arguing the privilege was waived. The convenience of a hosted model quietly widens the circle of who holds the file.</p>
+
+        <h4>The outcome &mdash; the AI stays inside the firm's walls</h4>
+        <p>The classifier runs on the firm's own hardware; privileged mail and work-product are read and sorted on-box and never transit an outside model. There is no third-party AI vendor to name in a subpoena and no external disclosure to build a waiver argument from &mdash; the mail stays under the firm's sole control, the way the file room already does. Sensitive-matter routing, drafted replies held for a lawyer's review (never auto-sent), and a tamper-evident log of who opened which matter round it out.</p>
+
         <p style="font-style:italic; color:#64748B;">This is an infrastructure-and-strategy posture, not legal advice &mdash; confirm the privilege and discovery implications for your jurisdiction with your own counsel.</p>
       </div>
 
@@ -80,8 +105,14 @@
       <div class="card" style="margin-bottom:32px;">
         <span class="tag">Standard engagement · HIPAA mode</span>
         <h3>Solo Practitioner Clinic (1–5 person practice)</h3>
-        <p><strong>Context:</strong> M365 or Google Workspace-based. HIPAA-regulated by default. Need to demonstrate compliance posture to insurers + auditors.</p>
-        <p><strong>Outcome:</strong> HIPAA-mode accounts with PHI-scrubbed logs. Audit chain on every staff access. Drafted patient-correspondence replies for clinician review (never auto-sent). Delegate access for front-desk staff to triage but not draft. Quarterly compliance review packet produced from the audit log.</p>
+        <p><strong>Context.</strong> M365 or Google Workspace-based. HIPAA-regulated by default. Need to demonstrate compliance posture to insurers + auditors.</p>
+        <h4>Outcome</h4>
+        <ul>
+          <li>HIPAA-mode accounts with PHI-scrubbed logs, and an audit chain on every staff access.</li>
+          <li>Drafted patient-correspondence replies held for clinician review (never auto-sent).</li>
+          <li>Delegate access for front-desk staff, scoped to specific mailboxes with audit-row stamping &mdash; sensitive operations stay with the owner.</li>
+          <li>A paginated compliance view over the tamper-evident audit log for periodic review.</li>
+        </ul>
         <p><a href="../regulated-industries/sovereign-ai.html">See sovereign AI for compliance-driven organizations →</a></p>
       </div>
 
@@ -89,8 +120,14 @@
       <div class="card" style="margin-bottom:32px;">
         <span class="tag">Embedded engagement · self-use</span>
         <h3>Fractional CTO / Consulting Firm</h3>
-        <p><strong>Context:</strong> Multiple client mailboxes (separately authenticated). Need to keep client communications isolated for confidentiality. Calendar coordination across 8–12 active clients per week.</p>
-        <p><strong>Outcome:</strong> Per-client account with isolated rules and routes. Per-client writing-style profile so responses sound right for each engagement (the assistant's "voice" matches the engagement). Meeting-request intercept on every account with the right working-hours config per client. Watch rules escalate "fire-drill" client emails to SMS instantly.</p>
+        <p><strong>Context.</strong> Multiple client mailboxes (separately authenticated). Need to keep client communications isolated for confidentiality. Calendar coordination across 8&ndash;12 active clients per week.</p>
+        <h4>Outcome</h4>
+        <ul>
+          <li>Per-client account with isolated rules and routes.</li>
+          <li>A per-client writing-style profile, so replies sound right for each engagement.</li>
+          <li>Meeting-request intercept on every account, with the right working-hours config per client.</li>
+          <li>Watch rules escalate "fire-drill" client emails to SMS instantly.</li>
+        </ul>
         <p style="font-style:italic; color:#64748B;">This is how I run my own consulting practice.</p>
       </div>
 
@@ -98,8 +135,13 @@
       <div class="card" style="margin-bottom:32px;">
         <span class="tag">Standard engagement · multi-user</span>
         <h3>Researcher Cohort Tooling</h3>
-        <p><strong>Context:</strong> A lab with N researchers all using shared mail infrastructure. Each researcher has their own writing style and their own preferences. Privacy: one researcher shouldn't see another's mail or drafts.</p>
-        <p><strong>Outcome:</strong> Multi-user install with role-based access. Each researcher gets their own dashboard, their own categories, their own digest. Lab PI has delegate access to specific researcher mailboxes (with audit-row stamping). One Ollama host serves the whole lab; one container, one TLS cert, one backup.</p>
+        <p><strong>Context.</strong> A lab with N researchers all using shared mail infrastructure. Each researcher has their own writing style and their own preferences. Privacy: one researcher shouldn't see another's mail or drafts.</p>
+        <h4>Outcome</h4>
+        <ul>
+          <li>Multi-user install with role-based access &mdash; each researcher gets their own dashboard, categories, and digest.</li>
+          <li>The lab PI has delegate access to specific researcher mailboxes (with audit-row stamping).</li>
+          <li>One Ollama host serves the whole lab: one container, one TLS cert, one backup.</li>
+        </ul>
         <p><a href="../medical-research/">See the Medical Research Fractional CTO engagement →</a></p>
       </div>
 
@@ -107,8 +149,14 @@
       <div class="card" style="margin-bottom:32px;">
         <span class="tag">Self-hosted · no engagement needed</span>
         <h3>Privacy-First Homelab Operator</h3>
-        <p><strong>Context:</strong> A self-hosting enthusiast who wants to run everything on their own machines. <span style="color:#64748B;">(For the technically-inclined: containers on Podman, reached over a Tailscale mesh, with the AI model already running locally on their own GPU via Ollama.)</span></p>
-        <p><strong>Outcome:</strong> Install + configure independently from the public repository at <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>. Pull the cosign-signed image from <code>ghcr.io/unlimited-data-works-llc/email-triage</code>, verify the SLSA-3 provenance, run on Podman with a systemd quadlet. <strong>Air-gap installable</strong> via the hash-pinned embedding-runtime tarball &mdash; same verification path as the auto-download. Audit chain and HIPAA-mode features work exactly the same as in any other deployment &mdash; the privacy posture isn't gated behind an engagement.</p>
+        <p><strong>Context.</strong> A self-hosting enthusiast who wants to run everything on their own machines. <span style="color:#64748B;">(For the technically-inclined: containers on Podman, reached over a Tailscale mesh, with the AI model already running locally on their own GPU via Ollama.)</span></p>
+        <h4>Outcome</h4>
+        <ul>
+          <li>Install + configure independently from the public repo at <a href="https://github.com/Unlimited-Data-Works-LLC/Email-Triage" target="_blank" rel="noopener">github.com/Unlimited-Data-Works-LLC/Email-Triage</a>.</li>
+          <li>Pull the cosign-signed image from <code>ghcr.io/unlimited-data-works-llc/email-triage</code>, verify the SLSA-3 provenance, run on Podman with a systemd quadlet.</li>
+          <li><strong>Air-gap installable</strong> via the hash-pinned embedding-runtime tarball &mdash; same verification path as the auto-download.</li>
+          <li>Audit chain and HIPAA-mode features work exactly the same as in any other deployment &mdash; the privacy posture isn't gated behind an engagement.</li>
+        </ul>
       </div>
     </div>
   </section>

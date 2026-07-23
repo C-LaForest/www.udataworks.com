@@ -45,7 +45,7 @@
   <section class="hero">
     <div class="container">
       <h1>Stop triaging your inbox by hand.</h1>
-      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, schedules meetings, and produces aggregated digests — running on infrastructure you control. Sovereign AI by default. HIPAA-class controls throughout. For high-subscription readers, the newsletter digest alone gives back <strong>60–90 minutes a day</strong>.</p>
+      <p class="lead">Email Triage is a self-hosted email automation system that classifies, routes, drafts replies, schedules meetings, and produces aggregated digests — running on infrastructure you control. Sovereign AI by default. HIPAA-class controls throughout. For high-subscription readers, the newsletter digest alone can give back an estimated <strong>60–90 minutes a day</strong> &mdash; an illustrative estimate for a subscription-heavy inbox, not a measured guarantee.</p>
       <p class="hero-sub">It's the working reference implementation behind Craig LaForest's fractional-CTO practice — proof of what a sovereign, regulated-grade build looks like in a real inbox, not a product to buy off a shelf.</p>
       <div class="cta-group">
         <a href="contact.html" class="cta-btn">Talk to Craig</a>
@@ -71,7 +71,7 @@
       </div>
       <div style="flex:1; min-width:160px;">
         <div style="font-size:2.4rem; font-weight:700;">5 sec</div>
-        <div style="font-size:0.95rem; opacity:0.95;">end-to-end push → classify → action</div>
+        <div style="font-size:0.95rem; opacity:0.95;">end-to-end push → classify → action (design target, not a guaranteed SLA)</div>
       </div>
     </div>
   </section>
@@ -116,7 +116,7 @@
     <div class="container">
       <p class="eyebrow">Headline Capability</p>
       <h2><span class="accent">Sovereign AI</span> by default.</h2>
-      <p class="lead-light">Your email stays inside your network by default, by design. The classifier and drafter run on your own infrastructure — Ollama on a GPU you control. Cloud LLM backends are supported, but only for non-HIPAA accounts or after explicit BAA acknowledgment recorded in code, not policy.</p>
+      <p class="lead-light">Your email stays inside your network by default, by design. The classifier and drafter run on your own infrastructure — Ollama on a GPU you control. Cloud LLM backends are supported, but only for non-HIPAA accounts or after explicit BAA acknowledgment recorded in code, not policy. For a law firm or legal department, that same boundary is a confidentiality argument: no third-party AI vendor receives your text, so there is nothing for an opposing party to subpoena and no outside disclosure to argue a privilege waiver from.</p>
 
       <div class="card-grid">
         <div class="card">
@@ -173,6 +173,18 @@
           <p>Categories, routes, and actions are user-defined and visible in a web UI. No black-box behavior.</p>
         </div>
         <div class="card">
+          <h3>Never Silently Drops Your Mail</h3>
+          <p>Supervised background workers, a durable per-message retry queue, and no-reprocess cursors mean a provider timeout, a restart mid-sync, or a network blip can&rsquo;t make an inbound message vanish or get triaged twice. A daily health email confirms it&rsquo;s still working &mdash; and stays quiet on a clean day.</p>
+        </div>
+        <div class="card">
+          <h3>Tamper-Evident Audit Chain</h3>
+          <p>Every classification and access lands on a keyed HMAC-SHA256 hash chain across nine tables. An operator-runnable verifier pinpoints where any tampering occurred, and the chain stays verifiable across master-key rotation &mdash; something most vendors&rsquo; compliance decks can&rsquo;t show.</p>
+        </div>
+        <div class="card">
+          <h3>Removal Keeps the Record</h3>
+          <p>Deactivating an account or user purges live credentials and stops reading immediately &mdash; but the audit history survives. A soft delete, so removing access never destroys the compliance record you may later need to retain or produce.</p>
+        </div>
+        <div class="card">
           <h3>Calendar-Aware</h3>
           <p>Reads your calendar, suggests free slots, drafts meeting-acceptance replies with proper iCal threading.</p>
         </div>
@@ -198,11 +210,11 @@
       <div class="card-grid">
         <div class="card">
           <h3>The Problem</h3>
-          <p>Research clinicians, financial analysts, consultants — anyone whose job requires staying current on a high-volume subscription feed — spend <strong>60&ndash;90 minutes per day</strong> on newsletter skimming. Only 5&ndash;10% of articles deserve a real read.</p>
+          <p>Research clinicians, financial analysts, consultants — anyone whose job requires staying current on a high-volume subscription feed — spend an estimated <strong>60&ndash;90 minutes per day</strong> on newsletter skimming. Only 5&ndash;10% of articles deserve a real read.</p>
         </div>
         <div class="card">
           <h3>The Outcome</h3>
-          <p>From "120 inbox entries the system can't help me with" to <strong>"one digest with 90 article cards I can scan in 5 minutes."</strong> Click through the 5&ndash;10 worth reading. Close the tab on the rest. Daily time recovered: <strong>60&ndash;90 minutes.</strong></p>
+          <p>From "120 inbox entries the system can't help me with" to <strong>"one digest with 90 article cards I can scan in 5 minutes."</strong> Click through the 5&ndash;10 worth reading. Close the tab on the rest. Daily time recovered: an estimated <strong>60&ndash;90 minutes</strong> for a subscription-heavy inbox.</p>
         </div>
         <div class="card">
           <h3>Plus a Daily "What Did the AI Do?" Digest</h3>

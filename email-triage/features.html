@@ -199,7 +199,7 @@
       <div class="mockup-frame">
         <img src="images/sample-newsletter-digest.html.png" alt="Rendered newsletter digest">
       </div>
-      <p class="mockup-caption">A daily 7 AM newsletter digest &mdash; 12 articles across 5 sources (NIH funding, NEJM, AHA, STAT News, JAMA), each with a headline + summary + "Read more" link</p>
+      <p class="mockup-caption">A daily newsletter digest &mdash; 13 articles across 5 sources (NIH funding, NEJM, AHA, STAT News, JAMA), each with a headline + summary + "Read more" link</p>
 
       <h3 style="margin-top:40px;">Triage-Activity Digest &mdash; for the "I want to know what the AI is doing" user</h3>
       <p>The "set it and forget it" anti-pattern is real: an AI quietly classifies + drafts + moves mail for weeks, the operator's confidence drifts toward "I have no idea what it's doing," trust erodes, eventually the operator pulls the plug. The triage-activity digest is the antidote &mdash; <strong>every day, the operator gets a complete record of what email-triage did with their mail.</strong></p>
@@ -354,6 +354,11 @@
         <li><strong>Tamper-evident clock audit chain.</strong> Every legally-meaningful transition (detected, awareness, determination, escalation, breach, submission, dismissal, correction) is recorded in the same HMAC-keyed audit chain &mdash; bounded, non-PHI detail only, never the trigger email&rsquo;s content.</li>
         <li><strong>Automatic detection is off by default.</strong> Optional scanning of inbound mail for safety-reporting language is flag-gated and ships disabled; even when enabled it only <em>proposes</em> a candidate for human confirmation.</li>
       </ul>
+
+      <div class="mockup-frame">
+        <img src="images/clocks.png" alt="Regulatory deadlines view tracking an armed IRB continuing-review clock">
+      </div>
+      <p class="mockup-caption">The Deadlines view &mdash; an armed IRB continuing-review clock: Running, a working-day countdown, an explicit due date, and Acknowledge / Mark-submitted / Dismiss actions. Sponsor FDA/EU deadlines surface as informational only; an escalating clock arms solely after a human confirms it is theirs to submit.</p>
     </div>
   </section>
 
@@ -503,8 +508,8 @@
           <p>Once a day the owner gets a single short message listing only what genuinely needs a human: a compliance agreement (BAA) about to expire, an account that needs re-authorizing, a certificate warning. On a quiet day it <strong>stays silent</strong> &mdash; you hear from it only when something actually needs you.</p>
         </div>
         <div class="card">
-          <h3>It learns your categories the longer it runs</h3>
-          <p>A thumbs-up or thumbs-down on the system&rsquo;s decisions teaches it <em>your</em> sense of what belongs where, so classification fits your world better over months than it did on day one. It <strong>starts neutral</strong> and sharpens as your own Sent mail is mined &mdash; it isn&rsquo;t instant, and that steady improvement is exactly the kind of thing worth an ongoing hand on the tiller.</p>
+          <h3>It sharpens to your workflow the longer it runs</h3>
+          <p>Your Topic digests learn per sender &mdash; a thumbs-down drops a noisy sender from a study digest, a thumbs-up always keeps one &mdash; so each digest fits your world better over months than it did on day one. Separately, the draft-reply voice <strong>starts neutral</strong> and sharpens as your own Sent mail is mined. Neither is instant &mdash; that steady, reversible improvement is exactly the kind of thing worth an ongoing hand on the tiller.</p>
         </div>
         <div class="card">
           <h3>Encode your IRB&rsquo;s own process</h3>
