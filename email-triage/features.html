@@ -147,7 +147,7 @@
           <tr><td><code>custom</code></td><td><code>{event, timestamp, data}</code> envelope &mdash; verbatim, HMAC-signed</td></tr>
         </tbody>
       </table>
-      <p>Each payload is a template you can edit per target (<code>{{data.category}}</code>, <code>{{data.subject}}</code>, <code>{{data.flow_id}}</code>, &hellip;), rendered through one shared code path so the wire shape can&rsquo;t drift between targets.</p>
+      <p>Each payload is a template you can edit per target (<code>{{data.category}}</code>, <code>{{data.subject}}</code>, <code>{{data.flow_id}}</code>, &hellip;), rendered through one shared code path so the wire shape can&rsquo;t drift between targets. A live preview in the setup wizard renders the exact bytes &mdash; normal and HIPAA-locked side by side &mdash; as you type, so what you see is what ships.</p>
 
       <div class="callout">
         <p><strong>Signed, gated, metadata-only.</strong> Give a target a shared secret and every POST carries an <code>X-Signature-256</code> HMAC-SHA256 over the exact rendered bytes &mdash; and if that secret ever fails to decrypt, the delivery is <strong>dropped, never sent unsigned</strong>. External URLs are <strong>deny-by-default</strong>: the operator explicitly allows each off-host destination, and every send is egress-gated and idempotency-guarded against double-fire. Payloads carry <strong>metadata only</strong> &mdash; never the email body; on a HIPAA-flagged account the operator&rsquo;s template is ignored entirely and the wire collapses to <code>{event, category, timestamp, flow_id}</code>. A webhook failure never breaks triage &mdash; the application log is the durable receipt.</p>
