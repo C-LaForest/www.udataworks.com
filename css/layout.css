@@ -65,9 +65,8 @@
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #e0e0e0;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    text-align: center;
+    box-sizing: border-box;
     padding: 1.5rem 1rem;
   }
   .aboutme-main {

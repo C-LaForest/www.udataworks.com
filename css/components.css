@@ -42,6 +42,8 @@ footer {
 }
 
 footer nav a { font-weight: 400; font-size: 1em; }
+footer .footer-also { margin: 10px 0 0 0; font-size: 0.9em; opacity: 0.85; }
+footer .footer-also a { color: #fff; text-decoration: underline; }
 
 /* ===== CTA Button ===== */
 .cta-btn {
@@ -297,7 +299,7 @@ footer nav a { font-weight: 400; font-size: 1em; }
 .contact-list a {
   color: var(--color-link);
   text-decoration: none;
-  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .aboutme-main h2 {
