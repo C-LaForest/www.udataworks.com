@@ -114,6 +114,14 @@
           <p>A live <strong>model picker</strong> shows each backend&rsquo;s capabilities and memory footprint, with capability-aware <strong>failover</strong> &mdash; every switch written to a tamper-evident audit row &mdash; and a per-backend circuit breaker that tells &ldquo;the server is down&rdquo; apart from &ldquo;the answer was bad.&rdquo;</p>
         </div>
         <div class="card">
+          <h3>Mailboxes in 100+ languages</h3>
+          <p>Turkish, Spanish, Chinese, and 100+ other languages, selectable from one Admin dropdown. A multilingual embedding selector (default <code>intfloat/multilingual-e5-base</code>) handles matching, and changing it starts a <strong>confirm-gated</strong> background reindex rather than silently rebuilding your data.</p>
+        </div>
+        <div class="card">
+          <h3>Runs on ARM64, including the DGX Spark</h3>
+          <p>ARM64 is a supported target, and the DGX Spark is a supported <strong>one-box deployment</strong>: the whole stack on a single machine you own.</p>
+        </div>
+        <div class="card">
           <h3>The whole picture, in one diagram</h3>
           <p>The Features page now opens with an end-to-end map: real-time ingest and classification fanning out in a single pass to routes, watch rules, and topic matching, alongside the scheduled digests &mdash; over a band that marks what stays <strong>sovereign</strong> (local by default, content never leaves your network) and what is <strong>audited</strong>. <a href="features.html">See the pipeline &rarr;</a></p>
         </div>
@@ -135,6 +143,10 @@
         <div class="card">
           <h3>A versioned, stable API</h3>
           <p>The integration API moved to a clean <code>/api/v1</code> namespace, and every legacy path now issues a permanent (<strong>308</strong>) redirect that preserves the method and body &mdash; so anything you&rsquo;ve already built keeps working. <a href="api.html">See the API &rarr;</a></p>
+        </div>
+        <div class="card">
+          <h3>A tighter supply chain</h3>
+          <p>The container base moved to a digest-pinned <code>python:3.14-slim</code>, closing a HIGH-severity Expat CVE, and Debian security updates are applied at build time with the installed packages recorded. The embedding runtime checks each file against the publisher&rsquo;s hashes, rolls back on failure, and emails the admin until an unfinished security update is fixed. <code>/health/runtime-deps</code> lists libraries bundled inside wheels, vendored code, and Debian packages, which name-based scanners cannot see.</p>
         </div>
         <div class="card">
           <h3>Verified accessible and mobile-correct</h3>

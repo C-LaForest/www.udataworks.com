@@ -117,7 +117,7 @@
     <div class="container">
       <p class="eyebrow">4 &middot; The paper trail</p>
       <h2 class="section-title">Every finding lands on a permanent, retained register.</h2>
-      <p>Whether a finding is opened by an outside auditor, an automated census, the review panel, or a live incident, it lands on one register keyed to <strong>§164.316(b)(1)</strong> &mdash; ID, title, §-anchor, severity, status, opened/closed, owner, and a rationale link. Every status transition emits an HMAC-chained audit row, and the register is retained for the full <strong>§164.316(b)(2)(i) six years</strong> in-tree and in git history &mdash; and in off-host backup where the operator enables it (off-host backup ships disabled). No closed row is ever silently dropped.</p>
+      <p>Whether a finding is opened by an outside auditor, an automated census, the review panel, or a live incident, it lands on one register keyed to <strong>§164.316(b)(1)</strong> &mdash; ID, title, §-anchor, severity, status, opened/closed, owner, and a rationale link. Every status transition emits an HMAC-chained audit row, and the register is retained for the full <strong>§164.316(b)(2)(i) six years</strong> in-tree and in git history &mdash; and in off-host backup where the operator enables it (off-host backup ships disabled). No closed row is ever silently dropped. Between v0.1.2 and v0.2.0 the register grew from <strong>9 rows to 493</strong>.</p>
 
       <h3 style="margin-top:32px;">Incident &rarr; structural pin lineage</h3>
       <p>The register records <em>what</em> was found. This is the &ldquo;how does that not happen again&rdquo; answer &mdash; each real production failure paired with the count-agnostic pin that now fails the build if the shape ever recurs:</p>
@@ -127,6 +127,44 @@
         <li><strong>An edit to an already-applied migration downed a deploy.</strong> A &ldquo;behavior-neutral&rdquo; refactor changed the source of two shipped migrations; the boot-time checksum verifier refused to start. Now: a frozen normalized checksum of every shipped migration body fails CI if an applied body is edited or a new migration ships unpinned.</li>
       </ul>
       <p>Each incident bought a permanent, tree-wide guarantee &mdash; not a note in a wiki that the next hire never reads.</p>
+
+      <h3 style="margin-top:32px;">Found, disclosed, fixed in v0.2.0</h3>
+      <ul>
+        <li><strong>Three privacy controls passed while examining nothing.</strong> They reported success without inspecting the data they were meant to check. v0.2.0 fixed all three, and personal identifiers no longer reach the published tree.</li>
+        <li><strong>Backup bundles silently omitted the Office 365 token caches from 2026-07-08.</strong> A restore could have left those mailboxes unauthenticated. v0.2.0 fixes the omission and adds a fail-closed restorability check: no snapshot counts until it is proven restorable.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Scale of the work -->
+  <section>
+    <div class="container">
+      <p class="eyebrow">5 &middot; The scale of the work</p>
+      <h2 class="section-title">One release cycle: 157 days, 1,878 commits.</h2>
+      <p>From v0.1.2 (2026-06-04) to v0.2.0 (2026-11-08). Counts come from <code>git rev-list --count v0.1.2..v0.2.0</code> and <code>git diff --shortstat v0.1.2 v0.2.0 -- &lt;dir&gt;</code>, so you can reproduce them from the public source.</p>
+      <table class="feature-table">
+        <thead><tr><th>Measure</th><th>v0.1.2 to v0.2.0</th></tr></thead>
+        <tbody>
+          <tr><td>Application source</td><td>313 files, +80,132 / &minus;12,370 lines</td></tr>
+          <tr><td>Tests</td><td>1,043 files, +228,576 lines &mdash; about 17,300 unit and pin tests plus 146 browser (e2e) tests</td></tr>
+          <tr><td>Documentation</td><td>105 files, +17,250 lines</td></tr>
+          <tr><td>HIPAA findings register</td><td>9 rows &rarr; 493 rows</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:32px;">What that would cost a conventional team</h3>
+      <p>Estimated as <strong>equivalent human engineering effort</strong>: the hours a team of experienced engineers would need to produce the same result.</p>
+      <table class="feature-table">
+        <thead><tr><th>Work</th><th>Estimate</th></tr></thead>
+        <tbody>
+          <tr><td>Engineering &mdash; design, code, tests</td><td>2,400 to 4,000 hours</td></tr>
+          <tr><td>Compliance and assurance &mdash; findings register, review panels, audit-trail and regulatory documentation, release verification</td><td>600 to 1,000 hours</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>3,000 to 5,000 hours</strong> (about 1.5 to 2.5 engineer-years)</td></tr>
+        </tbody>
+      </table>
+      <p style="padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#F8FAFC; font-size:0.95rem; color:#475569;">
+        <strong>How to read this.</strong> It is an estimate of equivalent effort, not a timesheet. The method: about 68,000 net source lines at 20 to 35 lines per hour, a typical rate for regulated, fully tested code, plus the review, compliance, and release work around it. Email Triage was built largely by AI coding agents under my direction and review, so these are not hours anyone worked. They are the hours a conventional team would have needed.
+      </p>
     </div>
   </section>
 
