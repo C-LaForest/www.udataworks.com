@@ -87,7 +87,7 @@
   </section>
 
   <!-- SME gate + Evidence-or-Block -->
-  <section style="background:#F8FAFC;">
+  <section id="review-gate" style="background:#F8FAFC;">
     <div class="container">
       <p class="eyebrow">3 &middot; The review gate</p>
       <h2 class="section-title">No change to a risk surface reaches <code>main</code> unreviewed.</h2>
@@ -137,7 +137,7 @@
   </section>
 
   <!-- Scale of the work -->
-  <section>
+  <section id="scale">
     <div class="container">
       <p class="eyebrow">5 &middot; The scale of the work</p>
       <h2 class="section-title">One release cycle: 157 days, 1,878 commits.</h2>
@@ -163,8 +163,10 @@
         </tbody>
       </table>
       <p style="padding:16px 20px; border:1px solid #CBD5E1; border-radius:8px; background:#F8FAFC; font-size:0.95rem; color:#475569;">
-        <strong>How to read this.</strong> It is an estimate of equivalent effort, not a timesheet. The method: about 68,000 net source lines at 20 to 35 lines per hour, a typical rate for regulated, fully tested code, plus the review, compliance, and release work around it. Email Triage was built largely by AI coding agents under my direction and review, so these are not hours anyone worked. They are the hours a conventional team would have needed.
+        <strong>How to read this.</strong> It is an estimate of equivalent effort, not a timesheet, and not hours anyone worked. The method: about 68,000 net source lines at 20 to 35 lines per hour, a typical rate for regulated, fully tested code, plus the review, compliance, and release work around it.
       </p>
+      <h3 style="margin-top:32px;">Who wrote it, and why you can trust it anyway</h3>
+      <p>Email Triage was written largely by AI coding agents under my direction, and I am accountable for the result. Trust in it rests on verification, not authorship. Every change runs against about 17,300 automated unit and pin tests. Any change that touches a risk surface &mdash; PHI logic, the audit chain, encryption, auth, egress, LLM prompts, or schema &mdash; must also pass the <a href="#review-gate">review gate</a>. The gate applies three independent review lenses (regulatory, data-path, and devil&rsquo;s-advocate), largely structured AI personas each held to its own brief, plus my hardware-key sign-off.</p>
     </div>
   </section>
 
